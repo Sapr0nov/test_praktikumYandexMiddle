@@ -1,0 +1,8 @@
+.vs
+.parcel-cache
+node_modules
+dist
+# MacOS
+.DS_Store
+.AppleDouble
+.LSOverride

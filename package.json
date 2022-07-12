@@ -1,0 +1,16 @@
+{
+  "name": "sprint-1",
+  "version": "0.0.1",
+  "description": "skin without meat",
+  "main": "./src/index.js",
+  "scripts": {
+    "dev": "parcel ./src/index.html",
+    "build": "parcel build index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.6.2"
+  }
+}
