@@ -10,7 +10,7 @@
   "author": "SSA",
   "license": "ISC",
   "devDependencies": {
-    "@sapronovs/parcel-transformer-templator": "^0.0.2",
+    "@sapronovs/parcel-transformer-templator": "^0.1.0",
     "buffer": "^6.0.3",
     "parcel": "^2.6.2",
     "postcss": "^8.4.14",
