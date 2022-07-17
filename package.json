@@ -4,12 +4,13 @@
   "description": "skin without meat",
   "scripts": {
     "dev": "parcel src/index.jssx",
-    "build": "parcel build src/index.html"
+    "build": "parcel build src/index.jssx"
   },
   "keywords": [],
   "author": "SSA",
   "license": "ISC",
   "devDependencies": {
+    "@sapronovs/parcel-transformer-templator": "^0.0.2",
     "buffer": "^6.0.3",
     "parcel": "^2.6.2",
     "postcss": "^8.4.14",
