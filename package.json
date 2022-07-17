@@ -3,17 +3,20 @@
   "version": "0.0.1",
   "description": "skin without meat",
   "scripts": {
-    "dev": "parcel src/index.html",
-    "build": "parcel build src/index.html" 
+    "dev": "parcel src/index.jssx",
+    "build": "parcel build src/index.html"
   },
   "keywords": [],
   "author": "SSA",
   "license": "ISC",
   "devDependencies": {
+    "buffer": "^6.0.3",
     "parcel": "^2.6.2",
     "postcss": "^8.4.14",
     "postcss-custom-properties": "^12.1.8",
     "postcss-import": "^14.1.0",
-    "postcss-url": "^10.1.3"
+    "postcss-url": "^10.1.3",
+    "posthtml": "^0.16.6",
+    "posthtml-include": "^1.7.4"
   }
 }

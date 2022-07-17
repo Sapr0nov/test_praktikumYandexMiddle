@@ -1,11 +1,3 @@
-import { Templator } from "../../utils/templator"
-import 'button.css';
-
-console.log(Templator);
-const name = 'кнопка';
-
-const Button = () => {
-    return (
-        <div className="button">{name}</div>
-    )
-}
+<div id="btn">
+    <button class="button__test"> {Sign In} </button>
+</div>

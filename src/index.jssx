@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>messAnger </title>
+    <link rel="stylesheet" type="text/css" href="./index.css" />
+    <script type="module" src="./index.js"></script>
+</head>
+    <body>
+        <div id="root">start</div>
+        <div id="btn"></div>
+        <include src="/src/components/button/button.jssx"></include>
+        content {cats}
+        <ul> 1
+            {for i = 1; i < 5; i++}
+                <li> параметр {i}-{i}</li>
+            {/for}
+        </ul>
+        [[Button]]
+        {dogs}
+        <div class="menu"> 2
+        {for i = 1; i < 5; i++}
+            <div class="menu_element{i}"> пункт меню {dogs} {i} </div>
+        {/for}
+        </div>
+    </body>
+</html>
