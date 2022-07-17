@@ -1,0 +1,6 @@
+body {
+    color: lch(53 105 40);
+  }
+  .image {
+    background-image: url(/static/404error.png);
+  }
