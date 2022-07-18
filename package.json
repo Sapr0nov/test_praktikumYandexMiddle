@@ -4,6 +4,8 @@
   "description": "skin without meat",
   "scripts": {
     "start": "node src/srv.js",
+    "clean-dist": "rm -rf dist && mkdir dist",
+    "clean-cache": "rm -rf .parcel-cacle",
     "dev": "parcel src/pages/index/index.jssx",
     "dev404": "parcel src/pages/404/404.html",
     "dev500": "parcel src/pages/500/500.html",
