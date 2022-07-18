@@ -5,6 +5,8 @@
   "scripts": {
     "start": "node src/srv.js",
     "dev": "parcel src/pages/index/index.jssx",
+    "dev404": "parcel src/pages/404/404.html",
+    "dev500": "parcel src/pages/500/500.html",
     "build": "parcel build src/pages/index/index.jssx src/pages/404/404.html src/pages/500/500.html"
   },
   "keywords": [],
