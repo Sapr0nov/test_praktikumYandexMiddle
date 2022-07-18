@@ -4,8 +4,8 @@
   "description": "skin without meat",
   "scripts": {
     "start": "node src/srv.js",
-    "dev": "parcel src/index.jssx",
-    "build": "parcel build src/index.jssx"
+    "dev": "parcel src/pages/index/index.jssx",
+    "build": "parcel build src/pages/index/index.jssx src/pages/404/404.html src/pages/500/500.html"
   },
   "keywords": [],
   "author": "SSA",

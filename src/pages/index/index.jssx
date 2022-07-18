@@ -11,6 +11,7 @@ dogs = 'Собаки';
 </head>
     <body>
         <div id="root">
+            сюда встанет код сгенерированный js
         </div>
     </body>
 </html>
