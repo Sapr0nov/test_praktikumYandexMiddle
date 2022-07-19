@@ -1,0 +1,33 @@
+.form-auth {
+    display: flex;
+    flex-direction: column;
+    min-width: 400px;
+    max-width: 500px;
+    margin: auto;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
+    border-radius: 12px;
+    font-family: 'Arial','Inter';
+    font-style: normal;
+    padding: 30px;
+}
+.form-auth label{
+    width: 100%;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 12px;
+    color: #999999;
+    box-sizing: border-box;
+    padding: 10px 30px;
+}
+.form-auth input{
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #3369F3;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 16px;
+    color: #1E1E1E;
+    box-sizing: border-box;
+    padding: 10px 30px;
+}

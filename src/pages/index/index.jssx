@@ -13,5 +13,6 @@ dogs = 'Собаки';
         <div id="root">
             сюда встанет код сгенерированный js
         </div>
+        [[Form_auth]]
     </body>
 </html>
