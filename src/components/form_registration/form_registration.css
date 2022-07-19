@@ -43,7 +43,7 @@
     box-sizing: border-box;
     padding: 8px 30px;
 }
-.form_auth__btn {
+.form_auth__registration {
     background-color:#3369F3;
     background-color: #3369f3;
     padding: 0 200px;
@@ -53,7 +53,7 @@
     color: white;
     margin-top: 80px;
 }
-.form-auth__link {
+.form-auth__enter {
     width: 100%;
     text-align: center;
     text-decoration: none;

@@ -1,8 +1,9 @@
 <link rel="stylesheet" href="../../components/form_auth/form_auth.css">
 <form id="auth" class="form-auth">
-<label>
+    <h2 class="form-auth__title">Регистрация</h2>
+<label for="email">
     Почта
-    <input type="text" value="" placeholder="pochta@yandex.ru" />
+    <input type="text" value="" name="email" placeholder="pochta@yandex.ru" />
 </label>
 <label for="login">
     Логин
@@ -10,11 +11,11 @@
 </label>
 <label for="name">
     Имя
-    <input type="text" value="" name="name" placeholder="Иван" />
+    <input type="text" value="" name="first_name" placeholder="Иван" />
 </label>
 <label for="surname">
     Фамилия
-    <input type="text" value="" name="surname" placeholder="Иванов" />
+    <input type="text" value="" name="second_name" placeholder="Иванов" />
 </label>
 <label for="phone">
     Телефон
@@ -22,15 +23,14 @@
 </label>
 <label for="pswd">
     Пароль
-    <input type="password" name="pswd" />
+    <input type="password" name="password" />
 </label>
 <label for="pswd-confirm">
     Пароль (ещё раз)
     <input type="password" name="pswd-confirm" />
 </label>
 
+<button class="form_auth__btn">Зарегистрироваться</button>
+<a class="form-auth__link" href="/" >Войти</a>
 </form>
 
-<div id="btn">
-    <button class="button__test"> Регистрация </button>
-</div>

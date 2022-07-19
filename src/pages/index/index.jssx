@@ -10,9 +10,11 @@ dogs = 'Собаки';
     <script type="module" src="./index.js"></script>
 </head>
     <body>
-        <div id="root">
-            сюда встанет код сгенерированный js
+        <div id="reg">
+            [[Form_auth]]
         </div>
-        [[Form_auth]]
+        <div id="auth">
+            [[Form_registration]]
+        </div>
     </body>
 </html>
