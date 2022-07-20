@@ -1,10 +1,11 @@
 :root {
-    --text-title-color: #1E1E1E;
+    --text-title-color: #1f1f1f;
     --text-label-color: #999999;
-    --blue-color: #3369F3;
+    --blue-color: #3369f3;
     --lightbg-grey-color: #fbfbfb;
     --input-bg-color: #efefef;
     --light-grey-line: #eaeaea;
+    --select-chat-bg: #e4edfd;
 }
 .chat-profile {
     text-align: right;
@@ -66,6 +67,12 @@ input:placeholder-shown {
     background-color: var(--lightfill-grey-color);
     border-top: 1px solid var(--light-grey-line);
     box-sizing: border-box;
+}
+.chat-preview.active{
+    background: #E4EDFD;
+}
+.chat-preview:hover{
+    background: #E4EDFD;
 }
 .chat-preview__avatar {
     width: 48px;

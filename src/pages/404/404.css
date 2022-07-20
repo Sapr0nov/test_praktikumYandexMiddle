@@ -26,6 +26,7 @@ body {
   font-size: 34px;
   animation: glitch 5s 5s infinite;
   text-transform: uppercase;
+  text-align: center;
 }
 .glitch::before, .glow::before {
   content: attr(data-text);
