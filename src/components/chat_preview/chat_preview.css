@@ -55,6 +55,14 @@ input:placeholder-shown {
     border-right: 1px solid var(--light-grey-line);
     background: var(--light-bg-text);
     z-index: 9;
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+.chat-list::-webkit-scrollbar {
+        width: 0;
+        height: 0;
 }
 .chat-preview {
     display: flex;

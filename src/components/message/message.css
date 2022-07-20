@@ -48,7 +48,7 @@
     position: absolute;
     width: calc(100% - 48px);
     height: calc(100vh - 108px);
-    right: 24px;
+    right: 0px;
     top: 54px;
     flex-direction: column;
     overflow-y: scroll;

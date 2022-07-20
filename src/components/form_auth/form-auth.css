@@ -43,7 +43,7 @@
     box-sizing: border-box;
     padding: 8px 30px;
 }
-.form_auth__btn {
+.form-auth__btn {
     background-color: var(--blue-color);
     padding: 0 200px;
     border: none;
@@ -51,6 +51,7 @@
     padding: 10px 8px;
     color: white;
     margin-top: 80px;
+    cursor: pointer;
 }
 .form-auth__link {
     width: 100%;

@@ -1,4 +1,4 @@
-.form-auth__title {
+.form-reg__title {
     padding: 20px 120px;
     font-family: 'Arial','Inter';
     font-style: normal;
@@ -8,7 +8,7 @@
     text-align: center;
     color: #1E1E1E;
 }
-.form-auth {
+.form-reg {
     display: flex;
     flex-direction: column;
     min-width: 300px;
@@ -22,7 +22,7 @@
     padding: 30px;
 }
 
-.form-auth label{
+.form-reg label{
     width: 100%;
     font-weight: 500;
     font-size: 12px;
@@ -31,7 +31,7 @@
     box-sizing: border-box;
     padding: 10px 30px;
 }
-.form-auth input{
+.form-reg input{
     width: 100%;
     border: none;
     outline: none;
@@ -43,7 +43,7 @@
     box-sizing: border-box;
     padding: 8px 30px;
 }
-.form_auth__btn {
+.form-reg__btn {
     background-color: var(--blue-color);
     padding: 0 200px;
     border: none;
@@ -51,8 +51,9 @@
     padding: 10px 8px;
     color: white;
     margin-top: 80px;
+    cursor: pointer;
 }
-.form-auth__link {
+.form-reg__link {
     width: 100%;
     text-align: center;
     text-decoration: none;

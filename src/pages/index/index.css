@@ -7,6 +7,9 @@
   --light-grey-line: #eaeaea;
   --select-light-bg: #e4edfd;
 }
+body {
+  margin: 0px;
+}
 div.hide {
   display: none;
 }
