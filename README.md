@@ -3,8 +3,8 @@ It include part of web application - client for chat app.
 
 ## Getting Started 🚀
 
-* [Figma] (https://www.figma.com/file/ovjYpFJqUreYoOcBK0ixb8/Messanger?node-id=0%3A1) 
-* [DEMO] (https://sprint1.stacksite.ru)
+* [Figma](https://www.figma.com/file/ovjYpFJqUreYoOcBK0ixb8/Messanger?node-id=0%3A1) 
+* [DEMO](https://sprint1.stacksite.ru)
 
 ## Using 
 
