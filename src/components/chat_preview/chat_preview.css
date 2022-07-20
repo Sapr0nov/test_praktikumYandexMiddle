@@ -39,7 +39,7 @@
     display: flex;
     color: var(--text-label-color);
     background: var(--input-bg-color);
-    background-image: url(/static/search.svg);
+    background-image: url(search.svg);
     background-repeat: no-repeat;
     background-position: 2px center;
     text-align: center;
