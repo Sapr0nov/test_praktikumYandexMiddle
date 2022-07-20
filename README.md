@@ -12,7 +12,20 @@ It include part of web application - client for chat app.
 
 ## Commands 💬
 
-* npm start - lounch server
-* npm run clean - clear cache
-* npm run build - compile file for production
-* npm run dev - compile file for development
+
+#### launch server
+```sh
+npm start
+```
+#### clear cache
+```sh
+npm run clean
+```
+#### compile file for production
+```sh
+npm run build
+```
+#### compile file for development
+```sh
+npm run dev
+```
