@@ -1,12 +1,3 @@
-:root {
-    --text-title-color: #1f1f1f;
-    --text-label-color: #999999;
-    --blue-color: #3369f3;
-    --lightbg-grey-color: #fbfbfb;
-    --input-bg-color: #efefef;
-    --light-grey-line: #eaeaea;
-    --select-chat-bg: #e4edfd;
-}
 .chat-profile {
     text-align: right;
     color: var(--text-label-color);
@@ -19,6 +10,7 @@
     display: flex;
     padding: 12px 21px;
     background-color: var(--lightfill-grey-color);
+    cursor: pointer;
 }
 
 .chat-search {
@@ -39,7 +31,7 @@
     padding: 8px 12px;
     display: flex;
     color: var(--text-label-color);
-    background: var(--input-bg-color);
+    background: var(--light-grey-line);
     background-image: url(search.svg);
     background-repeat: no-repeat;
     background-position: 2px center;
@@ -53,33 +45,41 @@ input:placeholder-shown {
     background-position: 2px center;
 }
 .chat-list {
+    display: block;
+    position: absolute;
+    overflow-y: scroll;
     width: 310px;
+    height: 100vh;
+    top: 0;
+    left: 0;
     border-right: 1px solid var(--light-grey-line);
+    background: var(--light-bg-text);
+    z-index: 9;
 }
-.chat-previw {
+.chat-preview {
     display: flex;
     width: 310px;
     flex-direction: row;
-    font-family: 'Inter';
+    font-family: Arial,'Inter';
     font-style: normal;
     padding: 10px 12px;
-    font-family: Arial;
-    background-color: var(--lightfill-grey-color);
     border-top: 1px solid var(--light-grey-line);
+    background-color: var(--light-bg-text);
     box-sizing: border-box;
+    cursor: pointer;
 }
 .chat-preview.active{
-    background: #E4EDFD;
+    background-color: var(--select-light-bg);
 }
 .chat-preview:hover{
-    background: #E4EDFD;
+    background-color: var(--select-light-bg);
 }
 .chat-preview__avatar {
     width: 48px;
     min-width: 48px;
     height: 48px;
     display: flex;
-    background: #EFEFEF;
+    background-color: var(--grey-bg-placeholder);
     border-radius: 50%;
 }
 .chat-preview__last-msg {
@@ -133,5 +133,5 @@ input:placeholder-shown {
     text-align: center;
     color: white;
     border-radius: 50%;
-    background-color: var(----blue-color);
+    background-color: var(--blue-color);
 }

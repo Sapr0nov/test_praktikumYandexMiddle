@@ -6,7 +6,7 @@
         <input type="text" name="search" placeholder="поиск" value="">
     </div>
     {for i = 1; i < 14; i++}
-    <div class="chat-previw"> 
+    <div class="chat-preview"> 
         <div class="chat-preview__avatar">{img}</div>
         <div class="chat-preview__last-msg">
             <div class="chat-preview__lastname">{name}</div>

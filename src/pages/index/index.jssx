@@ -5,14 +5,17 @@
     <link rel="stylesheet" type="text/css" href="./index.css" />
     <script type="module" src="./index.js"></script>
 </head>  
-    <body>
-        <div> 
-        [[Chat_preview@{"img":"<div></div>","msg":"И Human Interface Guidelines и Material Design рекомендуют всем И Human Interface Guidelines и Material Design рекомендуют","name":"Володя Воронин","time":"Пн","unreadMsgs":"1"}]]
+    <body>     
+        <div id="messages-list">
+            [[Message@{"photo":"","name":"Володя Сибуль","text":"Всем привет здесь просо текст даже не лорум)","date":"12:33","class":"self"}]] 
         </div>
-        <div id="reg">
+        <div id="chat-list"> 
+            [[Chat_preview@{"img":"<div></div>","msg":"И Human Interface Guidelines и Material Design рекомендуют всем И Human Interface Guidelines и Material Design рекомендуют","name":"Володя Воронин","time":"Пн","unreadMsgs":"1"}]]
+        </div>  
+        <div id="regPopup">
             [[Form_auth]]
         </div>
-        <div id="auth">
+        <div id="authPopup"> 
             [[Form_registration]]
         </div>
     </body>

@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="../../components/message/message.css">
+
+<div class="chat">
+    <div class="chat-header"> 
+        <div class="chat-header__image">{photo}</div>
+        <div class="chat-header__name"> {name} </div>
+        <div class="chat-header__setting"></div>
+    </div>    
+    
+    <div class="message-history">
+        {for i = 1; i < 14; i++}
+        <div class="message {class}">{text}<span>{date}</span></div>
+        {/for}
+    </div>
+    <div class="message-input">
+        <div class="message-input__attach"></div>
+        <input name="message" type="text" />
+        <button class="message-input__send-btn" type="submit"> </button>
+    </div>
+</div>

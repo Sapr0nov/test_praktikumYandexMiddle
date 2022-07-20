@@ -1,9 +1,12 @@
-
-html {
-  background-color: var(--varColor);
+:root {
+  --text-title-color: #1f1f1f;
+  --text-label-color: #999999;
+  --blue-color: #3369f3;
+  --light-bg-text: GhostWhite;
+  --grey-bg-placeholder: lightgray;
+  --light-grey-line: #eaeaea;
+  --select-light-bg: #e4edfd;
 }
-.icon {
-  width: 50px;
-  height: 50px;
-  background-image: var(--varIcon);
+div.hide {
+  display: none;
 }
