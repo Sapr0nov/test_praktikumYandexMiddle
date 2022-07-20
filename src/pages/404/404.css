@@ -16,7 +16,7 @@ body {
   text-align: center;
   padding: 60px 0px;
   font-size: 24px;
-  color: #fff;
+  color: white;
   text-decoration: underline;
   text-shadow: 1px 1px 1px red;
 }
@@ -35,7 +35,7 @@ body {
   text-shadow: -5px 0 magenta;
   background: black;
   overflow: hidden;
-  animation: noise-1 3s linear infinite alternate-reverse, glitch 5s 5.05s infinite;
+  animation: animation1 3s linear infinite alternate-reverse, glitch 5s 5.05s infinite;
 }
 .glitch::after, .glow::after {
   content: attr(data-text);
@@ -45,7 +45,7 @@ body {
   text-shadow: -5px 0 lightgreen;
   background: black;
   overflow: hidden;
-  animation: noise-2 3s linear infinite alternate-reverse, glitch 5s 5s infinite;
+  animation: animation2 3s linear infinite alternate-reverse, glitch 5s 5s infinite;
 }
 @keyframes glitch {
   1% {
@@ -55,7 +55,7 @@ body {
     transform: rotateX(0deg) skewX(0deg);
  }
 }
-@keyframes noise-1 {
+@keyframes animation1 {
   3.3333333333% {
     clip-path: inset(3px 0 26px 0);
  }
@@ -147,7 +147,7 @@ body {
     clip-path: inset(36px 0 40px 0);
  }
 }
-@keyframes noise-2 {
+@keyframes animation2 {
   0% {
     clip-path: inset(69px 0 32px 0);
  }
@@ -280,9 +280,9 @@ body {
   text-align: center;
   position: absolute;
   left: 17%;
-  animation: glitch-2 5s 5.02s infinite;
+  animation: animation3 5s 5.02s infinite;
 }
-@keyframes glitch-2 {
+@keyframes animation3 {
   1% {
     transform: rotateX(10deg) skewX(70deg);
  }

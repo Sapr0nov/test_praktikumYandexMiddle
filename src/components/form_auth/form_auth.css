@@ -1,3 +1,8 @@
+:root {
+    --text-title-color: #1E1E1E;
+    --text-label-color: #999999;
+    --blue-color: #3369F3;
+}
 .form-auth__title {
     padding: 20px 120px;
     font-family: 'Arial','Inter';
@@ -14,7 +19,7 @@
     min-width: 300px;
     max-width: 400px;
     margin: auto;
-    background: #FFFFFF;
+    background: white;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
     border-radius: 12px;
     font-family: 'Arial','Inter';
@@ -35,17 +40,16 @@
     width: 100%;
     border: none;
     outline: none;
-    border-bottom: 1px solid #3369F3;
+    border-bottom: 1px solid var(--blue-color);
     font-weight: 500;
     font-size: 16px;
     line-height: 16px;
-    color: #1E1E1E;
+    color: var(--text-title-color);
     box-sizing: border-box;
     padding: 8px 30px;
 }
 .form_auth__btn {
-    background-color:#3369F3;
-    background-color: #3369f3;
+    background-color: var(--blue-color);
     padding: 0 200px;
     border: none;
     border-radius: 8px;
@@ -58,5 +62,5 @@
     text-align: center;
     text-decoration: none;
     padding: 12px 0px;
-    color:#3369f3;
+    color: var(--blue-color);
 }
