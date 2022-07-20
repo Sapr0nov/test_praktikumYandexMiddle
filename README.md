@@ -16,9 +16,3 @@ It include part of web application - client for chat app.
 * npm run clean - clear cache
 * npm run build - compile file for production
 * npm run dev - compile file for development
-
-
-## Documentation
-
-Read the docs at https://parceljs.org/docs/.
-
