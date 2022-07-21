@@ -1,0 +1,6 @@
+{
+  "extends": "@parcel/config-default",
+  "transformers": {
+    "*.jssx": ["...","@sapronovs/parcel-transformer-templator"]
+  }
+}

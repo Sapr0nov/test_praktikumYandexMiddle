@@ -1,0 +1,20 @@
+<div class="chat-list">
+    <div class="chat-profile">профиль ></div> 
+    <div class="chat-search">
+        <input type="text" name="search" placeholder="поиск" value="">
+    </div>
+    {for i = 1; i < 14; i++}
+    <div class="chat-preview"> 
+        <div class="chat-preview__avatar">{img}</div>
+        <div class="chat-preview__last-msg">
+            <div class="chat-preview__lastname">{name}</div>
+            <div class="chat-preview__lasttext">{msg}</div>
+        </div>
+        <div class="chat-preview__info">
+            <time class="chat-preview__time" datetime="{time-format}">{time}</time>  
+            <div class="chat-preview__mark">{unreadMsgs}</div>
+        </div>
+    </div>
+    {/for}
+</div>
+<script type="module" src="/src/components/side_bar/side_bar.js"></script>

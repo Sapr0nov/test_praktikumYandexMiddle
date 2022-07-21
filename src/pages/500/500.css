@@ -1,0 +1,58 @@
+:root {
+    --text-title-color: #1E1E1E;
+}
+body {
+    background-color: black;
+}
+.container {
+    width: 50%;
+    height: 50%;
+    margin: auto;
+    overflow: hidden;
+}
+.comforting-message {
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 180px;
+    width: 800px;
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 30px;
+    align-items: center;
+    color: white;
+}
+.text-error{
+    width: 100%;
+    font-family: 'Arial';
+    font-style: normal;
+    font-size: 42px;
+    color: var(--text-title-color);
+    text-align: center;
+}
+.image {
+    display: block;
+    position: relative;
+}
+.image img{
+    width: 712px;
+    height: auto;
+    border-radius: 25px 25px 0px 0px;
+}
+@media (max-width:400px){
+    .image img{
+       width: 350px;
+    }
+    .text-error{
+        font-size: 14px;
+    }
+    .container {
+        width: 100%;
+    }
+    .comforting-message {
+        left: 18px;
+        text-shadow: 1px 1px 1px black;
+    }
+}
