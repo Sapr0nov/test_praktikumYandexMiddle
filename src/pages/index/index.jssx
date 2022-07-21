@@ -4,26 +4,20 @@
     <title>messAnger</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <meta name="description" content="404: Page Not Found">
+    <meta name="description" content="messanger">
     <meta name="viewport" content="maximum-scale=1,width=device-width,initial-scale=1,user-scalable=0">
-    <link rel="stylesheet" type="text/css" href="./index.css" />
-    <script type="module" src="./index.js"></script>  
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="index.css" />
+    <link rel="stylesheet" type="text/css" href="/src/modules/color.css" />
+    <link rel="stylesheet" type="text/css" href="/src/components/chat/chat.css" />
+    <link rel="stylesheet" type="text/css" href="/src/components/side_bar/side_bar.css" />
 </head>
     <body>
         <div id="messages-list">
-            [[Message@{"photo":"","name":"Володя Сибуль","text":"Всем привет здесь просо текст даже не лорум)","date":"12:33","class":"self"}]]
+            [[Chat@{"photo":"","name":"Володя Сибуль","text":"Всем привет здесь просо текст даже не лорум)","date":"12:33","class":"self"}]]
         </div>
         <div id="chat-list">
-            [[Chat_preview@{"img":"<div></div>","msg":"И Human Interface Guidelines и Material Design рекомендуют всем И Human Interface Guidelines и Material Design рекомендуют","name":"Володя Воронин","time":"Пн","unreadMsgs":"1"}]]
-        </div>
-        <div id="reg-popup">
-            [[Form_auth]]
-        </div>
-        <div id="auth-popup">
-            [[Form_registration]]
-        </div>
-        <div id="user-settings">
-            [[Settings]]
+            [[Side_bar@{"img":"<div></div>","msg":"И Human Interface Guidelines и Material Design рекомендуют всем И Human Interface Guidelines и Material Design рекомендуют","name":"Володя Воронин","time":"Пн","unreadMsgs":"1"}]]
         </div>
     </body>
 </html>

@@ -6,14 +6,15 @@
     <meta name="description" content="404: Page Not Found">
     <meta name="viewport" content="maximum-scale=1,width=device-width,initial-scale=1,user-scalable=0">
     <title>404:Page Not Found</title>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="404.css" />
+    <link rel="stylesheet" type="text/css" href="/src/components/glitchEffect/glitchEffect.css" />
 </head>
 
 <body>
     <div class="container">
         <a class="link404" href="/">Начать с главной</a>
-        <div class="glitch" data-text="404: страница не найдена">404: страница не найдена</div>
-        <div class="glow">404: страница не найдена</div>
+        [[glitchEffect]]
     </div>
 </body>
 </html>

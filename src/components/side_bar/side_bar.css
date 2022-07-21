@@ -38,6 +38,9 @@
     text-align: center;
     transition: background .3s ease;
 }
+.chat-search input:focus{
+    outline: 1px solid var(--text-label-color);
+}
 input:placeholder-shown {
     background-position: calc(50% - 28px) center;
 }

@@ -1,5 +1,4 @@
-<link rel="stylesheet" href="../../components/settings/settings.css">
-<button class="close-settings"> </button>
+<button class="close-settings" onclick="document.location.href='{linkback}'; return false;"> </button>
 <form id="settings" class="form-set locked">
         <h2 class="form-set__title">Настройки</h2>
     <div class="set-avatar">

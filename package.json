@@ -4,11 +4,14 @@
   "description": "skin without meat",
   "scripts": {
     "start": "node src/srv.js",
-    "clean": "rm -rf .parcel-cache && rm -rf dist && mkdir dist",
+    "clean": "rimraf .parcel-cache rimraf .cache && rimraf dist && mkdir dist",
     "dev": "parcel src/pages/index/index.jssx",
-    "dev404": "parcel src/pages/404/404.html",
+    "dev404": "parcel src/pages/404/404.jssx",
     "dev500": "parcel src/pages/500/500.html",
-    "build": "parcel build src/pages/index/index.jssx src/pages/404/404.html src/pages/500/500.html"
+    "devSet": "parcel src/pages/profile/profile.jssx",
+    "devAuth": "parcel src/pages/auth/auth.jssx",
+    "devReg": "parcel src/pages/reg/reg.jssx",
+    "build": "parcel build src/pages/index/index.jssx src/pages/404/404.jssx src/pages/500/500.html src/pages/signin/signin.jssx src/pages/signup/signup.jssx src/pages/profile/profile.jssx"
   },
   "keywords": [],
   "author": "SSA",
@@ -16,27 +19,16 @@
   "devDependencies": {
     "@parcel/transformer-svg-react": "2.6.2",
     "@sapronovs/parcel-transformer-templator": "^0.1.4",
-    "assert": "2.0.0",
-    "browserify-zlib": "0.2.0",
-    "buffer": "6.0.3",
-    "crypto-browserify": "3.12.0",
+    "autoprefixer": "10.4.7",
     "eslint": "8.20.0",
-    "events": "3.3.0",
     "parcel": "2.6.2",
-    "path-browserify": "1.0.1",
     "postcss": "8.4.14",
     "postcss-custom-properties": "12.1.8",
     "postcss-import": "14.1.0",
     "postcss-url": "10.1.3",
-    "posthtml": "0.16.6",
     "posthtml-include": "1.7.4",
-    "process": "0.11.10",
-    "querystring-es3": "0.2.1",
-    "stream-browserify": "3.0.0",
-    "stream-http": "3.2.0",
-    "string_decoder": "1.3.0",
-    "url": "0.11.0",
-    "util": "0.12.4"
+    "prettier": "2.7.1",
+    "rimraf": "3.0.2"
   },
   "dependencies": {
     "express": "4.18.1"
