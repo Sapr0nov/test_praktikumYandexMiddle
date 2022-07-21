@@ -5,6 +5,8 @@ It include part of web application - client for chat app.
 
 * [Figma](https://www.figma.com/file/ovjYpFJqUreYoOcBK0ixb8/Messanger?node-id=0%3A1) 
 * [DEMO](https://sprint1.stacksite.ru)
+* [404](https://sprint1.stacksite.ru/404/404.html)
+* [500](https://sprint1.stacksite.ru/500/500.html)
 
 ## Using 
 
