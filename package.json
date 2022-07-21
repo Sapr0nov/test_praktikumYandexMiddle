@@ -14,8 +14,8 @@
   "author": "SSA",
   "license": "ISC",
   "devDependencies": {
-    "@parcel/transformer-svg-react": "^2.6.2",
-    "@sapronovs/parcel-transformer-templator": "^0.1.3",
+    "@parcel/transformer-svg-react": "2.6.2",
+    "@sapronovs/parcel-transformer-templator": "^0.1.4",
     "assert": "2.0.0",
     "browserify-zlib": "0.2.0",
     "buffer": "6.0.3",
