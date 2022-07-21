@@ -86,6 +86,9 @@
     width: 100px;
     margin: auto;
 }
+.set-avatar input {
+    display: none;
+}
 .settings__name {
     display: flex;
     width: 300px;
