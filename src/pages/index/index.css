@@ -13,3 +13,14 @@ body {
 div.hide {
   display: none;
 }
+/** scroll-bar for Chrome */
+::-weblit-scrollbar {
+  width: 6px!important;
+  height: 6px!important;
+}
+html[dir] ::-webkit-scrollbar-thumb {
+  background-color: var(--text-label-color);
+}
+html[dir] .dark ::-webkit-scrollbar-thumb {
+  background-color: var(--text-label-color);
+}

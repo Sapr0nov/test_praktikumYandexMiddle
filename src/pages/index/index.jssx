@@ -3,22 +3,22 @@
 <head>
     <title>messAnger</title>
     <link rel="stylesheet" type="text/css" href="./index.css" />
-    <script type="module" src="./index.js"></script>
-</head>  
-    <body>      
+    <script type="module" src="./index.js"></script>  
+</head>
+    <body>
         <div id="messages-list">
-            [[Message@{"photo":"","name":"Володя Сибуль","text":"Всем привет здесь просо текст даже не лорум)","date":"12:33","class":"self"}]] 
+            [[Message@{"photo":"","name":"Володя Сибуль","text":"Всем привет здесь просо текст даже не лорум)","date":"12:33","class":"self"}]]
         </div>
-        <div id="chat-list"> 
+        <div id="chat-list">
             [[Chat_preview@{"img":"<div></div>","msg":"И Human Interface Guidelines и Material Design рекомендуют всем И Human Interface Guidelines и Material Design рекомендуют","name":"Володя Воронин","time":"Пн","unreadMsgs":"1"}]]
-        </div>  
+        </div>
         <div id="reg-popup">
             [[Form_auth]]
         </div>
-        <div id="auth-popup"> 
+        <div id="auth-popup">
             [[Form_registration]]
         </div>
-        <div id="user-settings"> 
+        <div id="user-settings">
             [[Settings]]
         </div>
     </body>
