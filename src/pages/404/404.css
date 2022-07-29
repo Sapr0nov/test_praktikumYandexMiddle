@@ -1,0 +1,22 @@
+body {
+  background: black;
+  font-family: "Arial";
+}
+.container {
+  width: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 30%;
+  left: 50%;
+  margin: auto;
+}
+.link404 {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 0px;
+  font-size: 24px;
+  color: white;
+  text-decoration: underline;
+  text-shadow: 1px 1px 1px red;
+}
