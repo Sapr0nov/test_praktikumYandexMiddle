@@ -8,13 +8,13 @@
     <title>404:Page Not Found</title>
     <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="404.css" />
-    <link rel="stylesheet" type="text/css" href="/src/components/glitchEffect/glitchEffect.css" />
+    <link rel="stylesheet" type="text/css" href="/src/components/glitch_effect/glitch_effect.css" />
 </head>
 
 <body>
     <div class="container">
         <a class="link404" href="/">Начать с главной</a>
-        [[glitchEffect]]
+        [[glitch_effect]]
     </div>
 </body>
 </html>

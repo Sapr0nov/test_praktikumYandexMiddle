@@ -2,7 +2,7 @@
 <form id="settings" class="form-set locked">
         <h2 class="form-set__title">Настройки</h2>
     <div class="set-avatar">
-        <img src="../../components/settings/placeholder.png" />
+        <img src="../../../static/placeholder.png" />
         <input type="file" name="avatar" />
     </div>
     <div class="settings__name">{name}</div>

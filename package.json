@@ -6,12 +6,7 @@
     "start": "node src/srv.js",
     "clean": "rimraf .parcel-cache rimraf .cache && rimraf dist && mkdir dist",
     "dev": "parcel src/pages/index/index.jssx",
-    "dev404": "parcel src/pages/404/404.jssx",
-    "dev500": "parcel src/pages/500/500.html",
-    "devSet": "parcel src/pages/profile/profile.jssx",
-    "devAuth": "parcel src/pages/auth/auth.jssx",
-    "devReg": "parcel src/pages/reg/reg.jssx",
-    "build": "parcel build src/pages/index/index.jssx src/pages/404/404.jssx src/pages/500/500.html src/pages/signin/signin.jssx src/pages/signup/signup.jssx src/pages/profile/profile.jssx"
+    "build": "parcel build src/pages/index/index.jssx src/pages/404/404.jssx src/pages/500/500.jssx src/pages/signin/signin.jssx src/pages/signup/signup.jssx src/pages/profile/profile.jssx"
   },
   "keywords": [],
   "author": "SSA",
