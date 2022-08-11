@@ -1,5 +1,5 @@
 [[redirects]]
-  from = "/settings"
+  from = "/settings/"
   to = "/"
   status = 200
   force = false
@@ -7,18 +7,18 @@
   conditions = {Language = ["ru"], Country = ["RU"], Role = ["guest"]}
 
 [[redirects]]
-  from = "/login"
+  from = "/login/"
   to = "/"
   status = 200
 [[redirects]]
-  from = "/reg"
+  from = "/reg/"
   to = "/"
   status = 200
 [[redirects]]
-  from = "/404"
+  from = "/404/"
   to = "/"
   status = 200
 [[redirects]]
-  from = "/500"
+  from = "/500/"
   to = "/"
   status = 200

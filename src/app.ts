@@ -18,19 +18,19 @@ let currentPage:Block;
 const urlPath = document.location.pathname;
 switch (urlPath) {
     case '/' : 
-    case '/index' : 
+    case '/index/' : 
         currentPage = new Index(); 
         break;
-    case '/login' : 
+    case '/login/' : 
         currentPage = new AuthForm(); 
         break;
-    case '/reg' : 
+    case '/reg/' : 
         currentPage = new RegForm(); 
         break;
-    case '/settings' : 
+    case '/settings/' : 
         currentPage = new Settings(); 
         break;
-    case '/500' : 
+    case '/500/' : 
         currentPage = new Error500();
         break;
     default : 
