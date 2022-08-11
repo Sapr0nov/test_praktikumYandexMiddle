@@ -4,13 +4,24 @@ const port = 3000;
 
 app.use('/', express.static(`${__dirname}/../dist`));
 
-app.use('/login', express.static(`${__dirname}/../dist`));
-app.use('/settings', express.static(`${__dirname}/../dist`));
-app.use('/reg', express.static(`${__dirname}/../dist`));
-app.use('/404', express.static(`${__dirname}/../dist`));
-app.use('/500', express.static(`${__dirname}/../dist`));
-
 /** Routing */
+app.get('/login', function (req, res) {
+  res.status(200).type('.html').sendFile('index.html', { root: __dirname + '/../dist/' });
+});
+app.get('/settings', function (req, res) {
+  res.status(200).type('.html').sendFile('index.html', { root: __dirname + '/../dist/' });
+});
+app.get('/reg', function (req, res) {
+  res.status(200).type('.html').sendFile('index.html', { root: __dirname + '/../dist/' });
+});
+app.get('/404', function (req, res) {
+  res.status(200).type('.html').sendFile('index.html', { root: __dirname + '/../dist/' });
+});
+app.get('/500', function (req, res) {
+  res.status(200).type('.html').sendFile('index.html', { root: __dirname + '/../dist/' });
+});
+
+
 app.get('*', function (req, res) {
   res.status(200).type('.html').sendFile('index.html', { root: __dirname + '/../dist/' });
 });
