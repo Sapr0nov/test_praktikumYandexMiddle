@@ -5,25 +5,29 @@ It include part of web application - client for chat app.
 ## Getting Started 🚀
 
 * [Figma](https://www.figma.com/file/ovjYpFJqUreYoOcBK0ixb8/Messanger?node-id=0%3A1) 
-* [DEMO](https://sprint2.stacksite.ru)
-* [404](https://sprint2.stacksite.ru/404/)
-* [500](https://sprint2.stacksite.ru/500/)
-* [signin](https://sprint2.stacksite.ru/login/)
-* [signup](https://sprint2.stacksite.ru/reg/)
-* [profile](https://sprint2.stacksite.ru/settings/)
+* [DEMO](https://sapronovsa.netlify.app)
+* [404](https://sapronovsa.netlify.app/404/)
+* [500](https://sapronovsa.netlify.app/500/)
+* [signin](https://sapronovsa.netlify.app/login/)
+* [signup](https://sapronovsa.netlify.app/reg/)
+* [profile](https://sapronovsa.netlify.app/settings/)
 
 ## Using 
 
-**Parcel** **Node JS** **Express** **PosHTML** **PostCSS** **Pretter**  **Linter**
+**Parcel** **TypeScript** **Node JS** **Express** **PosHTML** **PostCSS** **Pretter**  **Linter**
 
 ## Commands 💬
 
 
-#### launch server
-```sh
-npm start
-```
 #### clear cache and user's data
 ```sh
 npm run clean
+```
+#### build project
+```sh
+npm run build
+```
+#### launch server
+```sh
+npm start
 ```
