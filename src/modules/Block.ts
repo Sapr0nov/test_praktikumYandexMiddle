@@ -1,4 +1,11 @@
-import { stringify } from "querystring";
+interface Meta {
+  tagName: string;
+  props: Object;
+}
+interface EventBus {
+  dispatch:Function;
+  register:Function;
+}
 import { EventBus } from "./EventBus.ts";
 
 export class Block {
@@ -9,13 +16,13 @@ export class Block {
       FLOW_RENDER: "flow:render"
     };
   
-    _element = null;
-    _meta = null;
-    props: any;
-    eventBus = new EventBus();
+    _element:HTMLElement |null= null;
+    _meta:Meta|null = null;
+    props:Object;
+    eventBus:EventBus = new EventBus();
 
 
-    constructor(tagName = "div", props = {}) {
+    constructor(tagName:string = "div", props:Object = {}) {
 
       this._meta = {
         tagName,
@@ -28,7 +35,7 @@ export class Block {
       this.eventBus.dispatch(Block.EVENTS.INIT);
     }
   
-    _registerEvents(eventBus) {
+    _registerEvents(eventBus:EventBus) {
       eventBus.register(Block.EVENTS.INIT, this.init.bind(this));
       eventBus.register(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
       eventBus.register(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
@@ -36,8 +43,8 @@ export class Block {
     }
   
     _createResources() {
-      const { tagName } = this._meta;
-      this._element = this._createDocumentElement(tagName);
+      const tagName = this._meta?.tagName;
+      this._element = this._createDocumentElement(tagName?tagName:'div');
     }
   
     init() {
@@ -49,12 +56,12 @@ export class Block {
       this.componentDidMount(this);
     }
   
-    componentDidMount(oldProps) {}  
+    componentDidMount(oldProps:Object) {}  
       dispatchComponentDidMount() {
     this.eventBus.dispatch(Block.EVENTS.FLOW_CDM);
       }
   
-    _componentDidUpdate(oldProps, newProps) {
+    _componentDidUpdate(oldProps:Object, newProps:Object) {
       const response = this.componentDidUpdate(oldProps, newProps);
       if (!response) {
         return;
@@ -62,11 +69,11 @@ export class Block {
       this._render();
     }
   
-    componentDidUpdate(oldProps, newProps) {
+    componentDidUpdate(oldProps:Object, newProps:Object) {
       return true;
     }
   
-    setProps = nextProps => {
+    setProps = (nextProps:Object) => {
       if (!nextProps) {
         return;
       }
@@ -84,11 +91,11 @@ export class Block {
       // Используйте шаблонизатор из npm или напишите свой безопасный
       // Нужно не в строку компилировать (или делать это правильно),
       // либо сразу в DOM-элементы возвращать из compile DOM-ноду
-      this._element.innerHTML = block;
+      this._element? this._element.innerHTML  = block : this._element = null;
     }
   
     render() {
-      let result:string;
+      let result:string = '';
       return result;
     }
   
@@ -96,7 +103,7 @@ export class Block {
       return this.element;
     }
   
-    _makePropsProxy(props) {
+    _makePropsProxy(props:any) {
       const self = this;
   
       return new Proxy(props, {
@@ -119,16 +126,18 @@ export class Block {
       });
     }
   
-    _createDocumentElement(tagName) {
+    _createDocumentElement(tagName:string) {
       // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
       return document.createElement(tagName);
     }
   
     show() {
-      this.getContent().style.display = "block";
+      const element:HTMLElement = this.getContent()!;
+      element.style.display = "block";
     }
   
     hide() {
-      this.getContent().style.display = "none";
+      const element:HTMLElement = this.getContent()!;
+      element.style.display = "none";
     }
   }

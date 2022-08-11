@@ -12,49 +12,25 @@ import { Settings } from './components/settings/settings.ts';
 import { Block } from './modules/Block';
 import './pages/index/index.css';
 import './modules/form.css';
-/*
-const express = require('express');
-const app = express();
-const port = 3000;
-
-app.use('/', express.static(`${__dirname}/../dist`));
-app.get('/', function (req:Request, res:Response) {
-    res.status(200).type('.html').sendFile('index.html', { root: __dirname + '/../dist/index/' });
-});
-
-app.set('port', process.env.PORT || port);
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}!`)
-});
-
-app.use(express.static(__dirname + '/public'));
-*/
-/*
-Handlebars.registerHelper('domLoad', function (aString: string) {
-    this.appendChild();
-    return new DOMParser().parseFromString(index, "text/html").body.firstChild
-})
-*/
-
 
 let currentPage:Block;
 
 const urlPath = document.location.pathname;
 switch (urlPath) {
     case '/' : 
-    case '/index' : 
+    case '/index/' : 
         currentPage = new Index(); 
         break;
-    case '/login' : 
+    case '/login/' : 
         currentPage = new AuthForm(); 
         break;
-    case '/reg' : 
+    case '/reg/' : 
         currentPage = new RegForm(); 
         break;
-    case '/settings' : 
+    case '/settings/' :
         currentPage = new Settings(); 
         break;
-    case '/500' : 
+    case '/500/' : 
         currentPage = new Error500();
         break;
     default : 
@@ -81,12 +57,11 @@ if (newNode && newNode.parentNode) {
     const settingBtn = <Element>newNode.parentNode.querySelector('.chat-header__setting');
     form = <HTMLFormElement>newNode.parentNode.querySelector('form');
     
-    profileBtn && profileBtn.addEventListener("click", () => { document.location.href = "/settings"; });
-    settingBtn && settingBtn.addEventListener("click", () => { document.location.href = "/settings"; });
+    profileBtn && profileBtn.addEventListener("click", () => { document.location.href = "/settings/"; });
+    settingBtn && settingBtn.addEventListener("click", () => { document.location.href = "/settings/"; });
 }
 
 // check forms
-
 if (form) {
     form.querySelectorAll('input').forEach(el => {
         if (el.tagName == "INPUT") {
