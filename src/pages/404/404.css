@@ -1,8 +1,8 @@
-body {
+body.e404 {
   background: black;
   font-family: "Arial";
 }
-.container {
+.e404 .container {
   width: 50%;
   position: absolute;
   transform: translate(-50%, -50%);
@@ -10,7 +10,7 @@ body {
   left: 50%;
   margin: auto;
 }
-.link404 {
+.e404 .link404 {
   display: flex;
   justify-content: center;
   text-align: center;

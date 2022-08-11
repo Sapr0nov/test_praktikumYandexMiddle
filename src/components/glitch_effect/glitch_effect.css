@@ -9,9 +9,11 @@
   .glitch::before, .glow::before {
     content: attr(data-text);
     position: absolute;
+    width: 100%;
     left: -2px;
     top: 0px;
     text-shadow: -5px 0 magenta;
+    text-align: center;
     background: black;
     overflow: hidden;
     animation: animation1 3s linear infinite alternate-reverse, glitch 5s 5.05s infinite;
@@ -19,11 +21,13 @@
   .glitch::after, .glow::after {
     content: attr(data-text);
     position: absolute;
+    width: 100%;
     left: 2px;
     top: 0;
     text-shadow: -5px 0 lightgreen;
     background: black;
     overflow: hidden;
+    text-align: center;
     animation: animation2 3s linear infinite alternate-reverse, glitch 5s 5s infinite;
   }
   @keyframes glitch {
@@ -248,18 +252,6 @@
     color: transparent;
     position: absolute;
     top: 0;
-  }
-  .subtitle {
-    font-family: Arial;
-    font-weight: 100;
-    font-size: 32px;
-    color: rgba(165, 141, 141, .4);
-    text-transform: uppercase;
-    letter-spacing: 1em;
-    text-align: center;
-    position: absolute;
-    left: 17%;
-    animation: animation3 5s 5.02s infinite;
   }
   @keyframes animation3 {
     1% {

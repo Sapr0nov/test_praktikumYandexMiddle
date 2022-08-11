@@ -1,14 +1,15 @@
 <form id="auth" class="form form-auth">
-    <h2 class="form-title">Вход</h2>
+    <h2 class="form-title">{{enter_text}}</h2>
+    <span class="form-error"></span>
 <label for="login">
-    Логин
+    {{login_text}}
     <input type="text" value="" name="login" placeholder="ivanivanov" />
 </label>
 <label for="pswd">
-    Пароль
+    {{password_text}}
     <input type="password" name="password" />
 </label>
 
-<button class="form-btn">Авторизоваться</button>
-<a class="form-link" href="/" >Зарегистрироваться</a>
+<button class="form-btn">{{btn_name}}</button>
+<a class="form-link" href="/" >{{link_text}}</a>
 </form>

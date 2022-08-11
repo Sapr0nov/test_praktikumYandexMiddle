@@ -1,16 +1,13 @@
-:root {
-    --text-title-color: #1E1E1E;
-}
-body {
+body.e500 {
     background-color: black;
 }
-.container {
+.e500 .container {
     width: 50%;
     height: 50%;
     margin: auto;
     overflow: hidden;
 }
-.comforting-message {
+.e500 .comforting-message {
     display: block;
     position: absolute;
     top: 0px;
@@ -24,7 +21,7 @@ body {
     align-items: center;
     color: white;
 }
-.text-error{
+.e500 .text-error{
     width: 100%;
     font-family: 'Arial';
     font-style: normal;
@@ -32,26 +29,26 @@ body {
     color: var(--text-title-color);
     text-align: center;
 }
-.image {
+.e500 .image {
     display: block;
     position: relative;
 }
-.image img{
+.e500 .image img{
     width: 712px;
     height: auto;
     border-radius: 25px 25px 0px 0px;
 }
 @media (max-width:400px){
-    .image img{
+    .e500 .image img{
        width: 350px;
     }
-    .text-error{
+    .e500 .text-error{
         font-size: 14px;
     }
-    .container {
+    .e500 .container {
         width: 100%;
     }
-    .comforting-message {
+    .e500 .comforting-message {
         left: 18px;
         text-shadow: 1px 1px 1px black;
     }
