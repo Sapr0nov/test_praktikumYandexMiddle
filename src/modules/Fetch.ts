@@ -1,8 +1,9 @@
+interface Map { [key: string]: string; }
 type Options = {
-    headers: Object;
-    method: string;
-    data: Object;
-    timeout: number;
+    headers: Map, 
+    method: string,
+    data: Object,
+    timeout: number
   };
 
 export class Fetch {
@@ -15,14 +16,14 @@ export class Fetch {
     };
 
     // Необязательный метод
-    queryStringify(data) {
+    queryStringify(data:Map) {
         if (typeof data !== 'object') {
             throw new Error('Data must be object');
         }
         
         // Здесь достаточно и [object Object] для объекта
         const keys = Object.keys(data);
-        return keys.reduce((result, key, index) => {
+        return keys.reduce((result:Object, key:string, index:number) => {
             return `${result}${key}=${data[key]}${index < keys.length - 1 ? '&' : ''}`;
         }, '?');
     }
@@ -44,7 +45,7 @@ export class Fetch {
     };
     
     request = (url:string, options: Options, timeout:number = 5000) => {
-        const headers = options.headers;
+        const headers:Map = options.headers;
         const method = options.method;
         const data:any = options.data;
 
