@@ -4,7 +4,7 @@
   "description": "skin without meat",
   "scripts": {
     "start": "parcel ./src/index.html --port 3000",
-    "build": "parcel build ./src/index.html --no-source-maps --target default --port 3000",
+    "build": "parcel build ./src/index.html --no-source-maps --target default",
     "clean": "rimraf .parcel-cache && rimraf .cache && rimraf dist && rimraf build"
   },
   "keywords": [],
