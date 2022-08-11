@@ -6,19 +6,19 @@ app.use('/', express.static(`${__dirname}/../dist`));
 
 /** Routing */
 
-app.get('/login', function (req, res) {
+app.get('/login/', function (req, res) {
   res.status(200).type('.html').sendFile('index.html', { root: __dirname + '/../dist/' });
 });
-app.get('/settings', function (req, res) {
+app.get('/settings/', function (req, res) {
   res.status(200).type('.html').sendFile('index.html', { root: __dirname + '/../dist/' });
 });
-app.get('/reg', function (req, res) {
+app.get('/reg/', function (req, res) {
   res.status(200).type('.html').sendFile('index.html', { root: __dirname + '/../dist/' });
 });
-app.get('/404', function (req, res) {
+app.get('/404/', function (req, res) {
   res.status(200).type('.html').sendFile('index.html', { root: __dirname + '/../dist/' });
 });
-app.get('/500', function (req, res) {
+app.get('/500/', function (req, res) {
   res.status(200).type('.html').sendFile('index.html', { root: __dirname + '/../dist/' });
 });
 
