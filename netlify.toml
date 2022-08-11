@@ -2,10 +2,6 @@
   from = "/settings/"
   to = "/"
   status = 200
-  force = false
-  query = {path = ":path"}
-  conditions = {Language = ["ru"], Country = ["RU"], Role = ["guest"]}
-
 [[redirects]]
   from = "/login/"
   to = "/"
