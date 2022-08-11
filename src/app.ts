@@ -12,30 +12,6 @@ import { Settings } from './components/settings/settings.ts';
 import { Block } from './modules/Block';
 import './pages/index/index.css';
 import './modules/form.css';
-/*
-const express = require('express');
-const app = express();
-const port = 3000;
-
-app.use('/', express.static(`${__dirname}/../dist`));
-app.get('/', function (req:Request, res:Response) {
-    res.status(200).type('.html').sendFile('index.html', { root: __dirname + '/../dist/index/' });
-});
-
-app.set('port', process.env.PORT || port);
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}!`)
-});
-
-app.use(express.static(__dirname + '/public'));
-*/
-/*
-Handlebars.registerHelper('domLoad', function (aString: string) {
-    this.appendChild();
-    return new DOMParser().parseFromString(index, "text/html").body.firstChild
-})
-*/
-
 
 let currentPage:Block;
 
@@ -86,7 +62,6 @@ if (newNode && newNode.parentNode) {
 }
 
 // check forms
-
 if (form) {
     form.querySelectorAll('input').forEach(el => {
         if (el.tagName == "INPUT") {
