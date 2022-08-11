@@ -13,7 +13,7 @@ interface jsonChat {
 import Handlebars from "handlebars";
 import hbs_aside_chat_preview from "./aside_chat_preview.hbs";
 import "./aside_chat_preview.css";
-import { data } from "../../../static/data.json";
+import data from "../../../static/data.json";
 
 export function renderAsideChatPreview() {
     let outLine:string = '';
