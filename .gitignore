@@ -1,5 +1,6 @@
 .vs
 .parcel-cache
+.cache
 node_modules
 dist
 build
