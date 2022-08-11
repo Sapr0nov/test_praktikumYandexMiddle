@@ -5,9 +5,6 @@ const port = 3000;
 app.use('/', express.static(`${__dirname}/../dist`));
 
 /** Routing */
-app.get('/test', function (req, res) {
-  res.send( __dirname + '/../dist/    vot tak');
-});
 
 app.get('/login', function (req, res) {
   res.status(200).type('.html').sendFile('index.html', { root: __dirname + '/../dist/' });
