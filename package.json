@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node src/srv.js",
     "build": "parcel build ./src/index.html --no-source-maps --target default",
-    "clean": "rimraf .parcel-cache && rimraf .cache && rimraf dist && rimraf build"
+    "clean": "rimraf .parcel-cache && rimraf .cache && rimraf .dist && rimraf .node_modules && rimraf .build"
   },
   "keywords": [],
   "author": "SSA",
