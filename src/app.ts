@@ -27,7 +27,7 @@ switch (urlPath) {
     case '/reg/' : 
         currentPage = new RegForm(); 
         break;
-    case '/settings/' : 
+    case '/settings/' :
         currentPage = new Settings(); 
         break;
     case '/500/' : 
@@ -57,8 +57,8 @@ if (newNode && newNode.parentNode) {
     const settingBtn = <Element>newNode.parentNode.querySelector('.chat-header__setting');
     form = <HTMLFormElement>newNode.parentNode.querySelector('form');
     
-    profileBtn && profileBtn.addEventListener("click", () => { document.location.href = "/settings"; });
-    settingBtn && settingBtn.addEventListener("click", () => { document.location.href = "/settings"; });
+    profileBtn && profileBtn.addEventListener("click", () => { document.location.href = "/settings/"; });
+    settingBtn && settingBtn.addEventListener("click", () => { document.location.href = "/settings/"; });
 }
 
 // check forms
