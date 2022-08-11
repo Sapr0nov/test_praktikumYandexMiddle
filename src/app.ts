@@ -2,7 +2,6 @@ interface FormData {
     key:  keyof FormData;
     value: string;
 }
-  
 
 import { Error404 } from './pages/404/404.ts';
 import { Error500 } from './pages/500/500.ts';
@@ -13,7 +12,23 @@ import { Settings } from './components/settings/settings.ts';
 import { Block } from './modules/Block';
 import './pages/index/index.css';
 import './modules/form.css';
+/*
+const express = require('express');
+const app = express();
+const port = 3000;
 
+app.use('/', express.static(`${__dirname}/../dist`));
+app.get('/', function (req:Request, res:Response) {
+    res.status(200).type('.html').sendFile('index.html', { root: __dirname + '/../dist/index/' });
+});
+
+app.set('port', process.env.PORT || port);
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}!`)
+});
+
+app.use(express.static(__dirname + '/public'));
+*/
 /*
 Handlebars.registerHelper('domLoad', function (aString: string) {
     this.appendChild();
@@ -66,8 +81,8 @@ if (newNode && newNode.parentNode) {
     const settingBtn = <Element>newNode.parentNode.querySelector('.chat-header__setting');
     form = <HTMLFormElement>newNode.parentNode.querySelector('form');
     
-    profileBtn && profileBtn.addEventListener("click", e => { document.location.href = "/settings"; });
-    settingBtn && settingBtn.addEventListener("click", e => { document.location.href = "/settings"; });
+    profileBtn && profileBtn.addEventListener("click", () => { document.location.href = "/settings"; });
+    settingBtn && settingBtn.addEventListener("click", () => { document.location.href = "/settings"; });
 }
 
 // check forms
@@ -182,7 +197,7 @@ function addMultipleEventListener(element:Element, events:Array<any>, handler:an
 //  flag 1 - check all form, collect errors
 function validator(element:any, error_class:string, tests:Array<Function>, text_err:string, min:number | null, max:number | null, flag:number) {
     if (flag == 0) {
-        const form_error:Element | null = document.querySelector('.form-error');
+        const form_error:Element | null = document.querySelector('.'+error_class);
         if (form_error) {
             form_error.textContent = "";
         }  
@@ -193,7 +208,7 @@ function validator(element:any, error_class:string, tests:Array<Function>, text_
         })
     }
     catch(err) {
-        const form_error:Element | null = document.querySelector('.form-error');
+        const form_error:Element | null = document.querySelector('.'+error_class);
         if (form_error) {
             form_error.textContent += " " + text_err + err;
         }  
