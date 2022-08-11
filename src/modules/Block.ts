@@ -1,4 +1,3 @@
-import { stringify } from "querystring";
 import { EventBus } from "./EventBus.ts";
 
 export class Block {
