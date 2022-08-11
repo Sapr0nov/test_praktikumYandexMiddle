@@ -62,3 +62,8 @@
     padding: 12px 0px;
     color: var(--blue-color);
 }
+.form-error {
+    color: red;
+    font-size: 11px;
+    text-align: center;
+}
