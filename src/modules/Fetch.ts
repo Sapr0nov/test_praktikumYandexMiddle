@@ -1,14 +1,20 @@
-interface Map { [key: string]: string; }
+type Methods = 'GET' | 'POST' | 'PUT' | 'DELETE';
+type MethodsCollection = {
+    GET:Methods,
+    POST:Methods,
+    PUT:Methods,
+    DELETE:Methods
+}
 type Options = {
-    headers: Map, 
-    method: string,
+    headers: Record<string, string>, 
+    method: Methods,
     data: Object,
     timeout: number
   };
 
 export class Fetch {
     
-    METHODS = {
+    METHODS:MethodsCollection = {
         GET: 'GET',
 		POST: 'POST',
 		PUT: 'PUT',
@@ -16,7 +22,7 @@ export class Fetch {
     };
 
     // Необязательный метод
-    queryStringify(data:Map) {
+    queryStringify(data:Record<string, string>) {
         if (typeof data !== 'object') {
             throw new Error('Data must be object');
         }
@@ -29,23 +35,23 @@ export class Fetch {
     }
 
     get = (url: string, options: Options) => {
-        return this.request(url, {...options, method: this.METHODS.GET}, options.timeout);
+        return this.request(url, {...options, method: this.METHODS.GET});
     };
 
     post = (url: string, options: Options) => {
-        return this.request(url, {...options, method: this.METHODS.POST}, options.timeout);
+        return this.request(url, {...options, method: this.METHODS.POST});
     };
     
     put = (url: string, options: Options) => {
-        return this.request(url, {...options, method: this.METHODS.PUT}, options.timeout);
+        return this.request(url, {...options, method: this.METHODS.PUT});
     };
 
     delete = (url: string, options: Options) => {
-        return this.request(url, {...options, method: this.METHODS.DELETE}, options.timeout);
+        return this.request(url, {...options, method: this.METHODS.DELETE});
     };
     
     request = (url:string, options: Options, timeout:number = 5000) => {
-        const headers:Map = options.headers;
+        const headers:Record<string, string> = options.headers;
         const method = options.method;
         const data:any = options.data;
 
