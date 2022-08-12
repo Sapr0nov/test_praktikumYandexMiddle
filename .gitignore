@@ -1,7 +1,9 @@
 .vs
 .parcel-cache
+.cache
 node_modules
 dist
+build
 # MacOS
 .DS_Store
 .AppleDouble

@@ -1,0 +1,20 @@
+[[redirects]]
+  from = "/settings/"
+  to = "/"
+  status = 200
+[[redirects]]
+  from = "/login/"
+  to = "/"
+  status = 200
+[[redirects]]
+  from = "/reg/"
+  to = "/"
+  status = 200
+[[redirects]]
+  from = "/404/"
+  to = "/"
+  status = 200
+[[redirects]]
+  from = "/500/"
+  to = "/"
+  status = 200
