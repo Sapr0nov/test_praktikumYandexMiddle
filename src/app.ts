@@ -6,26 +6,26 @@ import { RegForm } from './pages/form_registration/form_registration.ts';
 import { Settings } from './components/settings/settings.ts';
 import { Block } from './modules/Block';
 import { ValidateForm } from './modules/Validate';
-
 import './pages/index/index.css';
 import './modules/form.css';
 
 let currentPage:Block;
 const validator = new ValidateForm();
-
 const urlPath = document.location.pathname;
 switch (urlPath) {
-    case '/' : 
-    case '/index/' : 
+    case '/messenger' : 
+    case '/messenger/' : 
         currentPage = new Index(); 
         break;
-    case '/login/' : 
+    case '/' : 
         currentPage = new AuthForm(); 
         break;
-    case '/reg/' : 
+        case '/sign-up' : 
+        case '/reg/' : 
         currentPage = new RegForm(); 
         break;
-    case '/settings/' :
+        case '/settings/' :
+        case '/settings' :
         currentPage = new Settings(); 
         break;
     case '/500/' : 

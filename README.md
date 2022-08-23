@@ -5,12 +5,12 @@ It include part of web application - client for chat app.
 ## Getting Started 🚀
 
 * [Figma](https://www.figma.com/file/ovjYpFJqUreYoOcBK0ixb8/Messanger?node-id=0%3A1) 
-* [DEMO](https://sapronovsa.netlify.app)
+* [DEMO](https://sapronovsa.netlify.app/messanger)
 * [404](https://sapronovsa.netlify.app/404/)
 * [500](https://sapronovsa.netlify.app/500/)
-* [signin](https://sapronovsa.netlify.app/login/)
-* [signup](https://sapronovsa.netlify.app/reg/)
-* [profile](https://sapronovsa.netlify.app/settings/)
+* [signin](https://sapronovsa.netlify.app/)
+* [signup](https://sapronovsa.netlify.app/sign-up)
+* [profile](https://sapronovsa.netlify.app/settings)
 
 ## Using 
 
