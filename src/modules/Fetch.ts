@@ -12,7 +12,7 @@ type Options = {
     timeout: number
   };
 
-export class Fetch {
+export default class Fetch {
     
     METHODS:MethodsCollection = {
         GET: 'GET',
