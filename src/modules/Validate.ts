@@ -4,38 +4,51 @@ interface FormData {
 }
 
 export class ValidateForm {
-    validate(e:Event, inputs:Array<HTMLInputElement>) {
+    validate(e:Event, inputs:Array<HTMLInputElement>) :boolean {
+
         e.preventDefault();
-        
         const formData:FormData | any = {};
+        const errors:Array<string> = [];
+        const form_error:Element | null = document.querySelector('.form-error');
+        form_error?.textContent == '';
+
         inputs.forEach(el => {
             let key:keyof typeof formData = el.name;
+            let error: string;
             formData[key] = el.value;
-    
+           
             switch (el.name) {
                 case "login":
-                    this.validator(el, 'form-error', [this.isLogin, this.isValidLenght], "Логин не корректен: ", 3, 20, true); break;
+                    error = this.validator(el, [this.isLogin, this.isValidLenght], "Логин не корректен: ", 3, 20);
+                    if (error) { errors.push(error); } break;
                 case "password":
-                    this.validator(el, 'form-error', [this.isPassword, this.isValidLenght], "Пароль не корректен: ", 8, 40, true); break;
+                    error = this.validator(el, [this.isPassword, this.isValidLenght], "Пароль не корректен: ", 8, 40);
+                    if (error) { errors.push(error); } break;
                 case "first_name":
-                    this.validator(el, 'form-error', [this.isName], "Имя не корректено: ", null, null, true); break;
+                    error = this.validator(el, [this.isName], "Имя не корректено: ", null, null);
+                    if (error) { errors.push(error); } break;
                 case "second_name":
-                    this.validator(el, 'form-error', [this.isName], "Фамилия не корректена: ", null, null, true); break;
+                    error = this.validator(el, [this.isName], "Фамилия не корректена: ", null, null);
+                    if (error) { errors.push(error); } break;
                 case "email":
-                    this.validator(el, 'form-error', [this.isEmail], "Email не корректен: ", null, null, true); break;
+                    error = this.validator(el, [this.isEmail], "Email не корректен: ", null, null);
+                    if (error) { errors.push(error); } break;
                 case "phone":
-                    this.validator(el, 'form-error', [this.isPhone, this.isValidLenght], "Телефон не корректен: ", 10, 15, true); break;
+                    error = this.validator(el, [this.isPhone, this.isValidLenght], "Телефон не корректен: ", 10, 15);
+                    if (error) { errors.push(error); } break;
                 case "message":
-                    this.validator(el, 'form-error', [this.isValidLenght], "Сообщение не корректно: ", 1, 255, true); break;
+                    error = this.validator(el, [this.isValidLenght], "Сообщение не корректно: ", 1, 255);
+                    if (error) { errors.push(error); } break;
                 default:
-                    break;
+                break;
             }
         })
-    
-        const form_error:Element | null = document.querySelector('.form-error');
-        if (form_error && form_error.textContent == '') {
-            return;
+        if (errors.length == 0) {
+            form_error!.textContent = '';
+            return true;
         }
+        form_error!.textContent = errors.join("\r\n");
+        return false;
     }
     
     isName(str:string) {
@@ -68,13 +81,8 @@ export class ValidateForm {
     }
     
     //  shouldCleanError  true - check all form, collect errors
-    validator(element:any, error_class:string, tests:Array<Function>, text_err:string, min:number | null, max:number | null, shouldCleanError:boolean) {
-        if (shouldCleanError) {
-            const form_error:Element | null = document.querySelector('.'+error_class);
-            if (form_error) {
-                form_error.textContent = "";
-            }  
-        }
+    validator(element:any, tests:Array<Function>, text_err:string, min:number | null, max:number | null) {
+        let error:string = '';
     
         try {
             tests.forEach(test => {
@@ -82,10 +90,8 @@ export class ValidateForm {
             })
         }
         catch(err) {
-            const form_error:Element | null = document.querySelector('.'+error_class);
-            if (form_error) {
-                form_error.textContent += " " + text_err + err;
-            }  
+            error = text_err + err;
         }
+        return error;
     }
 }

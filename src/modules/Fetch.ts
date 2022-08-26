@@ -1,19 +1,26 @@
-type Methods = 'GET' | 'POST' | 'PUT' | 'DELETE';
-type MethodsCollection = {
-    GET:Methods,
-    POST:Methods,
-    PUT:Methods,
-    DELETE:Methods
+export type Methods = 'GET' | 'POST' | 'PUT' | 'DELETE';
+
+export type MethodsCollection = {
+    GET: Methods,
+    POST: Methods,
+    PUT: Methods,
+    DELETE: Methods
 }
-type Options = {
+
+export type Options = {
+    headers: Record<string, string>, 
+    data: Object,
+    timeout: number
+};
+type ReqOptions = {
     headers: Record<string, string>, 
     method: Methods,
     data: Object,
     timeout: number
-  };
+}
 
 export default class Fetch {
-    
+    ctxFetch = this;
     METHODS:MethodsCollection = {
         GET: 'GET',
 		POST: 'POST',
@@ -50,24 +57,26 @@ export default class Fetch {
         return this.request(url, {...options, method: this.METHODS.DELETE});
     };
     
-    request = (url:string, options: Options, timeout:number = 5000) => {
+    request = (url:string, options:ReqOptions, timeout:number = 5000) => {
         const headers:Record<string, string> = options.headers;
         const method = options.method;
         const data:any = options.data;
+        let ctxFetch = this;
 
         return new Promise(function(resolve, reject) {
             if (!method) {
-                    reject('No method');
-                    return;
+                reject('No method');
+                return;
             }
 
             const xhr = new XMLHttpRequest();
-            const isGet = method === this.METHODS.GET;
-
+            const isGet = (method === ctxFetch.METHODS.GET);
+            const dataModifity = ctxFetch.queryStringify(data);
+            xhr.withCredentials = true;
             xhr.open(
                 method, 
                 isGet && !!data
-                    ? `${url}${this.queryStringify(data)}`
+                    ? `${url}${dataModifity}`
                     : url,
             );
 
@@ -88,7 +97,7 @@ export default class Fetch {
             if (isGet || !data) {
                 xhr.send();
             } else {
-                    xhr.send(data);
+                xhr.send(JSON.stringify(data));
             }
         });
     };
