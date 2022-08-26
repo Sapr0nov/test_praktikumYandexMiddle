@@ -1,4 +1,4 @@
-import Handlebars = require('handlebars');
+import Handlebars from 'handlebars';
 import hbs_reg from "./form_registration.hbs";
 import { Block } from "../../modules/Block";
 

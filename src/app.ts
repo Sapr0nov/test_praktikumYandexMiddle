@@ -6,8 +6,12 @@ import { RegForm } from './pages/form_registration/form_registration.ts';
 import { Settings } from './components/settings/settings.ts';
 import { Block } from './modules/Block';
 import { ValidateForm } from './modules/Validate';
+import { ApiAction } from './modules/ApiAction';
 import './pages/index/index.css';
 import './modules/form.css';
+
+const api = new ApiAction();
+api.getUser();
 
 let currentPage:Block;
 const validator = new ValidateForm();
@@ -22,7 +26,7 @@ switch (urlPath) {
         break;
         case '/sign-up' : 
         case '/reg/' : 
-        currentPage = new RegForm(); 
+        currentPage = new RegForm();
         break;
         case '/settings/' :
         case '/settings' :
@@ -73,4 +77,28 @@ if (form) {
     
 function addMultipleEventListener(element:Element, events:Array<any>, handler:any) {
     events.forEach(el => element.addEventListener(el, handler))
+}
+
+// send forms
+
+if (form) {
+    if (form.name == 'reg') {
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            if (!validator.validate(e, Array.from(form?.querySelectorAll('input')!)) ) {
+                console.log('test');
+                return;
+            };
+
+            const formData = new FormData(form as HTMLFormElement);
+            api.signUp(
+                formData.get('first_name') as string,
+                formData.get('second_name') as string,
+                formData.get('login') as string,
+                formData.get('email') as string,
+                formData.get('phone') as string,
+                formData.get('password') as string
+                );
+        });
+    }
 }
