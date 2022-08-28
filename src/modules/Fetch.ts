@@ -93,11 +93,16 @@ export default class Fetch {
         
             xhr.timeout = timeout;
             xhr.ontimeout = reject;
-                
-            if (isGet || !data) {
-                xhr.send();
-            } else {
-                xhr.send(JSON.stringify(data));
+
+            if ( headers["content-type"] && headers["content-type"].indexOf("json") > -1 ) {
+                if (isGet || !dataModifity) {
+                    xhr.send();
+                } else {
+                    xhr.send(JSON.stringify(data));
+                }                
+            }else{
+                //send as FormData
+                xhr.send(data);
             }
         });
     };

@@ -6,10 +6,12 @@ import { bus as eventsBus } from './EventBus';
 export class ApiAction {
     BASE_URL:string = 'https://ya-praktikum.tech/api/v2';
     GET_USER:string = '/auth/user';
+    UPDATE_USER:string = '/user/profile';
     SIGNUP:string='/auth/signup';
     SIGNIN:string='/auth/signin';
     LOGOUT:string='/auth/logout';
     GET_CHATS:string='/chats/';
+    LOAD_AVATAR:string='/user/profile/avatar';
 
     async getUser():Promise<UserFields> {
         const options:Options = {
@@ -100,4 +102,31 @@ export class ApiAction {
         return data;
     }
 
+    async updateUserInfo(info:UserFields):Promise<XMLHttpRequest> {
+        const options:Options = {
+            headers: {
+                'content-type': 'application/json'
+            },
+            data: info,
+            timeout: 1000
+        };
+        const fetch = new Fetch();
+        let data:XMLHttpRequest = await fetch.put(this.BASE_URL + this.UPDATE_USER, options) as XMLHttpRequest;
+        eventsBus.dispatch('updateUserData', data);
+        return data;
+
+    }
+
+    async loadAvatar(file:FormData):Promise<XMLHttpRequest> {
+        const options:Options = {
+            headers: { },
+            data: file,
+            timeout: 1000
+        };
+        const fetch = new Fetch();
+        let data:XMLHttpRequest = await fetch.put(this.BASE_URL + this.LOAD_AVATAR, options) as XMLHttpRequest;
+        eventsBus.dispatch('uploadedAvatar', data);
+        return data;
+
+    }
 }
