@@ -61,3 +61,5 @@ export class EventBus implements IEventBus {
     return EventBus.nextId++;
   }
 }
+
+export const bus = EventBus.getInstance();
