@@ -34,11 +34,11 @@ export default class Fetch {
             throw new Error('Data must be object');
         }
         
-        // Здесь достаточно и [object Object] для объекта
         const keys = Object.keys(data);
-        return keys.reduce((result:Object, key:string, index:number) => {
+        const result = keys.reduce((result:Object, key:string, index:number) => {
             return `${result}${key}=${data[key]}${index < keys.length - 1 ? '&' : ''}`;
         }, '?');
+        return result.length > 1 ? result : '';
     }
 
     get = (url: string, options: Options) => {
@@ -75,7 +75,7 @@ export default class Fetch {
             xhr.withCredentials = true;
             xhr.open(
                 method, 
-                isGet && !!data
+                isGet && !!dataModifity
                     ? `${url}${dataModifity}`
                     : url,
             );
