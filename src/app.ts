@@ -27,11 +27,13 @@ switch (urlPath) {
         break;
     case '/' :
     case '' :
-        currentPage = new AuthForm(); 
+        currentPage = new AuthForm();
+        reRender(currentPage);
         break;
         case '/sign-up' :
         case '/sign-up/' :
         currentPage = new RegForm();
+        reRender(currentPage);
         break;
         case '/settings/' :
         case '/settings' :
@@ -40,9 +42,11 @@ switch (urlPath) {
         break;
     case '/500/' : 
         currentPage = new Error500();
+        reRender(currentPage);
         break;
     default : 
         currentPage = new Error404();
+        reRender(currentPage);
 }
 
 
@@ -50,6 +54,7 @@ function reRender(currentPage:Block) {
     const newNode = new DOMParser().parseFromString(currentPage.render(), "text/html").body.firstChild;
     const root = document.getElementById("root");
     if (root && newNode) {
+        root.textContent = '';
         root.appendChild(newNode);
     }
     reEvents(newNode!);
@@ -95,8 +100,20 @@ eventsBus.register('signIn', (req:XMLHttpRequest)=>{
 })
 
 eventsBus.register('loadedChatList', (req:XMLHttpRequest)=> {
-    console.log(req);
-    console.log(User);
+    console.log('loadedChatList?', req);
+})
+
+eventsBus.register('updateUserData', (req:XMLHttpRequest)=> {
+    if (req.status == 200) {
+        alert('Данные обновлены');
+    }
+})
+
+eventsBus.register('uploadedAvatar', (req:XMLHttpRequest)=> {
+    if (req.status == 200) {
+        api.getUser();
+        reRender(currentPage);
+    }
 })
 
 
@@ -106,14 +123,55 @@ function reEvents(newNode:ChildNode) {
     if (newNode && newNode.parentNode) {
         const profileBtn = <Element>newNode.parentNode.querySelector('.chat-profile');
         const settingBtn = <Element>newNode.parentNode.querySelector('.chat-header__setting');
+        const changeBtn = <Element>newNode.parentNode.querySelector('.change-data');
+        const changeAvatar = <Element>newNode.parentNode.querySelector('.set-avatar img');
         form = <HTMLFormElement>newNode.parentNode.querySelector('form');
         
         profileBtn && profileBtn.addEventListener("click", () => { document.location.href = "/settings/"; });
         settingBtn && settingBtn.addEventListener("click", () => { document.location.href = "/settings/"; });
+        changeBtn && changeBtn.addEventListener("click", e => {
+            e.preventDefault();
+            if (changeBtn.parentElement?.classList.contains("locked")) {
+                changeBtn.parentElement?.classList.remove("locked");
+                changeBtn.textContent = "Сохранить данные";
+            }else{
+                const firstName:HTMLInputElement = document.querySelector('#first_name')!;
+                const secondName:HTMLInputElement = document.querySelector('#second_name')!;
+                const login:HTMLInputElement = document.querySelector('#login')!;
+                const email:HTMLInputElement = document.querySelector('#email')!;
+                const phone:HTMLInputElement = document.querySelector('#phone')!;
+                const newData =
+                {
+                    "first_name": firstName.value,
+                    "second_name": secondName.value,
+                    "display_name": "",
+                    "login": login.value,
+                    "email": email.value,
+                    "phone": phone.value
+                } as UserFields;
+                api.updateUserInfo(newData);
+                changeBtn.parentElement?.classList.add("locked");
+                changeBtn.textContent = "Изменить данные";
+            }
+        })
+        changeAvatar && changeAvatar.addEventListener('click', e => {
+            e.preventDefault();
+            let uploadFile = document.querySelector('#avatar') as HTMLInputElement;
+            uploadFile.click();
+            uploadFile.onchange = () => {
+                const file = uploadFile.files![0];
+                if (!!file) {
+                    const formData = new FormData;
+                    formData.append("avatar", file, file.name);
+                    api.loadAvatar(formData);
+                }
+              }
+        })
     }
 
     // check forms
-    if (form) {
+    if (form && form.name !== 'settings') {
+
         form.querySelectorAll('input').forEach(el => {
             if (el.tagName == "INPUT") {
                 addMultipleEventListener(el,['focus', 'blur'], (e:Event)=> {
@@ -125,12 +183,7 @@ function reEvents(newNode:ChildNode) {
         form?.addEventListener("submit", (e)=> { validator.validate(e, Array.from(form?.querySelectorAll('input')!)) });
     }
         
-    function addMultipleEventListener(element:Element, events:Array<any>, handler:any) {
-        events.forEach(el => element.addEventListener(el, handler))
-    }
-
     // send forms
-
     if (form) {
         if (form.name == 'reg') {
             form.addEventListener('submit', e => {
@@ -152,7 +205,6 @@ function reEvents(newNode:ChildNode) {
                     const JSONreqest:UserFields = JSON.parse(req.response);
                     if (JSONreqest.id) {
                         document.location.pathname = '/messenger';
-                        console.log("userID; ", JSONreqest.id);
                     }
                 });
 
@@ -174,4 +226,8 @@ function reEvents(newNode:ChildNode) {
             });
         }
     }
+}
+
+function addMultipleEventListener(element:Element, events:Array<any>, handler:any) {
+    events.forEach(el => element.addEventListener(el, handler))
 }
