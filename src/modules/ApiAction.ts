@@ -12,6 +12,7 @@ export class ApiAction {
     LOGOUT:string='/auth/logout';
     GET_CHATS:string='/chats/';
     LOAD_AVATAR:string='/user/profile/avatar';
+    UPDATE_PSWD:string='/user/password';
 
     async getUser():Promise<UserFields> {
         const options:Options = {
@@ -128,5 +129,19 @@ export class ApiAction {
         eventsBus.dispatch('uploadedAvatar', data);
         return data;
 
+    }
+
+    async updatePassword(newPassword:string, oldPassword:string):Promise<XMLHttpRequest> {
+        const options:Options = {
+            headers: {
+                'content-type': 'application/json'
+            },
+            data: {"oldPassword":oldPassword, "newPassword":newPassword},
+            timeout: 1000
+        };
+        const fetch = new Fetch();
+        let data:XMLHttpRequest = await fetch.put(this.BASE_URL + this.UPDATE_PSWD, options) as XMLHttpRequest;
+        eventsBus.dispatch('updatedPassword', data);
+        return data;
     }
 }
