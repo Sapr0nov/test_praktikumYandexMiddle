@@ -1,3 +1,5 @@
+import { User } from './User';
+
 export type ChatFields = {
     id: number,
     title: string,
@@ -14,5 +16,10 @@ export class Chat {
     public avatar:string|null;
     public created_by:number|null;
     public unreaded_count:number|null;
-    public last_message:string|null;
+    public last_message: {
+        user:User,
+        id:number|string,
+        content:string|null,
+        time:string|null,
+    }
 }

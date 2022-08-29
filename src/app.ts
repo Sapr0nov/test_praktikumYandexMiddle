@@ -68,6 +68,7 @@ eventsBus.register('getUser', (user:UserFields)=>{
     }else{
         [User.id, User.first_name, User.second_name, User.display_name, User.login, User.email, User.phone, User.avatar] = 
         [user.id, user.first_name, user.second_name, user.display_name, user.login, user.email, user.phone, user.avatar];
+        User.currentChat = {id:null,status:null,socket:null,token:null,pingId:null};
         reRender(currentPage);
 
         api.chatList();
@@ -158,15 +159,19 @@ eventsBus.register('gotToken', (req:XMLHttpRequest) => {
         User.currentChat.token = JSON.parse(req.response).token;
         console.warn(User.id, User.currentChat.id, User.currentChat.token);
         api.socketConnect(User.id!, User.currentChat.id!, User.currentChat.token!);
+        if (User.currentChat.pingId) {
+            clearInterval(User.currentChat.pingId);
+        }
+        User.currentChat.pingId = setInterval( ()=> {
+            if (User.currentChat.status == 'connect') {
+                sendPing();
+            }else{
+                clearInterval(User.currentChat.pingId);
+            }
+        }, 1000);
     }
 })
 
-eventsBus.register('sendMessage', (req:XMLHttpRequest) => {
-    User.currentChat.socket?.send(JSON.stringify({
-        content: 'Моё первое сообщение миру!',
-        type: 'message',
-    }));
-})
 
 
 // Events
@@ -181,7 +186,8 @@ function reEvents(newNode:ChildNode) {
         const changePassword = <Element>newNode.parentNode.querySelector('.change-pswd');
         const addChatBtn = <Element>newNode.parentNode.querySelector('.chat-add');
         const chatPreview:Array<HTMLElement> = Array.from(newNode.parentNode.querySelectorAll('.chat-preview'));
-
+        const sendMsgBtn = <Element>newNode.parentNode.querySelector('.message-input__send-btn');
+        
         profileBtn && profileBtn.addEventListener('click', () => { document.location.href = "/settings/"; });
         settingBtn && settingBtn.addEventListener('click', () => { document.location.href = "/settings/"; });
         changeBtn && changeBtn.addEventListener('click', e => {
@@ -282,6 +288,13 @@ function reEvents(newNode:ChildNode) {
 
             })
         })
+        sendMsgBtn && sendMsgBtn.addEventListener('click', e => {
+            e.preventDefault();
+            const input = document.querySelector('.message-input input') as HTMLInputElement;
+            const msg:string = input.value;
+            input.value = '';
+            sendMessage(msg);
+        })
     }
 
     // check forms
@@ -345,4 +358,17 @@ function reEvents(newNode:ChildNode) {
 
 function addMultipleEventListener(element:Element, events:Array<any>, handler:any) {
     events.forEach(el => element.addEventListener(el, handler))
+}
+
+function sendPing() {
+    User.currentChat.socket?.send(JSON.stringify({
+        type: 'ping',
+    }));
+}
+
+function sendMessage(message:string) {
+    User.currentChat.socket?.send(JSON.stringify({
+        content: message,
+        type: 'message',
+    }));
 }
