@@ -116,6 +116,14 @@ eventsBus.register('uploadedAvatar', (req:XMLHttpRequest)=> {
     }
 })
 
+eventsBus.register('updatedPassword', (req:XMLHttpRequest)=> {
+    if (req.status == 200) {
+        alert('Пароль обновлен');
+    }else{
+        console.log(req.response);
+    }
+})
+
 
 // Events
 function reEvents(newNode:ChildNode) {
@@ -125,6 +133,7 @@ function reEvents(newNode:ChildNode) {
         const settingBtn = <Element>newNode.parentNode.querySelector('.chat-header__setting');
         const changeBtn = <Element>newNode.parentNode.querySelector('.change-data');
         const changeAvatar = <Element>newNode.parentNode.querySelector('.set-avatar img');
+        const changePassword = <Element>newNode.parentNode.querySelector('.change-pswd');
         form = <HTMLFormElement>newNode.parentNode.querySelector('form');
         
         profileBtn && profileBtn.addEventListener("click", () => { document.location.href = "/settings/"; });
@@ -166,6 +175,12 @@ function reEvents(newNode:ChildNode) {
                     api.loadAvatar(formData);
                 }
               }
+        })
+        changePassword && changePassword.addEventListener("click", e => {
+            e.preventDefault();
+            const oldPswd = prompt('Введите ТЕКУЩИЙ пароль:');
+            const newPswd = prompt('Задайте НОВЫЙ пароль:');
+            api.updatePassword(newPswd!, oldPswd!);
         })
     }
 
