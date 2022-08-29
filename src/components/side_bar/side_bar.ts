@@ -8,7 +8,9 @@ export class SideBar extends Block {
     render() {
         let outLine:string = '';
         outLine = Handlebars.compile(hbs_side_bar) ({
-            chats: renderAsideChatPreview()
+            chats: renderAsideChatPreview(),
+            profileText:'профиль >',
+            newChatText:'новый чат'
         })
     
         return outLine;    

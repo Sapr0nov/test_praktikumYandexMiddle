@@ -11,7 +11,7 @@ import './pages/index/index.css';
 import './modules/form.css';
 import { bus as eventsBus } from './modules/EventBus';
 import { UserFields } from './modules/User';
-import {user as User } from './modules/User';
+import { user as User } from './modules/User';
 
 const api = new ApiAction();
 const validator = new ValidateForm();
@@ -66,8 +66,8 @@ eventsBus.register('getUser', (user:UserFields)=>{
         console.log('error: ', user.reason);
         api.logout();
     }else{
-        [User.first_name, User.second_name, User.display_name, User.login, User.email, User.phone, User.avatar] = 
-        [user.first_name, user.second_name, user.display_name, user.login, user.email, user.phone, user.avatar];
+        [User.id, User.first_name, User.second_name, User.display_name, User.login, User.email, User.phone, User.avatar] = 
+        [user.id, user.first_name, user.second_name, user.display_name, user.login, user.email, user.phone, user.avatar];
         reRender(currentPage);
 
         api.chatList();
@@ -100,7 +100,10 @@ eventsBus.register('signIn', (req:XMLHttpRequest)=>{
 })
 
 eventsBus.register('loadedChatList', (req:XMLHttpRequest)=> {
-    console.log('loadedChatList?', req);
+    if (req.status == 200) {
+        User.chats = JSON.parse(req.response);
+        reRender(currentPage);
+    }
 })
 
 eventsBus.register('updateUserData', (req:XMLHttpRequest)=> {
@@ -124,21 +127,64 @@ eventsBus.register('updatedPassword', (req:XMLHttpRequest)=> {
     }
 })
 
+eventsBus.register('createdChat', (req:XMLHttpRequest) => {
+    if (req.status == 200) {
+        alert('Чат успешно создан!');
+        reRender(currentPage);
+
+    }else{
+        console.log(req.response);
+    }
+})
+
+eventsBus.register('addedUserToChat', (req:XMLHttpRequest) => {
+    if (req.status == 200) {
+        alert('Пользователь добавлен!')
+    }else{
+        console.log(req.response);
+    }
+})
+
+eventsBus.register('deletedUserFromChat', (req:XMLHttpRequest) => {
+    if (req.status == 200) {
+        alert('Пользователь удален!')
+    }else{
+        console.log(req.response);
+    }
+})
+
+eventsBus.register('gotToken', (req:XMLHttpRequest) => {
+    if (req.status == 200) {
+        User.currentChat.token = JSON.parse(req.response).token;
+        console.warn(User.id, User.currentChat.id, User.currentChat.token);
+        api.socketConnect(User.id!, User.currentChat.id!, User.currentChat.token!);
+    }
+})
+
+eventsBus.register('sendMessage', (req:XMLHttpRequest) => {
+    User.currentChat.socket?.send(JSON.stringify({
+        content: 'Моё первое сообщение миру!',
+        type: 'message',
+    }));
+})
+
 
 // Events
 function reEvents(newNode:ChildNode) {
     let form:HTMLFormElement|null|undefined = newNode?.parentElement?.querySelector('form');
+
     if (newNode && newNode.parentNode) {
         const profileBtn = <Element>newNode.parentNode.querySelector('.chat-profile');
         const settingBtn = <Element>newNode.parentNode.querySelector('.chat-header__setting');
         const changeBtn = <Element>newNode.parentNode.querySelector('.change-data');
         const changeAvatar = <Element>newNode.parentNode.querySelector('.set-avatar img');
         const changePassword = <Element>newNode.parentNode.querySelector('.change-pswd');
-        form = <HTMLFormElement>newNode.parentNode.querySelector('form');
-        
-        profileBtn && profileBtn.addEventListener("click", () => { document.location.href = "/settings/"; });
-        settingBtn && settingBtn.addEventListener("click", () => { document.location.href = "/settings/"; });
-        changeBtn && changeBtn.addEventListener("click", e => {
+        const addChatBtn = <Element>newNode.parentNode.querySelector('.chat-add');
+        const chatPreview:Array<HTMLElement> = Array.from(newNode.parentNode.querySelectorAll('.chat-preview'));
+
+        profileBtn && profileBtn.addEventListener('click', () => { document.location.href = "/settings/"; });
+        settingBtn && settingBtn.addEventListener('click', () => { document.location.href = "/settings/"; });
+        changeBtn && changeBtn.addEventListener('click', e => {
             e.preventDefault();
             if (changeBtn.parentElement?.classList.contains("locked")) {
                 changeBtn.parentElement?.classList.remove("locked");
@@ -176,11 +222,65 @@ function reEvents(newNode:ChildNode) {
                 }
               }
         })
-        changePassword && changePassword.addEventListener("click", e => {
+        changePassword && changePassword.addEventListener('click', e => {
             e.preventDefault();
             const oldPswd = prompt('Введите ТЕКУЩИЙ пароль:');
             const newPswd = prompt('Задайте НОВЫЙ пароль:');
             api.updatePassword(newPswd!, oldPswd!);
+        })
+        addChatBtn && addChatBtn.addEventListener('click', e => {
+            e.preventDefault();
+            const chatName = prompt('Название добавляемого чата:');
+            api.createChat(chatName!);
+        })
+        chatPreview && chatPreview.length && chatPreview.forEach (element => {
+            element.addEventListener('click', () => {
+                User.currentChat.id = parseInt(element.dataset.id!);
+                api.getTokenChat(parseInt(element.dataset.id!));
+            });
+            
+            element.addEventListener('contextmenu', e => {
+                e.preventDefault();
+                const chatId = parseInt(element.dataset.id!);
+                let submenu:HTMLElement = document.querySelector('.submenu')!;
+                if (!submenu) {
+                    submenu = document.createElement('div');
+                    submenu.classList.add('submenu');
+                    const [subBtn1, subBtn2, subBtn3] = [document.createElement('div'), document.createElement('div'), document.createElement('div')];
+                    subBtn1.textContent = 'добавить пользователя';
+                    subBtn2.textContent = 'удалить пользователя';
+                    subBtn3.textContent = 'удалить чат';
+                    [subBtn1, subBtn2, subBtn3].forEach(btn => { btn.classList.add('submenu__btn'); submenu.appendChild(btn); });
+                    document.body.appendChild(submenu);
+
+                    subBtn1.addEventListener('click', e => {
+                        e.preventDefault();
+                        submenu.classList.add('hide');
+                        const id = parseInt(prompt('Введите id ДОБАВЛЯЕМОГО пользователя:')!);
+                        api.addUsersToChat([id!], chatId);
+                    })
+
+                    subBtn2.addEventListener('click', e => {
+                        e.preventDefault();
+                        submenu.classList.add('hide');
+                        const id = parseInt(prompt('Введите id УДАЛЯЕМОГО пользователя:')!);
+                        api.deleteUsersFromChat([id!], chatId);
+                    })
+
+                    subBtn3.addEventListener('click', e => {
+                        e.preventDefault();
+                        submenu.classList.add('hide');
+                        const isDelete = confirm('Точно УДАЛИТЬ этот чат?');
+                        if (isDelete) {
+                            api.deleteChat(chatId);
+                        }
+                    })
+                    
+                }
+                [submenu.style.left, submenu.style.top] = [e.pageX.toString() + 'px', e.pageY.toString() + 'px'];
+                submenu.classList.remove("hide");
+
+            })
         })
     }
 
