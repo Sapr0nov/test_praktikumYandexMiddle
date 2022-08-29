@@ -39,7 +39,8 @@ export class User {
         id:number|null,
         status:string|null,
         socket:WebSocket|null,
-        token: string|null
+        token: string|null,
+        pingId: any|null
     } ;
 }
 
