@@ -1,12 +1,14 @@
+import { Chat } from './Chat'
+
 export type UserFields = {
     id: number,
     first_name: string,
     second_name: string,
-    display_name: string | null,
+    display_name: string|null,
     email: string,
     login: string,
     phone: string,
-    avatar: string | null,
+    avatar: string|null,
     reason: string
 }
 
@@ -23,14 +25,22 @@ export class User {
     
         return this.instance;
     }
-    public id:number | null;
-    public first_name:string | null;
-    public second_name:string | null;
-    public display_name:string | null;
-    public login:string | null;
-    public avatar: string | null | any;
-    public email:string | null;
-    public phone:string | null;
+
+    public id:number|null;
+    public first_name:string|null;
+    public second_name:string|null;
+    public display_name:string|null;
+    public login:string|null;
+    public avatar: string|null | any;
+    public email:string|null;
+    public phone:string|null;
+    public chats: Array<Chat>|null;
+    public currentChat: {
+        id:number|null,
+        status:string|null,
+        socket:WebSocket|null,
+        token: string|null
+    } ;
 }
 
 export const user = User.getInstance();
