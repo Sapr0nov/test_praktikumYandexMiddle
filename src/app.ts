@@ -1,10 +1,9 @@
-import { Error404 } from './pages/404/404.ts';
-import { Error500 } from './pages/500/500.ts';
-import { Index } from './pages/index/index.ts';
-import { AuthForm } from './pages/form_auth/form_auth.ts';
-import { RegForm } from './pages/form_registration/form_registration.ts';
-import { Settings } from './components/settings/settings.ts';
-import { Block } from './modules/Block';
+import { Error404 } from './pages/404/404';
+import { Error500 } from './pages/500/500';
+import { Index } from './pages/index/index';
+import { AuthForm } from './pages/form_auth/form_auth';
+import { RegForm } from './pages/form_registration/form_registration';
+import { Settings } from './components/settings/settings';
 import { ValidateForm } from './modules/Validate';
 import { ApiAction } from './modules/ApiAction';
 import './pages/index/index.css';
@@ -12,103 +11,84 @@ import './modules/form.css';
 import { bus as eventsBus } from './modules/EventBus';
 import { UserFields } from './modules/User';
 import { user as User } from './modules/User';
+import Router from './modules/Router';
 
 const api = new ApiAction();
 const validator = new ValidateForm();
 const urlPath = document.location.pathname;
-let currentPage:Block;
 
-
-switch (urlPath) {
-    case '/messenger' :
-    case '/messenger/' :
-        currentPage = new Index();
-        api.getUser();
-        break;
-    case '/' :
-    case '' :
-        currentPage = new AuthForm();
-        reRender(currentPage);
-        break;
-        case '/sign-up' :
-        case '/sign-up/' :
-        currentPage = new RegForm();
-        reRender(currentPage);
-        break;
-        case '/settings/' :
-        case '/settings' :
-        currentPage = new Settings(); 
-        api.getUser();
-        break;
-    case '/500/' : 
-        currentPage = new Error500();
-        reRender(currentPage);
-        break;
-    default : 
-        currentPage = new Error404();
-        reRender(currentPage);
+const router = new Router(window);
+if (window.location.pathname == '/404/' || window.location.pathname == '/500/') {
+    document.body.classList.add('e404');
+}else{
+    document.body.classList.remove('e404');
 }
 
-
-function reRender(currentPage:Block) {
-    const newNode = new DOMParser().parseFromString(currentPage.render(), "text/html").body.firstChild;
-    const root = document.getElementById("root");
-    if (root && newNode) {
-        root.textContent = '';
-        root.appendChild(newNode);
-    }
-    reEvents(newNode!);
-}
+router.use('/messenger', (User.checkCookie())? new Index() : new AuthForm())
+router.use('/sign-up', new RegForm());
+router.use('/', new AuthForm);
+router.use('', new AuthForm);
+router.use('/settings', (User.checkCookie())? new Settings() : new AuthForm());
+router.use('/500/', new Error500());
+router.use('/404/', new Error404());
 
 
 eventsBus.register('getUser', (user:UserFields)=>{
     if (user.reason) {
         console.log('error: ', user.reason);
-        api.logout();
+        router.go('/');
     }else{
         [User.id, User.first_name, User.second_name, User.display_name, User.login, User.email, User.phone, User.avatar] = 
         [user.id, user.first_name, user.second_name, user.display_name, user.login, user.email, user.phone, user.avatar];
         User.currentChat = {id:null,status:null,socket:null,token:null,pingId:null};
-        reRender(currentPage);
-
+        User.setCookie();
         api.chatList();
-        // open messanger after registration or authorization
+        // open messenger after registration or authorization
         if (urlPath == '/' || urlPath == '' || urlPath == '/sign-up' ) {
-            document.location.pathname = '/messenger';
+            api.chatList();
+            router.go('/messenger');
         }
     }
 });
 
 eventsBus.register('goAuth', ()=>{
-    if (document.location.pathname !== '/') {
-        document.location.pathname = '/';
-    }
+    router.go('/');
 })
 
 eventsBus.register('signIn', (req:XMLHttpRequest)=>{
     if (req.response == 'OK') {
         api.getUser();
-        document.location.pathname = '/messenger';
+        router.back();
     }else{
         const err = JSON.parse(req.response as string);
         if (err.reason == 'User already in system') {
             api.getUser();
-            document.location.pathname = '/messenger';
+            router.back();
         }else{
             alert(err.reason);
         }
     }
 })
 
+eventsBus.register('rendered', (newNode:ChildNode) => {
+    if (!User.id) {
+        api.getUser();
+    }
+    reEvents(newNode);
+})
+
 eventsBus.register('loadedChatList', (req:XMLHttpRequest)=> {
     if (req.status == 200) {
         User.chats = JSON.parse(req.response);
-        reRender(currentPage);
+        if (window.location.pathname == '/messenger') {
+            router.go('/messenger');
+        }
     }
 })
 
 eventsBus.register('updateUserData', (req:XMLHttpRequest)=> {
     if (req.status == 200) {
+        api.getUser();
         alert('Данные обновлены');
     }
 })
@@ -116,7 +96,9 @@ eventsBus.register('updateUserData', (req:XMLHttpRequest)=> {
 eventsBus.register('uploadedAvatar', (req:XMLHttpRequest)=> {
     if (req.status == 200) {
         api.getUser();
-        reRender(currentPage);
+        if (window.location.pathname == '/settings') {
+            router.go('/settings');
+        }
     }
 })
 
@@ -131,8 +113,9 @@ eventsBus.register('updatedPassword', (req:XMLHttpRequest)=> {
 eventsBus.register('createdChat', (req:XMLHttpRequest) => {
     if (req.status == 200) {
         alert('Чат успешно создан!');
-        reRender(currentPage);
-
+        if (window.location.pathname == '/messenger') {
+            router.go('/messenger');
+        }
     }else{
         console.log(req.response);
     }
@@ -157,7 +140,6 @@ eventsBus.register('deletedUserFromChat', (req:XMLHttpRequest) => {
 eventsBus.register('gotToken', (req:XMLHttpRequest) => {
     if (req.status == 200) {
         User.currentChat.token = JSON.parse(req.response).token;
-        console.warn(User.id, User.currentChat.id, User.currentChat.token);
         api.socketConnect(User.id!, User.currentChat.id!, User.currentChat.token!);
         if (User.currentChat.pingId) {
             clearInterval(User.currentChat.pingId);
@@ -172,6 +154,8 @@ eventsBus.register('gotToken', (req:XMLHttpRequest) => {
     }
 })
 
+
+router.start();
 
 
 // Events
@@ -188,8 +172,8 @@ function reEvents(newNode:ChildNode) {
         const chatPreview:Array<HTMLElement> = Array.from(newNode.parentNode.querySelectorAll('.chat-preview'));
         const sendMsgBtn = <Element>newNode.parentNode.querySelector('.message-input__send-btn');
         
-        profileBtn && profileBtn.addEventListener('click', () => { document.location.href = "/settings/"; });
-        settingBtn && settingBtn.addEventListener('click', () => { document.location.href = "/settings/"; });
+        profileBtn && profileBtn.addEventListener('click', () => { router.go('/settings'); });
+        settingBtn && settingBtn.addEventListener('click', () => { router.go('/settings'); });
         changeBtn && changeBtn.addEventListener('click', e => {
             e.preventDefault();
             if (changeBtn.parentElement?.classList.contains("locked")) {
@@ -332,7 +316,7 @@ function reEvents(newNode:ChildNode) {
                 data.then( (req:XMLHttpRequest) => {
                     const JSONreqest:UserFields = JSON.parse(req.response);
                     if (JSONreqest.id) {
-                        document.location.pathname = '/messenger';
+                        router.go('/messenger');
                     }
                 });
 

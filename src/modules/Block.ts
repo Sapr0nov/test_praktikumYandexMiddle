@@ -6,7 +6,7 @@ interface EventBus {
   dispatch:Function;
   register:Function;
 }
-import { EventBus } from "./EventBus.ts";
+import { bus as eventsBus } from './EventBus';
 
 export class Block {
     static EVENTS = {
@@ -19,7 +19,7 @@ export class Block {
     _element:HTMLElement |null= null;
     _meta:Meta|null = null;
     props:Object;
-    eventBus:EventBus = new EventBus();
+    eventBus:EventBus = eventsBus;
 
 
     constructor(tagName:string = "div", props:Object = {}) {
@@ -56,10 +56,11 @@ export class Block {
       this.componentDidMount(this);
     }
   
-    componentDidMount(oldProps:Object) {}  
-      dispatchComponentDidMount() {
-    this.eventBus.dispatch(Block.EVENTS.FLOW_CDM);
-      }
+    componentDidMount(oldProps:Object) { return oldProps; } 
+
+    dispatchComponentDidMount() {
+      this.eventBus.dispatch(Block.EVENTS.FLOW_CDM);
+    }
   
     _componentDidUpdate(oldProps:Object, newProps:Object) {
       const response = this.componentDidUpdate(oldProps, newProps);
@@ -70,6 +71,7 @@ export class Block {
     }
   
     componentDidUpdate(oldProps:Object, newProps:Object) {
+      if (JSON.stringify(oldProps) !== JSON.stringify(newProps)) 
       return true;
     }
   
@@ -104,7 +106,6 @@ export class Block {
     }
   
     _makePropsProxy(props:any) {
-      const self = this;
   
       return new Proxy(props, {
         get(target, prop) {
