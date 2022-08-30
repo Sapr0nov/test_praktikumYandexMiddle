@@ -1,4 +1,5 @@
 import { Chat } from './Chat'
+import Cookies from './Cookie';
 
 export type UserFields = {
     id: number,
@@ -41,7 +42,16 @@ export class User {
         socket:WebSocket|null,
         token: string|null,
         pingId: any|null
-    } ;
+    }
+
+    setCookie() {
+        const cookie = new Cookies();
+        cookie.setCookie('messenger', this.id!.toString(), { 'path':'/', 'expires':null,'max-age':360000 } );
+    }
+    checkCookie() {
+        const cookie = new Cookies();
+        return !!(cookie.getCookie('messenger'))
+    }
 }
 
 export const user = User.getInstance();

@@ -51,47 +51,62 @@ export class ValidateForm {
         return false;
     }
     
-    isName(str:string) {
-        const regEx = /^[A-ZА-Я]+[a-zа-я\-]*/gm;    // cyrilic, latin, first Capital
-        if (!regEx.test(str)) { throw "должно начинаться с заглавной буквы и состоять только из Кирилицы, Латиницы и - "; };
+    isName(str:string):string|boolean {
+        const regEx = /^[A-ZА-Я]+[a-zа-я\-]*$/gm;    // cyrilic, latin, first Capital
+        if (!regEx.test(str)) { 
+            return "должно начинаться с заглавной буквы и состоять только из Кирилицы, Латиницы и - "; 
+        }
+        return true;
     }
     
-    isPhone(str:string) {
-        const regEx = /^\+?[0-9]*/gm;
-        if (!regEx.test(str)) { throw "может начинаться с плюса, состоит только из цифр"; };
+    isPhone(str:string):string|boolean {
+        const regEx = /^\+?[0-9]*$/gm;
+        if (!regEx.test(str)) { 
+            return "может начинаться с плюса, состоит только из цифр"; 
+        }
+        return true;
     }
     
-    isLogin(str:string) {
+    isLogin(str:string):string|boolean {
         const regEx = /^[0-9]?[a-zA-Z]+[a-zA-Z0-9-_]*/gm;
-        if (!regEx.test(str)) { throw "должен состоять из цифр и латинцицы, тире и подчеркивания, должна быть хотя бы одна буква"; };
+        if (!regEx.test(str)) { 
+            return "должен состоять из цифр и латиницы, тире и подчеркивания, должна быть хотя бы одна буква"; 
+        }
+        return true;
     }
     
     isPassword(str:string) {
         const regEx = /.*[А-ЯA-Z]+.*/gm;
-        if (!regEx.test(str)) { throw "Должна быть хотя бы одна заглавная буква"; };
+        if (!regEx.test(str)) { 
+            return "Должна быть хотя бы одна заглавная буква"; 
+        }
+        return true;
     }
     
     isEmail(str:string) {
         const regEx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/gm;
-        if (!regEx.test(str)) { throw "Должна быть @ точка после неё и латинские буквы"; };
+        if (!regEx.test(str)) { 
+            return "Должна быть @ точка после неё и латинские буквы"; 
+        }
+        return true;
     }
     
     isValidLenght(str:string,min:number,max:number) {
-        if (str.length < min || str.length > max) { throw "длина поля должна быть от " + min + " до " + max + " символов" ; };
+        if (str.length < min || str.length > max) { 
+            return "длина поля должна быть от " + min + " до " + max + " символов"; 
+        }
+        return true;
     }
     
     //  shouldCleanError  true - check all form, collect errors
     validator(element:any, tests:Array<Function>, text_err:string, min:number | null, max:number | null) {
         let error:string = '';
-    
-        try {
-            tests.forEach(test => {
-                test(element.value, min, max);
-            })
-        }
-        catch(err) {
-            error = text_err + err;
-        }
-        return error;
+        tests.forEach(test => {
+            let result = test(element.value, min, max);
+            if (result !== true) {
+                error = text_err + result;
+            }
+        })
+       return error;
     }
 }
