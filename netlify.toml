@@ -1,13 +1,13 @@
 [[redirects]]
-  from = "/settings/"
+  from = "/settings"
   to = "/"
   status = 200
 [[redirects]]
-  from = "/login/"
+  from = "/messenger"
   to = "/"
   status = 200
 [[redirects]]
-  from = "/reg/"
+  from = "/sign-up"
   to = "/"
   status = 200
 [[redirects]]
