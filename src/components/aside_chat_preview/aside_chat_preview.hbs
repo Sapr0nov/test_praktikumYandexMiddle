@@ -1,13 +1,13 @@
-    <div class="chat-preview" data-id="{{id}}"> 
-        <div class="chat-preview__avatar">{{img}}</div>
-        <div class="chat-preview__last-msg">
-            <div class="chat-preview__lastname">{{name}}</div>
-            <div class="chat-preview__lasttext">{{msg}}</div>
-        </div>
-        <div class="chat-preview__info">
-            <time class="chat-preview__time" datetime="{{fulltime}}">{{time}}</time>  
-            {{#if unreadMsgs}}
-            <div class="chat-preview__mark">{{unreadMsgs}}</div>
-            {{/if}}
-        </div>
-    </div>
+<div class="chat-preview" data-id="{{id}}">
+  <div class="chat-preview__avatar">{{img}}</div>
+  <div class="chat-preview__last-msg">
+    <div class="chat-preview__lastname">{{name}}</div>
+    <div class="chat-preview__lasttext">{{msg}}</div>
+  </div>
+  <div class="chat-preview__info">
+    <time class="chat-preview__time" datetime="{{fulltime}}">{{time}}</time>
+    {{#if unreadMsgs}}
+      <div class="chat-preview__mark">{{unreadMsgs}}</div>
+    {{/if}}
+  </div>
+</div>

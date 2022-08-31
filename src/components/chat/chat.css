@@ -1,146 +1,146 @@
-.chat{
-    width: calc(100% - 310px);
-    height: 100vh;
-    display: block;
-    overflow: hidden;
-    position: absolute;
-    right: 0;
+.chat {
+  width: calc(100% - 310px);
+  height: 100vh;
+  display: block;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
 }
 .chat-header {
-    width: 100%;
-    height: 54px;
-    flex-direction: row;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--light-grey-line);
-    display: flex;
+  width: 100%;
+  height: 54px;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--light-grey-line);
+  display: flex;
 }
 .chat-header__image {
-    width: 48px;
-    min-width: 48px;
-    height: 48px;
-    background: var(--grey-bg-placeholder);
-    border-radius: 50%;
-    display: flex;
-    margin: 3px;
-    margin-left: 22px;
-    justify-content: center;
-    align-items: center;
+  width: 48px;
+  min-width: 48px;
+  height: 48px;
+  background: var(--grey-bg-placeholder);
+  border-radius: 50%;
+  display: flex;
+  margin: 3px;
+  margin-left: 22px;
+  justify-content: center;
+  align-items: center;
 }
 .chat-header__name {
-    color: var(--text-title-color);
-    flex: 1;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 13px;
-    padding: 8px 12px;
+  color: var(--text-title-color);
+  flex: 1;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 13px;
+  padding: 8px 12px;
 }
 .chat-header__setting {
-    display: block;
-    width: 32px;
-    height: 32px;
-    background: url(/static/menu.svg);
-    background-repeat: no-repeat;
-    background-position: center center;
-    cursor: pointer;
+  display: block;
+  width: 32px;
+  height: 32px;
+  background: url(/static/menu.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  cursor: pointer;
 }
-.message-history{
-    display: flex;
-    position: absolute;
-    width: calc(100% - 48px);
-    height: calc(100vh - 108px);
-    right: 0px;
-    top: 54px;
-    flex-direction: column;
-    overflow-y: scroll;
+.message-history {
+  display: flex;
+  position: absolute;
+  width: calc(100% - 48px);
+  height: calc(100vh - 108px);
+  right: 0px;
+  top: 54px;
+  flex-direction: column;
+  overflow-y: scroll;
 }
 .message-input {
-    width: 100%;
-    height: 54px;
-    border-top: 1px solid var(--light-grey-line);
-    flex-direction: row;
-    align-items: flex-end;
-    display: flex;
-    position: absolute;
-    bottom: 0;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  height: 54px;
+  border-top: 1px solid var(--light-grey-line);
+  flex-direction: row;
+  align-items: flex-end;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
 }
-.message-input__attach{
-    width: 54px;
-    height: 54px;
-    background: url(/static/attach.svg);
-    flex-direction: column;
-    display: flex;
-    background-repeat: no-repeat;
-    background-position: center center;
-    cursor: pointer;
-    margin-left: 22px;
+.message-input__attach {
+  width: 54px;
+  height: 54px;
+  background: url(/static/attach.svg);
+  flex-direction: column;
+  display: flex;
+  background-repeat: no-repeat;
+  background-position: center center;
+  cursor: pointer;
+  margin-left: 22px;
 }
 .message {
-    display: flex;
-    position: relative;
-    width: 76%;
-    align-items: flex-start;
-    justify-content: flex-start;
-    background-color: var(--light-bg-text);
-    border-radius: 0px 12px 12px 12px;
-    padding: 18px;
-    margin:5px;
-    box-sizing: border-box;
+  display: flex;
+  position: relative;
+  width: 76%;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background-color: var(--light-bg-text);
+  border-radius: 0px 12px 12px 12px;
+  padding: 18px;
+  margin: 5px;
+  box-sizing: border-box;
 }
 .message.self {
-    justify-content: flex-end;
-    align-self: flex-end;
-    background-color: var(--select-light-bg);    
-    border-radius: 12px 12px 1px 12px;
+  justify-content: flex-end;
+  align-self: flex-end;
+  background-color: var(--select-light-bg);
+  border-radius: 12px 12px 1px 12px;
 }
-.message>span {
-    display: block;
-    position: absolute;
-    right: 4px;
-    bottom: 4px;
-    font-size: 10px;
-    color: var(--text-label-color);
-    font-family: Arial;
+.message > span {
+  display: block;
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  font-size: 10px;
+  color: var(--text-label-color);
+  font-family: Arial;
 }
 .message-input form {
-    width: 100%;
-    height: 70%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .message-input input {
-    flex: 1;
-    margin: 0px 25px;
-    background-color: var(--light-bg-text);
-    border: none;
-    border-radius: 25px;
-    font-size: 18px;
-    padding: 4px 14px;
+  flex: 1;
+  margin: 0px 25px;
+  background-color: var(--light-bg-text);
+  border: none;
+  border-radius: 25px;
+  font-size: 18px;
+  padding: 4px 14px;
 }
 .message-input .form-error {
-    position: absolute;
-    top: 2px;
+  position: absolute;
+  top: 2px;
 }
 .chat {
-    width: calc(100% - 310px);
-    display: block;
-    height: 100vh;
-    overflow: hidden;
+  width: calc(100% - 310px);
+  display: block;
+  height: 100vh;
+  overflow: hidden;
 }
 .message-input__send-btn {
-    display: block;
-    width: 54px;
-    height: 54px;
-    background: url(/static/sendBtn.svg);
-    background-repeat: no-repeat;
-    background-position: center center;
-    cursor: pointer;
-    margin: 0px 12px;
-    outline: none;
-    border: none;
+  display: block;
+  width: 54px;
+  height: 54px;
+  background: url(/static/sendBtn.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  cursor: pointer;
+  margin: 0px 12px;
+  outline: none;
+  border: none;
 }
-.message-input__send-btn:focus{
-    outline: 1px solid var(--text-label-color);
+.message-input__send-btn:focus {
+  outline: 1px solid var(--text-label-color);
 }

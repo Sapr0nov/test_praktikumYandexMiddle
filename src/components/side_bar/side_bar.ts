@@ -4,11 +4,13 @@ import { renderAsideChatPreview } from "../aside_chat_preview/aside_chat_preview
 import "./side_bar.css";
 
 export function renderSideBarPreview() {
-    let outLine:string = '';
-    outLine = outLine + Handlebars.compile(hbs_side_bar) ({
-        chats: renderAsideChatPreview(),
-        profileText:'профиль >',
-        newChatText:'новый чат'
-    })
-    return outLine;
+  let outLine: string = "";
+  outLine =
+    outLine +
+    Handlebars.compile(hbs_side_bar)({
+      chats: renderAsideChatPreview(),
+      profileText: "профиль >",
+      newChatText: "новый чат",
+    });
+  return outLine;
 }

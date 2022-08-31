@@ -5,6 +5,8 @@
   "scripts": {
     "start": "node src/srv.js",
     "dev": "parcel ./src/index.html --no-source-maps",
+    "lint": "node_modules/.bin/eslint . --fix",
+    "lint:format": "prettier . --write",
     "test": "./node_modules/.bin/mocha --require ts-node/register",
     "build": "parcel build ./src/index.html --no-source-maps",
     "buildAll": "parcel build ./src/index.html --no-source-maps && parcel build ./src/modules/Fetch.ts --no-source-maps --no-scope-hoist --no-optimize --no-content-hash",
@@ -29,6 +31,7 @@
     "chai-http": "4.3.0",
     "cssnano": "5.1.12",
     "eslint": "8.20.0",
+    "eslint-config-airbnb": "^19.0.4",
     "events": "3.3.0",
     "mocha": "10.0.0",
     "parcel": "2.7.0",
