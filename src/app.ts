@@ -24,11 +24,11 @@ if (window.location.pathname == '/404/' || window.location.pathname == '/500/') 
     document.body.classList.remove('e404');
 }
 
-router.use('/messenger', (User.checkCookie())? new Index() : new AuthForm())
+router.use('/messenger', new Index());
 router.use('/sign-up', new RegForm());
 router.use('/', new AuthForm);
 router.use('', new AuthForm);
-router.use('/settings', (User.checkCookie())? new Settings() : new AuthForm());
+router.use('/settings', new Settings());
 router.use('/500/', new Error500());
 router.use('/404/', new Error404());
 
@@ -44,7 +44,7 @@ eventsBus.register('getUser', (user:UserFields)=>{
         User.setCookie();
         api.chatList();
         // open messenger after registration or authorization
-        if (urlPath == '/' || urlPath == '' || urlPath == '/sign-up' ) {
+        if (User.id && (urlPath == '/' || urlPath == '' || urlPath == '/sign-up' )) {
             api.chatList();
             router.go('/messenger');
         }
@@ -58,12 +58,12 @@ eventsBus.register('goAuth', ()=>{
 eventsBus.register('signIn', (req:XMLHttpRequest)=>{
     if (req.response == 'OK') {
         api.getUser();
-        router.back();
+        router.go('/messenger');
     }else{
         const err = JSON.parse(req.response as string);
         if (err.reason == 'User already in system') {
             api.getUser();
-            router.back();
+            router.go('/messenger');
         }else{
             alert(err.reason);
         }
@@ -71,7 +71,7 @@ eventsBus.register('signIn', (req:XMLHttpRequest)=>{
 })
 
 eventsBus.register('rendered', (newNode:ChildNode) => {
-    if (!User.id) {
+    if (!User.id && (window.location.pathname == '/messenger' || window.location.pathname == '/settings') ) {
         api.getUser();
     }
     reEvents(newNode);
