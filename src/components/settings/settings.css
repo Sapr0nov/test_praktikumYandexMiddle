@@ -65,7 +65,7 @@
 
 }
 .form-set input{
-    width: 200px;
+    width: 300px;
     border: none;
     outline: none;
     font-weight: 500;
@@ -84,7 +84,11 @@
 .set-avatar {
     display: flex;
     width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 50%;
     margin: auto;
+    cursor: pointer;
 }
 .set-avatar input {
     display: none;

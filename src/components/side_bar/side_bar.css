@@ -12,7 +12,32 @@
     background-color: var(--lightfill-grey-color);
     cursor: pointer;
 }
-
+.chat-add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.chat-add:hover span{
+    color: black;
+}
+.chat-add span{
+    display: flex;
+    color: var(--text-label-color);
+    justify-content: flex-end;
+    font-family: Arial,Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 12px;
+}
+.chat-add span::before{
+    content: " + ";
+    font-family: Arial;
+    font-size: 18px;
+    font-weight: 900;
+    width: 16px;
+}
 .chat-search {
     display: flex;
     width: 100%;
