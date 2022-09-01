@@ -1,120 +1,122 @@
 #user-settings {
-    display: block;
-    position: absolute;
-    width: 100vw;
-    height: 100vw;
-    z-index: 99;
-    left: 0px;
-    background-color: white;
-    transition: all .5s ease;
+  display: block;
+  position: absolute;
+  width: 100vw;
+  height: 100vw;
+  z-index: 99;
+  left: 0px;
+  background-color: white;
+  transition: all 0.5s ease;
 }
 .close-settings {
-    display: block;
-    position: absolute;
-    width: 50px;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    background-color: var(--light-bg-text);
-    background-image: url(../../../static/arrow_back.svg);
-    background-repeat: no-repeat;
-    background-position: center center;
-    border: none;
-    border-right: 1px solid var(--light-grey-line);
-    z-index: 999;
-    cursor: pointer;
+  display: block;
+  position: absolute;
+  width: 50px;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: var(--light-bg-text);
+  background-image: url(../../../static/arrow_back.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  border: none;
+  border-right: 1px solid var(--light-grey-line);
+  z-index: 999;
+  cursor: pointer;
 }
 #user-settings.hide {
-    left: -100vw;
-}
-.form-set{
-    display: flex;
-    flex-direction: column;
-
-}
-.form-set__title {
-    padding: 20px 120px;
-    font-family: 'Arial','Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 20px;
-    text-align: center;
-    color: var(--text-title-color);
+  left: -100vw;
 }
 .form-set {
-    display: flex;
-    flex-direction: column;
-    min-width: 500px;
-    max-width: 900px;
-    margin: auto;
-    background: white;
-    font-family: 'Arial','Inter';
-    font-style: normal;
-    padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+.form-set__title {
+  padding: 20px 120px;
+  font-family: "Arial", "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 20px;
+  text-align: center;
+  color: var(--text-title-color);
+}
+.form-set {
+  display: flex;
+  flex-direction: column;
+  min-width: 500px;
+  max-width: 900px;
+  margin: auto;
+  background: white;
+  font-family: "Arial", "Inter";
+  font-style: normal;
+  padding: 30px;
 }
 
-.form-set label{
-    display: flex;
-    align-items: center;
-    color: var(--text-label-color);
-    box-sizing: border-box;
-    padding: 10px 30px;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--light-grey-line);
-
+.form-set label {
+  display: flex;
+  align-items: center;
+  color: var(--text-label-color);
+  box-sizing: border-box;
+  padding: 10px 30px;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--light-grey-line);
 }
-.form-set input{
-    width: 200px;
-    border: none;
-    outline: none;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 16px;
-    color: var(--text-title-color);
-    box-sizing: border-box;
-    text-align: right;
-    padding: 8px 30px;
-    background-color: var(--select-light-bg);
+.form-set input {
+  width: 300px;
+  border: none;
+  outline: none;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 16px;
+  color: var(--text-title-color);
+  box-sizing: border-box;
+  text-align: right;
+  padding: 8px 30px;
+  background-color: var(--select-light-bg);
 }
-.form-set.locked input{
-    background-color: inherit;
-    pointer-events: none;
+.form-set.locked input {
+  background-color: inherit;
+  pointer-events: none;
 }
 .set-avatar {
-    display: flex;
-    width: 100px;
-    margin: auto;
+  display: flex;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: auto;
+  cursor: pointer;
 }
 .set-avatar input {
-    display: none;
+  display: none;
 }
 .settings__name {
-    display: flex;
-    width: 300px;
-    margin: auto;
-    justify-content: center;
-    padding: 12px;
+  display: flex;
+  width: 300px;
+  margin: auto;
+  justify-content: center;
+  padding: 12px;
 }
 .form-set__btn {
-    background-color: var(--blue-color);
-    padding: 0 200px;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 8px;
-    color: white;
-    margin-top: 80px;
-    cursor: pointer;
+  background-color: var(--blue-color);
+  padding: 0 200px;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 8px;
+  color: white;
+  margin-top: 80px;
+  cursor: pointer;
 }
 .form-set__link {
-    width: 100%;
-    text-align: center;
-    text-decoration: none;
-    padding: 12px 0px;
-    font-family: 'Arial','Inter';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 13px;
-    color: var(--blue-color);
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  padding: 12px 0px;
+  font-family: "Arial", "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 13px;
+  color: var(--blue-color);
 }

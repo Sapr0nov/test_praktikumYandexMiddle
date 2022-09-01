@@ -1,35 +1,35 @@
-<form id="reg" class="form form-reg">
-    <h2 class="form-title">{{form_title}}</h2>
-    <span class="form-error"></span>
-<label for="email">
+<form id="reg" name="reg" class="form form-reg">
+  <h2 class="form-title">{{form_title}}</h2>
+  <span class="form-error"></span>
+  <label for="email">
     {{email_text}}
     <input type="text" value="" name="email" placeholder="pochta@yandex.ru" />
-</label>
-<label for="login">
+  </label>
+  <label for="login">
     {{login_text}}
     <input type="text" value="" name="login" placeholder="ivanivanov" />
-</label>
-<label for="name">
+  </label>
+  <label for="name">
     {{name_text}}
     <input type="text" value="" name="first_name" placeholder="Иван" />
-</label>
-<label for="surname">
+  </label>
+  <label for="surname">
     {{surname_text}}
     <input type="text" value="" name="second_name" placeholder="Иванов" />
-</label>
-<label for="phone">
+  </label>
+  <label for="phone">
     {{phone_text}}
     <input type="text" value="" name="phone" placeholder="+7(909)967 30 30" />
-</label>
-<label for="pswd">
+  </label>
+  <label for="pswd">
     {{password_text}}
     <input type="password" name="password" />
-</label>
-<label for="pswd-confirm">
+  </label>
+  <label for="pswd-confirm">
     {{password_repeat_text}}
     <input type="password" name="pswd-confirm" />
-</label>
+  </label>
 
-<button class="form-btn">{{btn_name}}</button>
-<a class="form-link" href="/" >{{link_text}}</a>
+  <button class="form-btn">{{btn_name}}</button>
+  <a class="form-link" href="/">{{link_text}}</a>
 </form>

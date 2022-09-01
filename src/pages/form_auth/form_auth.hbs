@@ -1,15 +1,15 @@
-<form id="auth" class="form form-auth">
-    <h2 class="form-title">{{enter_text}}</h2>
-    <span class="form-error"></span>
-<label for="login">
+<form id="auth" name="auth" class="form form-auth">
+  <h2 class="form-title">{{enter_text}}</h2>
+  <span class="form-error"></span>
+  <label for="login">
     {{login_text}}
     <input type="text" value="" name="login" placeholder="ivanivanov" />
-</label>
-<label for="pswd">
+  </label>
+  <label for="pswd">
     {{password_text}}
     <input type="password" name="password" />
-</label>
+  </label>
 
-<button class="form-btn">{{btn_name}}</button>
-<a class="form-link" href="/" >{{link_text}}</a>
+  <button class="form-btn">{{btn_name}}</button>
+  <a class="form-link" href="/sign-up">{{link_text}}</a>
 </form>
