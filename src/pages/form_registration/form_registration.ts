@@ -1,5 +1,6 @@
 import hbs_reg from "./form_registration.hbs";
 import Block from "../../modules/Block";
+import "../../../static/form.css"
 
 export default class RegForm extends Block {
   render() {

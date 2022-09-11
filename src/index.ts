@@ -1,12 +1,10 @@
 import { LoginPage, SettingsPage, RegistrationPage, ErrorPage404, ErrorPage500 } from './pages'
-import { default as Index } from './pages/index/index'
+import { default as Index } from './pages/chat/chat'
 import { ValidateForm } from "./modules/Validate"
 import { ApiAction } from "./modules/ApiAction"
 import { bus as eventsBus } from "./modules/EventBus"
 import { UserFields, user as User } from "./modules/User"
 import Router from "./modules/Router";
-import  "./pages/index/index.css"
-import "../static/form.css"
 
 const api = new ApiAction();
 const validator = new ValidateForm();
