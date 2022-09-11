@@ -26,22 +26,22 @@ export class User {
     return this.instance;
   }
 
-  public id: number | null;
-  public first_name: string | null;
-  public second_name: string | null;
-  public display_name: string | null;
-  public login: string | null;
-  public avatar: string | null | any;
-  public email: string | null;
-  public phone: string | null;
-  public chats: Array<Chat> | null;
+  public id: number | null = null;
+  public first_name: string | null = null;
+  public second_name: string | null = null;
+  public display_name: string | null = null;
+  public login: string | null = null;
+  public avatar: string | null | any = null;
+  public email: string | null = null;
+  public phone: string | null = null;
+  public chats: Array<Chat> | null = null;
   public currentChat: {
     id: number | null;
     status: string | null;
     socket: WebSocket | null;
     token: string | null;
     pingId: any | null;
-  };
+  } = {"id": null, "status": null,"socket": null,"token": null, "pingId": null}; 
 
   setCookie() {
     const cookie = new Cookies();
