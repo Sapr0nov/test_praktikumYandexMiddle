@@ -1,4 +1,4 @@
-<<<<<<< sprint_2
+<<<<<<< sprint_4
 Project from course Yandex - middle Front end developer
 It include part of web application - client for chat app.
 
@@ -14,7 +14,7 @@ It include part of web application - client for chat app.
 
 ## Using
 
-**Parcel** **TypeScript** **Node JS** **Express** **PosHTML** **PostCSS** **Pretter** **Linter**
+**WebPack** **TypeScript** **Node JS** **Express** **PosHTML** **PostCSS** **Pretter** **Linter** **
 
 ## Commands 💬
 
@@ -54,11 +54,9 @@ npm run lint:format
 npm run test
 ```
 
-#### TODO
+## Спринт 4
 
-## Спринт 3
-
-- Реализация клиентского роутера (`/src/modules/Route.ts`)
+- Переход на `webPack`
   - / — страница входа,
   - /sign-up — страница регистрации,
   - /settings — настройки профиля пользователя,
