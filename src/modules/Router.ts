@@ -1,12 +1,12 @@
 import Route from "./Route";
-import type { Block } from "./Block";
+import type Block from "./Block";
 
 export default class Router {
   static __instance: Router;
-  routes: Route[];
-  history: History;
-  window: any;
-  _currentRoute: Route | null;
+  routes: Route[] = [];
+  window: any = null;
+  history: History | null = null;
+  _currentRoute: Route | null = null;
 
   constructor(window: any) {
     if (Router.__instance) {
@@ -50,17 +50,17 @@ export default class Router {
   }
 
   go(path: string) {
-    this.history.pushState({}, "", path);
+    this.history!.pushState({}, "", path);
     this._onRoute(path);
     return;
   }
 
   back() {
-    this.history.back();
+    this.history!.back();
   }
 
   forward() {
-    this.history.forward();
+    this.history!.forward();
   }
 
   getRoute(path: string) {

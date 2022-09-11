@@ -50,6 +50,7 @@ app.use(
 app.use(limiter);
 
 app.use("/", express.static(`${__dirname}/../dist`));
+app.use("/static/", express.static(`${__dirname}/../static/`));
 
 app.get("*", function (req, res) {
   res

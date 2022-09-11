@@ -1,11 +1,10 @@
-import Handlebars from "handlebars";
 import hbs_reg from "./form_registration.hbs";
-import { Block } from "../../modules/Block";
+import Block from "../../modules/Block";
 
-export class RegForm extends Block {
+export default class RegForm extends Block {
   render() {
     let outLine: string = "";
-    outLine = Handlebars.compile(hbs_reg)({
+    outLine = hbs_reg({
       form_title: "Регистрация",
       email_text: "Почта",
       login_text: "Логин",
