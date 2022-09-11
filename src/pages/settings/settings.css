@@ -16,7 +16,7 @@
   top: 0;
   left: 0;
   background-color: var(--light-bg-text);
-  background-image: url(../../../static/arrow_back.svg);
+  background-image: url(../../../static/img/arrow_back.svg);
   background-repeat: no-repeat;
   background-position: center center;
   border: none;

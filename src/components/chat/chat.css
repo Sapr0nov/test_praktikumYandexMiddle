@@ -38,7 +38,7 @@
   display: block;
   width: 32px;
   height: 32px;
-  background: url(/static/menu.svg);
+  background: url(/static/img/menu.svg);
   background-repeat: no-repeat;
   background-position: center center;
   cursor: pointer;
@@ -68,7 +68,7 @@
 .message-input__attach {
   width: 54px;
   height: 54px;
-  background: url(/static/attach.svg);
+  background: url(/static/img/attach.svg);
   flex-direction: column;
   display: flex;
   background-repeat: no-repeat;
@@ -133,7 +133,7 @@
   display: block;
   width: 54px;
   height: 54px;
-  background: url(/static/sendBtn.svg);
+  background: url(/static/img/sendBtn.svg);
   background-repeat: no-repeat;
   background-position: center center;
   cursor: pointer;

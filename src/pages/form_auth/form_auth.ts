@@ -1,5 +1,6 @@
 import hbs_auth from "./form_auth.hbs";
 import Block from "../../modules/Block";
+import "../../../static/form.css"
 
 export default class AuthForm extends Block {
 

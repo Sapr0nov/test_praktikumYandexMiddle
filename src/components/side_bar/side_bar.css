@@ -57,7 +57,7 @@
   display: flex;
   color: var(--text-label-color);
   background: var(--light-grey-line);
-  background-image: url(/static/search.svg);
+  background-image: url(/static/img/search.svg);
   background-repeat: no-repeat;
   background-position: 2px center;
   text-align: center;

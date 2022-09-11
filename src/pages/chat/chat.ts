@@ -1,10 +1,10 @@
-import hbs_index from "./index.hbs";
-import "./index.css";
+import hbs_index from "./chat.hbs";
+import "./chat.css";
 import Block from "../../modules/Block";
 import renderSideBarPreview from "../../components/side_bar/side_bar";
 import renderChatPreview from "../../components/chat/chat";
 
-export default class Index extends Block {
+export default class Chat extends Block {
   render() {
     let outLine: string = "";
     outLine = hbs_index({
