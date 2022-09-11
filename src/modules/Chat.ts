@@ -9,17 +9,16 @@ export type ChatFields = {
   last_message: string | null;
   reason: string;
 };
-
 export class Chat {
-  public id: number | null;
-  public title: string | null;
-  public avatar: string | null;
-  public created_by: number | null;
-  public unreaded_count: number | null;
+  public id: number | null = null;
+  public title: string | null = null;
+  public avatar: string | null = null;
+  public created_by: number | null = null;
+  public unreaded_count: number | null = null;
   public last_message: {
-    user: User;
+    user: User | null;
     id: number | string;
     content: string | null;
     time: string | null;
-  };
+  } = {"user": null, "id":"", content:null, time: null};
 }

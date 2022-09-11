@@ -1,17 +1,12 @@
-import { Error404 } from "./pages/404/404";
-import { Error500 } from "./pages/500/500";
-import { Index } from "./pages/index/index";
-import { AuthForm } from "./pages/form_auth/form_auth";
-import { RegForm } from "./pages/form_registration/form_registration";
-import { Settings } from "./components/settings/settings";
-import { ValidateForm } from "./modules/Validate";
-import { ApiAction } from "./modules/ApiAction";
-import "./pages/index/index.css";
-import "../static/form.css";
-import { bus as eventsBus } from "./modules/EventBus";
-import { UserFields } from "./modules/User";
-import { user as User } from "./modules/User";
+import { LoginPage, SettingsPage, RegistrationPage, ErrorPage404, ErrorPage500 } from './pages'
+import { default as Index } from './pages/index/index'
+import { ValidateForm } from "./modules/Validate"
+import { ApiAction } from "./modules/ApiAction"
+import { bus as eventsBus } from "./modules/EventBus"
+import { UserFields, user as User } from "./modules/User"
 import Router from "./modules/Router";
+import  "./pages/index/index.css"
+import "../static/form.css"
 
 const api = new ApiAction();
 const validator = new ValidateForm();
@@ -28,12 +23,14 @@ if (
 }
 
 router.use("/messenger", new Index());
-router.use("/sign-up", new RegForm());
-router.use("/", new AuthForm());
-router.use("", new AuthForm());
-router.use("/settings", new Settings());
-router.use("/500/", new Error500());
-router.use("/404/", new Error404());
+router.use("/sign-up", new RegistrationPage());
+router.use("/", new LoginPage());
+router.use("", new LoginPage());
+router.use("/settings", new SettingsPage());
+router.use("/500/", new ErrorPage500());
+router.use("/404/", new ErrorPage404());
+
+router.start();
 
 eventsBus.register("getUser", (user: UserFields) => {
   if (user.reason) {
@@ -79,6 +76,7 @@ eventsBus.register("getUser", (user: UserFields) => {
 eventsBus.register("goAuth", () => {
   router.go("/");
 });
+
 
 eventsBus.register("signIn", (req: XMLHttpRequest) => {
   if (req.response == "OK") {
@@ -309,7 +307,7 @@ function reEvents(newNode: ChildNode) {
               const id = parseInt(
                 prompt("Введите id ДОБАВЛЯЕМОГО пользователя:")!
               );
-              api.addUsersToChat([id!], chatId);
+              api.addUsersToChat([id], chatId);
             });
 
             subBtn2.addEventListener("click", (e) => {
@@ -318,7 +316,7 @@ function reEvents(newNode: ChildNode) {
               const id = parseInt(
                 prompt("Введите id УДАЛЯЕМОГО пользователя:")!
               );
-              api.deleteUsersFromChat([id!], chatId);
+              api.deleteUsersFromChat([id], chatId);
             });
 
             subBtn3.addEventListener("click", (e) => {

@@ -1,4 +1,4 @@
-import { Block } from "./Block";
+import Block from "./Block";
 import { bus as eventsBus } from "./EventBus";
 
 export default class Route {

@@ -1,4 +1,4 @@
-import { Block } from "./Block";
+import Block from "./Block";
 
 const { describe, it } = require("mocha");
 const Router = require("./Route");
