@@ -1,7 +1,6 @@
 import { Fetch } from "./Fetch";
 import type { Options } from "./Fetch";
-import { UserFields } from "./User";
-import { user as User } from "./User";
+import { UserFields, user as User } from "./User";
 import { bus as eventsBus } from "./EventBus";
 
 export class ApiAction {

@@ -40,7 +40,8 @@ export default class Route {
     if (parentBlock && this._block) {
       parentBlock.textContent = "";
       parentBlock.appendChild(this._block);
-      eventsBus.dispatch("rendered", this._block);
+      console.log(route, "flow:render:"+this._blockClass._name);
+      eventsBus.dispatch("flow:render:"+this._blockClass._name, this._block);
       return this._block;
     }
     return null;

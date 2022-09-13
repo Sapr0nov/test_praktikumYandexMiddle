@@ -1,6 +1,6 @@
 import hbs_settings from "./settings.hbs";
 import "./settings.css";
-import image from "../../../static/placeholder.png";
+import image from "../../../static/img/placeholder.png";
 import Block from "../../modules/Block";
 import { user as User } from "../../modules/User";
 

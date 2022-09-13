@@ -23,7 +23,6 @@ export default class Router {
   use(path: string, block: Block) {
     const route = new Route(path, block);
     this.routes.push(route);
-    return;
   }
 
   start() {
@@ -52,7 +51,6 @@ export default class Router {
   go(path: string) {
     this.history!.pushState({}, "", path);
     this._onRoute(path);
-    return;
   }
 
   back() {
