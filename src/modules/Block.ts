@@ -16,6 +16,7 @@ interface Meta {
       FLOW_RENDER: "flow:render",
     };
   
+    _name: string = 'Block';
     _element: HTMLElement | null = null;
     _meta: Meta | null = null;
     props: Object;
@@ -53,7 +54,7 @@ interface Meta {
   
     init() {
       this._createResources();
-      this.eventBus.dispatch(Block.EVENTS.FLOW_RENDER);
+      
     }
   
     _componentDidMount() {

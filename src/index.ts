@@ -1,24 +1,11 @@
 import { LoginPage, SettingsPage, RegistrationPage, ErrorPage404, ErrorPage500 } from './pages'
 import { default as Index } from './pages/chat/chat'
-import { ValidateForm } from "./modules/Validate"
-import { ApiAction } from "./modules/ApiAction"
-import { bus as eventsBus } from "./modules/EventBus"
-import { UserFields, user as User } from "./modules/User"
 import Router from "./modules/Router";
 
-const api = new ApiAction();
-const validator = new ValidateForm();
-const urlPath = document.location.pathname;
 
 const router = new Router(window);
-if (
-  window.location.pathname == "/404/" ||
-  window.location.pathname == "/500/"
-) {
-  document.body.classList.add("e404");
-} else {
-  document.body.classList.remove("e404");
-}
+if (  window.location.pathname == "/404/" ) { document.body.classList.add("e404"); }
+if (  window.location.pathname == "/500/" ) { document.body.classList.add("e500"); }
 
 router.use("/messenger", new Index());
 router.use("/sign-up", new RegistrationPage());
@@ -30,156 +17,7 @@ router.use("/404/", new ErrorPage404());
 
 router.start();
 
-eventsBus.register("getUser", (user: UserFields) => {
-  if (user.reason) {
-    console.log("error: ", user.reason);
-    router.go("/");
-  } else {
-    [
-      User.id,
-      User.first_name,
-      User.second_name,
-      User.display_name,
-      User.login,
-      User.email,
-      User.phone,
-      User.avatar,
-    ] = [
-      user.id,
-      user.first_name,
-      user.second_name,
-      user.display_name,
-      user.login,
-      user.email,
-      user.phone,
-      user.avatar,
-    ];
-    User.currentChat = {
-      id: null,
-      status: null,
-      socket: null,
-      token: null,
-      pingId: null,
-    };
-    User.setCookie();
-    api.chatList();
-    // open messenger after registration or authorization
-    if (User.id && (urlPath == "/" || urlPath == "" || urlPath == "/sign-up")) {
-      api.chatList();
-      router.go("/messenger");
-    }
-  }
-});
-
-eventsBus.register("goAuth", () => {
-  router.go("/");
-});
-
-
-eventsBus.register("signIn", (req: XMLHttpRequest) => {
-  if (req.response == "OK") {
-    api.getUser();
-    router.go("/messenger");
-  } else {
-    const err = JSON.parse(req.response as string);
-    if (err.reason == "User already in system") {
-      api.getUser();
-      router.go("/messenger");
-    } else {
-      alert(err.reason);
-    }
-  }
-});
-
-eventsBus.register("rendered", (newNode: ChildNode) => {
-  if (
-    !User.id &&
-    (window.location.pathname == "/messenger" ||
-      window.location.pathname == "/settings")
-  ) {
-    api.getUser();
-  }
-  reEvents(newNode);
-});
-
-eventsBus.register("loadedChatList", (req: XMLHttpRequest) => {
-  if (req.status == 200) {
-    User.chats = JSON.parse(req.response);
-    if (window.location.pathname == "/messenger") {
-      router.go("/messenger");
-    }
-  }
-});
-
-eventsBus.register("updateUserData", (req: XMLHttpRequest) => {
-  if (req.status == 200) {
-    api.getUser();
-    alert("Данные обновлены");
-  }
-});
-
-eventsBus.register("uploadedAvatar", (req: XMLHttpRequest) => {
-  if (req.status == 200) {
-    api.getUser();
-    if (window.location.pathname == "/settings") {
-      router.go("/settings");
-    }
-  }
-});
-
-eventsBus.register("updatedPassword", (req: XMLHttpRequest) => {
-  if (req.status == 200) {
-    alert("Пароль обновлен");
-  } else {
-    console.log(req.response);
-  }
-});
-
-eventsBus.register("createdChat", (req: XMLHttpRequest) => {
-  if (req.status == 200) {
-    alert("Чат успешно создан!");
-    if (window.location.pathname == "/messenger") {
-      router.go("/messenger");
-    }
-  } else {
-    console.log(req.response);
-  }
-});
-
-eventsBus.register("addedUserToChat", (req: XMLHttpRequest) => {
-  if (req.status == 200) {
-    alert("Пользователь добавлен!");
-  } else {
-    console.log(req.response);
-  }
-});
-
-eventsBus.register("deletedUserFromChat", (req: XMLHttpRequest) => {
-  if (req.status == 200) {
-    alert("Пользователь удален!");
-  } else {
-    console.log(req.response);
-  }
-});
-
-eventsBus.register("gotToken", (req: XMLHttpRequest) => {
-  if (req.status == 200) {
-    User.currentChat.token = JSON.parse(req.response).token;
-    api.socketConnect(User.id!, User.currentChat.id!, User.currentChat.token!);
-    if (User.currentChat.pingId) {
-      clearInterval(User.currentChat.pingId);
-    }
-    User.currentChat.pingId = setInterval(() => {
-      if (User.currentChat.status == "connect") {
-        sendPing();
-      } else {
-        clearInterval(User.currentChat.pingId);
-      }
-    }, 1000);
-  }
-});
-
-router.start();
+/*
 
 // Events
 function reEvents(newNode: ChildNode) {
@@ -344,91 +182,21 @@ function reEvents(newNode: ChildNode) {
         sendMessage(msg);
       });
   }
-
-  // check forms
-  if (form && form.name !== "settings") {
-    form.querySelectorAll("input").forEach((el) => {
-      if (el.tagName == "INPUT") {
-        addMultipleEventListener(el, ["focus", "blur"], (e: Event) => {
-          validator.validate(e, [el]);
-        });
-      }
-    });
-
-    form?.addEventListener("submit", (e) => {
-      validator.validate(e, Array.from(form?.querySelectorAll("input")!));
-    });
+  
+  function sendPing() {
+    User.currentChat.socket?.send(
+      JSON.stringify({
+        type: "ping",
+      })
+    );
   }
-
-  // send forms
-  if (form) {
-    if (form.name == "reg") {
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        if (
-          !validator.validate(e, Array.from(form?.querySelectorAll("input")!))
-        ) {
-          return;
-        }
-
-        const formData = new FormData(form as HTMLFormElement);
-        const data = api.signUp(
-          formData.get("first_name") as string,
-          formData.get("second_name") as string,
-          formData.get("login") as string,
-          formData.get("email") as string,
-          formData.get("phone") as string,
-          formData.get("password") as string
-        );
-        data.then((req: XMLHttpRequest) => {
-          const JSONreqest: UserFields = JSON.parse(req.response);
-          if (JSONreqest.id) {
-            router.go("/messenger");
-          }
-        });
-      });
-    }
-
-    if (form.name == "auth") {
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        if (
-          !validator.validate(e, Array.from(form?.querySelectorAll("input")!))
-        ) {
-          return;
-        }
-
-        const formData = new FormData(form as HTMLFormElement);
-        api.signIn(
-          formData.get("login") as string,
-          formData.get("password") as string
-        );
-      });
-    }
+  
+  function sendMessage(message: string) {
+    User.currentChat.socket?.send(
+      JSON.stringify({
+        content: message,
+        type: "message",
+      })
+    );
   }
-}
-
-function addMultipleEventListener(
-  element: Element,
-  events: Array<any>,
-  handler: any
-) {
-  events.forEach((el) => element.addEventListener(el, handler));
-}
-
-function sendPing() {
-  User.currentChat.socket?.send(
-    JSON.stringify({
-      type: "ping",
-    })
-  );
-}
-
-function sendMessage(message: string) {
-  User.currentChat.socket?.send(
-    JSON.stringify({
-      content: message,
-      type: "message",
-    })
-  );
-}
+*/
