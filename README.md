@@ -5,7 +5,8 @@ It include part of web application - client for chat app.
 ## Getting Started 🚀
 
 - [Figma](https://www.figma.com/file/ovjYpFJqUreYoOcBK0ixb8/Messenger?node-id=0%3A1)
-- [DEMO](https://sapronovsa.netlify.app/messanger)
+- [DEMO Netlify](https://sapronovsa.netlify.app/messanger)
+- [DEMO Heroku](https://serg-middle-praktikum.herokuapp.com/)
 - [404](https://sapronovsa.netlify.app/404/)
 - [500](https://sapronovsa.netlify.app/500/)
 - [signin](https://sapronovsa.netlify.app/)
