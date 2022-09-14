@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import fs from 'fs'
 import path from 'path'
-import 'webpack-dev-server'
+
 import * as webpack from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
@@ -52,15 +52,6 @@ const config: webpack.Configuration = {
       'handlebars': '/node_modules/handlebars/dist/handlebars.min.js',
     },
     extensions: ['.ts', '.js', '.css'],
-  },
-  devServer: {
-    static: {
-      directory: PATHS.dist,
-    },
-    compress: false,
-    hot: true,
-    port: 80,
-    historyApiFallback: true,
   },
   module: {
     rules: [
