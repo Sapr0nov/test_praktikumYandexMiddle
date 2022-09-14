@@ -81,7 +81,6 @@ export class ApiAction {
       this.BASE_URL + this.SIGNIN,
       options
     )) as XMLHttpRequest;
-    eventsBus.dispatch("signIn", data);
     return data;
   }
 

@@ -3,6 +3,7 @@ import { ValidateForm } from "../../modules/Validate"
 import Block from "../../modules/Block";
 import "../../../static/form.css"
 import { ApiAction } from "../../modules/ApiAction";
+import Router from "../../modules/Router";
 
 
 export default class AuthForm extends Block {
@@ -42,7 +43,8 @@ export default class AuthForm extends Block {
   addEvents() {
     const validator = new ValidateForm();
     const api = new ApiAction();
-    
+    const router = new Router(window);
+
     const form = document.querySelector("#auth");
     const login = form!.querySelector("input[name=login]");
     const password = form!.querySelector("input[name=password]");
@@ -74,10 +76,18 @@ export default class AuthForm extends Block {
       e.preventDefault();
       
       const formData = new FormData(form as HTMLFormElement);
-      api.signIn(
+      const request = api.signIn(
         formData.get("login") as string,
         formData.get("password") as string
       );
+      request.then( data => { 
+        if (data.status !== 200) {
+          console.log('api err:', data.response);
+          if (JSON.parse(data.response).reason == "User already in system") {
+            router.go("/messenger");
+          }
+        }
+      });
     });
   }
 }

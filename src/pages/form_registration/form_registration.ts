@@ -118,10 +118,10 @@ export default class RegForm extends Block {
     });
 
 
-    form?.addEventListener("submit", (e) => {
+    form!.addEventListener("submit", (e) => {
       e.preventDefault();
       const formData = new FormData(form as HTMLFormElement);
-      const data = api.signUp(
+      const request = api.signUp(
         formData.get("first_name") as string,
         formData.get("second_name") as string,
         formData.get("login") as string,
@@ -129,17 +129,19 @@ export default class RegForm extends Block {
         formData.get("phone") as string,
         formData.get("password") as string
       );
-      data.then((req: XMLHttpRequest) => {
-        const JSONreqest: UserFields = JSON.parse(req.response);
+      request.then((data: XMLHttpRequest) => {
+        const JSONreqest: UserFields = JSON.parse(data.response);
         if (JSONreqest.id) {
           const router = new Router(window);
           router.go("/messenger");
+        }else{
+          console.log('api err:', data.response);
         }
       });
     });
   }
- 
- 
+
+  
   addMultipleEventListener(
     element: Element,
     events: Array<any>,
