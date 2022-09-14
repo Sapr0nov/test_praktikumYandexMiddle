@@ -4,7 +4,8 @@
   "description": "skin without meat",
   "scripts": {
     "build": "webpack build --mode production -c webpack.config.ts",
-    "start": "npm run build && ts-node src/srv.js",
+    "start": "webpack serve --open",
+    "server": "npm run build && ts-node src/srv.js",
     "lint": "eslint . --fix",
     "lint:format": "prettier . --write",
     "test": "mocha --require ts-node/register",
