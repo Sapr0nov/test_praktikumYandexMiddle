@@ -1,8 +1,7 @@
 export class ValidateForm {
-
   isName(str: string): string | boolean {
     const regEx = /^[A-ZА-Я]+[a-zа-я\-]*$/gm; // cyrilic, latin, first Capital
-    return regEx.test(str)
+    return regEx.test(str);
   }
 
   isPhone(str: string): string | boolean {
@@ -26,7 +25,7 @@ export class ValidateForm {
   }
 
   isValidLenght(str: string, min: number, max: number) {
-    return !(str.length < min || str.length > max)
+    return !(str.length < min || str.length > max);
   }
 
   validator(

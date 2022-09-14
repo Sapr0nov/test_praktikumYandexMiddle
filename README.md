@@ -15,7 +15,7 @@ It include part of web application - client for chat app.
 
 ## Using
 
-**WebPack** **TypeScript** **Node JS** **Express** **PosHTML** **PostCSS** **Pretter** **Linter** **
+**WebPack** **TypeScript** **Node JS** **Express** **PosHTML** **PostCSS** **Pretter** **Linter** \*\*
 
 ## Commands 💬
 
@@ -37,7 +37,7 @@ npm run build
 npm start
 ```
 
-#### linter 
+#### linter
 
 ```sh
 npm run lint

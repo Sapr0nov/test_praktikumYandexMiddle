@@ -1,11 +1,20 @@
-import { LoginPage, SettingsPage, RegistrationPage, ErrorPage404, ErrorPage500 } from './pages'
-import { default as Index } from './pages/chat/chat'
+import {
+  LoginPage,
+  SettingsPage,
+  RegistrationPage,
+  ErrorPage404,
+  ErrorPage500,
+} from "./pages";
+import { default as Index } from "./pages/chat/chat";
 import Router from "./modules/Router";
 
-
 const router = new Router(window);
-if (  window.location.pathname == "/404/" ) { document.body.classList.add("e404"); }
-if (  window.location.pathname == "/500/" ) { document.body.classList.add("e500"); }
+if (window.location.pathname == "/404/") {
+  document.body.classList.add("e404");
+}
+if (window.location.pathname == "/500/") {
+  document.body.classList.add("e500");
+}
 
 router.use("/messenger", new Index());
 router.use("/sign-up", new RegistrationPage());

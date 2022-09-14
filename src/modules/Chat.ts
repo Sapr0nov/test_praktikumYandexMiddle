@@ -20,5 +20,5 @@ export class Chat {
     id: number | string;
     content: string | null;
     time: string | null;
-  } = {"user": null, "id":"", content:null, time: null};
+  } = { user: null, id: "", content: null, time: null };
 }

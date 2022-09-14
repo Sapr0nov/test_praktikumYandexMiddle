@@ -2,4 +2,4 @@ build:
   docker:
     web: Dockerfile
 config:
-    NPM_CONFIG_PRODUCTION: true
+  NPM_CONFIG_PRODUCTION: true

@@ -4,7 +4,7 @@ import image from "../../../static/img/placeholder.png";
 import Block from "../../modules/Block";
 import { user as User } from "../../modules/User";
 
-export default class  Settings extends Block {
+export default class Settings extends Block {
   render() {
     let image_link: string = image;
     if (User.avatar) {

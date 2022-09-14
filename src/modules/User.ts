@@ -41,7 +41,7 @@ export class User {
     socket: WebSocket | null;
     token: string | null;
     pingId: any | null;
-  } = {"id": null, "status": null,"socket": null,"token": null, "pingId": null}; 
+  } = { id: null, status: null, socket: null, token: null, pingId: null };
 
   setCookie() {
     const cookie = new Cookies();

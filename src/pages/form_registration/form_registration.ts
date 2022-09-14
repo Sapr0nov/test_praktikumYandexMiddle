@@ -1,22 +1,19 @@
 import hbs_reg from "./form_registration.hbs";
-import { ValidateForm } from "../../modules/Validate"
+import { ValidateForm } from "../../modules/Validate";
 import Block from "../../modules/Block";
-import "../../../static/form.css"
+import "../../../static/form.css";
 import { UserFields } from "../../modules/User";
 import Router from "../../modules/Router";
 import { ApiAction } from "../../modules/ApiAction";
-
 
 export default class RegForm extends Block {
   constructor() {
     super();
     this._name = "RegForm";
-    this.eventBus.register("flow:render:"+this._name, () => {
+    this.eventBus.register("flow:render:" + this._name, () => {
       this.addEvents();
-
-    })   
+    });
   }
-
 
   render() {
     let outLine: string = "";
@@ -49,8 +46,7 @@ export default class RegForm extends Block {
     const phone = form!.querySelector("input[name=phone]");
     const form_error = form?.querySelector(".form-error");
 
-
-    this.addMultipleEventListener(login!, ["focus", "blur"], ( ) => {
+    this.addMultipleEventListener(login!, ["focus", "blur"], () => {
       let error = validator.validator(
         login,
         [validator.isLogin, validator.isValidLenght],
@@ -61,7 +57,7 @@ export default class RegForm extends Block {
       form_error!.textContent = error;
     });
 
-    this.addMultipleEventListener(password!, ["focus", "blur"], ( ) => {
+    this.addMultipleEventListener(password!, ["focus", "blur"], () => {
       let error = validator.validator(
         password,
         [validator.isPassword, validator.isValidLenght],
@@ -72,7 +68,7 @@ export default class RegForm extends Block {
       form_error!.textContent = error;
     });
 
-    this.addMultipleEventListener(first_name!, ["focus", "blur"], ( ) => {
+    this.addMultipleEventListener(first_name!, ["focus", "blur"], () => {
       let error = validator.validator(
         first_name,
         [validator.isName],
@@ -83,19 +79,18 @@ export default class RegForm extends Block {
       form_error!.textContent = error;
     });
 
-
-    this.addMultipleEventListener(second_name!, ["focus", "blur"], ( ) => {
+    this.addMultipleEventListener(second_name!, ["focus", "blur"], () => {
       let error = validator.validator(
         second_name,
         [validator.isName],
-          "Фамилия не корректена: должно начинаться с заглавной буквы и состоять только из Кирилицы, Латиницы и - ",
-          null,
-          null
+        "Фамилия не корректена: должно начинаться с заглавной буквы и состоять только из Кирилицы, Латиницы и - ",
+        null,
+        null
       );
       form_error!.textContent = error;
     });
 
-    this.addMultipleEventListener(email!, ["focus", "blur"], ( ) => {
+    this.addMultipleEventListener(email!, ["focus", "blur"], () => {
       let error = validator.validator(
         email,
         [validator.isEmail],
@@ -106,7 +101,7 @@ export default class RegForm extends Block {
       form_error!.textContent = error;
     });
 
-    this.addMultipleEventListener(phone!, ["focus", "blur"], ( ) => {
+    this.addMultipleEventListener(phone!, ["focus", "blur"], () => {
       let error = validator.validator(
         phone,
         [validator.isPhone, validator.isValidLenght],
@@ -116,7 +111,6 @@ export default class RegForm extends Block {
       );
       form_error!.textContent = error;
     });
-
 
     form!.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -134,19 +128,14 @@ export default class RegForm extends Block {
         if (JSONreqest.id) {
           const router = new Router(window);
           router.go("/messenger");
-        }else{
-          console.log('api err:', data.response);
+        } else {
+          console.log("api err:", data.response);
         }
       });
     });
   }
 
-  
-  addMultipleEventListener(
-    element: Element,
-    events: Array<any>,
-    handler: any
-  ) {
+  addMultipleEventListener(element: Element, events: Array<any>, handler: any) {
     events.forEach((el) => element.addEventListener(el, handler));
   }
 }
