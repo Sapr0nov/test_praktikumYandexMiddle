@@ -53,15 +53,7 @@ const config: webpack.Configuration = {
     },
     extensions: ['.ts', '.js', '.css'],
   },
-  devServer: {
-    static: {
-      directory: PATHS.dist,
-    },
-    compress: false,
-    hot: true,
-    port: 3000,
-    historyApiFallback: true,
-  },
+
   module: {
     rules: [
     {
