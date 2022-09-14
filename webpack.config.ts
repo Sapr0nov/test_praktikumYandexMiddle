@@ -59,7 +59,7 @@ const config: webpack.Configuration = {
     },
     compress: false,
     hot: true,
-    port: 3000,
+    port: 80,
     historyApiFallback: true,
   },
   module: {
