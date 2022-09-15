@@ -1,29 +1,45 @@
-import hbs_settings from "./settings.hbs"
-import "./settings.css"
-import image from "../../../static/img/placeholder.png"
-import Block from "../../modules/Block"
-import { UserFields, user as User } from "../../modules/User"
-import Router from "../../modules/Router"
-import { ApiAction } from "../../modules/ApiAction"
+import hbs_settings from "./settings.hbs";
+import "./settings.css";
+import image from "../../../static/img/placeholder.png";
+import Block from "../../modules/Block";
+import { UserFields, user as User } from "../../modules/User";
+import Router from "../../modules/Router";
+import { ApiAction } from "../../modules/ApiAction";
 export default class Settings extends Block {
   constructor() {
     super();
     this._name = "Settings";
     this.eventBus.register("flow:render:" + this._name, () => {
-      this.addEvents();   
+      this.addEvents();
     });
 
     const router = new Router(window);
     const api = new ApiAction();
     const req = api.getUser();
-    
-    req.then( data => {
-      [User.id, User.login, User.display_name, User.first_name, User.second_name, User.email, User.phone, User.avatar] =
-      [data.id, data.login, data.display_name, data.first_name, data.second_name, data.email, data.phone, data.avatar];
+
+    req.then((data) => {
+      [
+        User.id,
+        User.login,
+        User.display_name,
+        User.first_name,
+        User.second_name,
+        User.email,
+        User.phone,
+        User.avatar,
+      ] = [
+        data.id,
+        data.login,
+        data.display_name,
+        data.first_name,
+        data.second_name,
+        data.email,
+        data.phone,
+        data.avatar,
+      ];
       router._onRoute(window.location.pathname);
     });
   }
-
 
   render() {
     let image_link: string = image;
@@ -43,13 +59,12 @@ export default class Settings extends Block {
     return outLine;
   }
 
-
   addEvents() {
     const api = new ApiAction();
 
     const changeBtn = <Element>document.querySelector(".change-data");
-    const changeAvatar = <Element>( document.querySelector(".set-avatar img") );
-    const changePassword = <Element>( document.querySelector(".change-pswd") );
+    const changeAvatar = <Element>document.querySelector(".set-avatar img");
+    const changePassword = <Element>document.querySelector(".change-pswd");
     const router = new Router(window);
 
     changeBtn &&
@@ -77,7 +92,7 @@ export default class Settings extends Block {
           const req = api.updateUserInfo(newData);
           changeBtn.parentElement?.classList.add("locked");
           changeBtn.textContent = "Изменить данные";
-          req.then( data => {
+          req.then((data) => {
             if (data.status == 200) {
               alert("Данные обновлен");
             }
@@ -96,9 +111,9 @@ export default class Settings extends Block {
             const formData = new FormData();
             formData.append("avatar", file, file.name);
             const req = api.loadAvatar(formData);
-            req.then( data => {
-              if (data.status == 200) { 
-                console.log('avatar loaded');
+            req.then((data) => {
+              if (data.status == 200) {
+                console.log("avatar loaded");
                 router._onRoute(window.location.pathname);
               }
             });
@@ -111,9 +126,9 @@ export default class Settings extends Block {
         const oldPswd = prompt("Введите ТЕКУЩИЙ пароль:");
         const newPswd = prompt("Задайте НОВЫЙ пароль:");
         const req = api.updatePassword(newPswd!, oldPswd!);
-        req.then( data => {
-          if (data.status == 200) { 
-            alert('Пароль обновлен');
+        req.then((data) => {
+          if (data.status == 200) {
+            alert("Пароль обновлен");
           }
         });
       });
