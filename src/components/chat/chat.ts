@@ -1,5 +1,6 @@
-import hbs_chat from "./chat.hbs";
-import "./chat.css";
+import hbs_chat from "./chat.hbs"
+import "./chat.css"
+//import { user as User } from "../../modules/User"
 
 export default function renderChatPreview() {
   let outLine: string = "";

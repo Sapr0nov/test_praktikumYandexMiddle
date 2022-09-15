@@ -79,20 +79,20 @@ const config: webpack.Configuration = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: "/public/path/to/",
+              publicPath: "/",
             },
           },
           "css-loader",
         ],
-        exclude: /node_modules/,
+        exclude: /.svg/,
       },
       {
         test: /\.(png|jpg|gif)$/,
         loader: "file-loader",
-      },
-      {
-        test: /\.svg$/,
-        loader: "svg-url-loader",
+        options: {
+          outputPath: './',
+          name: '[path][name].[ext]',
+        },
       },
     ],
   },

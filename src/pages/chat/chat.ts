@@ -58,14 +58,53 @@ export default class Chat extends Block {
         router.go("/settings");
       });
 
-    addChatBtn && chatPreview && sendMsgBtn;
+    addChatBtn && 
+    addChatBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const chatName = prompt("Название добавляемого чата:");
+      const req = api.createChat(chatName!);
+      req.then((data) => {
+        if (data.status == 200) {
+          router._onRoute(window.location.pathname);
+        }
+      });
+    });
 
     chatPreview &&
       chatPreview.length &&
       chatPreview.forEach((element) => {
         element.addEventListener("click", () => {
           User.currentChat.id = parseInt(element.dataset.id!);
-          api.getTokenChat(parseInt(element.dataset.id!));
+          const req = api.getTokenChat(parseInt(element.dataset.id!));
+          req.then( data => {
+            if (data.status == 200) {
+              User.currentChat.token = JSON.parse(data.response).token;
+
+              if (User.currentChat.pingId) {
+                clearInterval(User.currentChat.pingId);
+              }
+
+              api.socketConnect(User.id!, User.currentChat.id!, User.currentChat.token!);
+              User.currentChat.pingId = setInterval(() => {
+                this.sendPing();
+              }, 10000);
+
+              setTimeout(function () {
+                User.currentChat.socket?.send(
+                  JSON.stringify({
+                    content: "0",
+                    type: "get old",
+                  })
+                );
+              }, 500);
+
+              
+              User.currentChat.socket?.addEventListener("message", (event) => {
+                console.log("Получены данные", event.data);
+              });
+              
+            }
+          })
         });
         element.addEventListener("contextmenu", (e) => {
           e.preventDefault();
@@ -129,9 +168,9 @@ export default class Chat extends Block {
         const msg: string = input.value;
         input.value = "";
         this.sendMessage(msg);
-        this.sendPing();
       });
   }
+
 
   sendPing() {
     User.currentChat.socket?.send(
@@ -142,11 +181,19 @@ export default class Chat extends Block {
   }
 
   sendMessage(message: string) {
-    User.currentChat.socket?.send(
-      JSON.stringify({
-        content: message,
-        type: "message",
-      })
-    );
+    if (User.currentChat.socket?.readyState === 1) {
+      User.currentChat.socket?.send(
+        JSON.stringify({
+          content: message,
+          type: "message",
+        })
+      );
+    }else{
+      console.log('waiter');
+      setTimeout(function () {
+        this.sendMessage(message);
+    }, 500);
+    }
   }
+  
 }
