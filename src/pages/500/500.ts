@@ -4,6 +4,13 @@ import image from "../../../static/500/500error.png";
 import Block from "../../modules/Block";
 
 export default class Error500 extends Block {
+  constructor() {
+    super();
+    this._name = "Error500";
+    this.eventBus.register("flow:render:" + this._name, () => {
+      document.body.classList.add("e500");
+    });
+  }
   render() {
     let outLine: string = "";
     outLine = hbs_500({

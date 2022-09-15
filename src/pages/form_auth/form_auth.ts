@@ -1,18 +1,21 @@
 import hbs_auth from "./form_auth.hbs";
-import { ValidateForm } from "../../modules/Validate";
+import { ValidateForm } from "../../modules/Validate"
 import Block from "../../modules/Block";
-import "../../../static/form.css";
+import "../../../static/form.css"
 import { ApiAction } from "../../modules/ApiAction";
 import Router from "../../modules/Router";
+
 
 export default class AuthForm extends Block {
   constructor() {
     super();
     this._name = "AuthForm";
-    this.eventBus.register("flow:render:" + this._name, () => {
+    this.eventBus.register("flow:render:"+this._name, () => {
       this.addEvents();
-    });
+
+    })   
   }
+
 
   render() {
     let outLine: string = "";
@@ -26,10 +29,16 @@ export default class AuthForm extends Block {
 
     return outLine;
   }
+  
 
-  addMultipleEventListener(element: Element, events: Array<any>, handler: any) {
+  addMultipleEventListener(
+    element: Element,
+    events: Array<any>,
+    handler: any
+  ) {
     events.forEach((el) => element.addEventListener(el, handler));
   }
+
 
   addEvents() {
     const validator = new ValidateForm();
@@ -39,9 +48,9 @@ export default class AuthForm extends Block {
     const form = document.querySelector("#auth");
     const login = form!.querySelector("input[name=login]");
     const password = form!.querySelector("input[name=password]");
-    const form_error = form?.querySelector(".form-error");
+    const form_error = form!.querySelector(".form-error");
 
-    this.addMultipleEventListener(login!, ["focus", "blur"], () => {
+    this.addMultipleEventListener(login!, ["focus", "blur"], ( ) => {
       let error = validator.validator(
         login,
         [validator.isLogin, validator.isValidLenght],
@@ -52,7 +61,7 @@ export default class AuthForm extends Block {
       form_error!.textContent = error;
     });
 
-    this.addMultipleEventListener(password!, ["focus", "blur"], () => {
+    this.addMultipleEventListener(password!, ["focus", "blur"], ( ) => {
       let error = validator.validator(
         password,
         [validator.isPassword, validator.isValidLenght],
@@ -65,15 +74,15 @@ export default class AuthForm extends Block {
 
     form!.addEventListener("submit", (e) => {
       e.preventDefault();
-
+      
       const formData = new FormData(form as HTMLFormElement);
       const request = api.signIn(
         formData.get("login") as string,
         formData.get("password") as string
       );
-      request.then((data) => {
+      request.then( data => { 
         if (data.status !== 200) {
-          console.log("api err:", data.response);
+          console.log('api err:', data.response);
           if (JSON.parse(data.response).reason == "User already in system") {
             router.go("/messenger");
           }
