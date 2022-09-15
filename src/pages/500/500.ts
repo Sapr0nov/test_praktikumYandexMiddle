@@ -1,7 +1,7 @@
-import hbs_500 from "./500.hbs";
-import "./500.css";
-import image from "../../../static/500/500error.png";
-import Block from "../../modules/Block";
+import hbs_500 from "./500.hbs"
+import "./500.css"
+import image from "../../../static/500/500error.png"
+import Block from "../../modules/Block"
 
 export default class Error500 extends Block {
   constructor() {
@@ -11,6 +11,8 @@ export default class Error500 extends Block {
       document.body.classList.add("e500");
     });
   }
+
+  
   render() {
     let outLine: string = "";
     outLine = hbs_500({

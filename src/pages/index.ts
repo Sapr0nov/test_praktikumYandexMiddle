@@ -1,4 +1,3 @@
-export { mainPage } from "./main"
 export { LoginPage } from "./form_auth"
 export { RegistrationPage } from "./form_registration"
 export { ChatPage } from "./chat"
