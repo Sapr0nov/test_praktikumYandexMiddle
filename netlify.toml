@@ -19,6 +19,10 @@
   to = "/"
   status = 200
 [[redirects]]
-  from = "/static/*"
-  to = "../static/*"
+  from = "/static/form.css"
+  to = "../static/form.css"
+  status = 200
+  [[redirects]]
+  from = "/static/color.css"
+  to = "../static/color.css"
   status = 200
