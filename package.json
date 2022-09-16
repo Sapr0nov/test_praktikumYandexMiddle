@@ -13,14 +13,13 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint && npm run lint:format",
+      "pre-commit": "npx lint-staged",
       "pre-push": "npm run lint"
     }
   },
-  "directories": {
-    "test": "test"
+  "lint-staged": {
+    "*.ts": "npm run lint && npm run lint:format"
   },
-  "browser": "dist/handlebars.js",
   "keywords": [],
   "author": "SSA",
   "license": "ISC",
@@ -36,7 +35,6 @@
     "@typescript-eslint/eslint-plugin": "5.28.0",
     "@typescript-eslint/parser": "5.28.0",
     "chai": "4.3.6",
-    "copy-webpack-plugin": "11.0.0",
     "cross-env": "7.0.3",
     "eslint": "8.17.0",
     "eslint-config-airbnb-base": "15.0.0",
@@ -44,25 +42,22 @@
     "eslint-plugin-import": "2.26.0",
     "husky": "8.0.1",
     "jsdom": "19.0.0",
-    "lint-staged": "13.0.1",
+    "lint-staged": "^13.0.1",
     "mocha": "10.0.0",
     "postcss": "8.4.14",
-    "postcss-loader": "7.0.0",
+    "postcss-loader": "3.0.0",
     "prettier": "2.7.0",
     "rimraf": "3.0.2",
-    "sass": "1.52.3",
-    "sass-loader": "13.0.0",
     "sinon": "14.0.0",
     "style-loader": "3.3.1",
     "stylelint": "14.9.1",
-    "stylelint-config-prettier-scss": "0.0.1",
-    "stylelint-config-standard-scss": "4.0.0",
     "typescript": "4.7.3",
     "webpack": "5.73.0",
     "webpack-bundle-analyzer": "4.5.0"
   },
   "dependencies": {
     "@types/webpack": "5.28.0",
+    "autoprefixer": "9.0.0",
     "clean-webpack-plugin": "4.0.0",
     "css-loader": "6.7.1",
     "express": "4.18.1",
@@ -78,6 +73,7 @@
     "svg-url-loader": "8.0.0",
     "ts-loader": "9.3.1",
     "ts-node": "10.9.1",
+    "tsconfig-paths-webpack-plugin": "^4.0.0",
     "uuid": "8.3.2",
     "webpack-cli": "4.10.0",
     "webpack-dev-server": "4.11.0"

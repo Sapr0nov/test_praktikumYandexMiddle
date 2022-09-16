@@ -1,10 +1,10 @@
 import hbs_settings from "./settings.hbs";
 import "./settings.css";
-import image from "../../../static/img/placeholder.png";
-import Block from "../../modules/Block";
-import { UserFields, user as User } from "../../modules/User";
-import Router from "../../modules/Router";
-import { ApiAction } from "../../modules/ApiAction";
+import image from "Static/img/placeholder.png";
+import Block from "Modules/Block";
+import { UserFields, user as User } from "Modules/User";
+import Router from "Modules/Router";
+import { ApiAction } from "Modules/ApiAction";
 export default class Settings extends Block {
   constructor() {
     super();
@@ -93,7 +93,7 @@ export default class Settings extends Block {
           changeBtn.parentElement?.classList.add("locked");
           changeBtn.textContent = "Изменить данные";
           req.then((data) => {
-            if (data.status == 200) {
+            if (data.status === 200) {
               alert("Данные обновлен");
             }
           });
@@ -112,7 +112,7 @@ export default class Settings extends Block {
             formData.append("avatar", file, file.name);
             const req = api.loadAvatar(formData);
             req.then((data) => {
-              if (data.status == 200) {
+              if (data.status === 200) {
                 console.log("avatar loaded");
                 router._onRoute(window.location.pathname);
               }
@@ -127,7 +127,7 @@ export default class Settings extends Block {
         const newPswd = prompt("Задайте НОВЫЙ пароль:");
         const req = api.updatePassword(newPswd!, oldPswd!);
         req.then((data) => {
-          if (data.status == 200) {
+          if (data.status === 200) {
             alert("Пароль обновлен");
           }
         });
