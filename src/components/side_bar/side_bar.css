@@ -1,94 +1,95 @@
 .chat-profile {
-    text-align: right;
-    color: var(--text-label-color);
-    justify-content: flex-end;
-    font-family: Arial, Inter;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 12px;
-    display: flex;
-    padding: 12px 21px;
-    background-color: var(--lightfill-grey-color);
-    cursor: pointer;
+  text-align: right;
+  color: var(--text-label-color);
+  justify-content: flex-end;
+  font-family: Arial, Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 12px;
+  display: flex;
+  padding: 12px 21px;
+  background-color: var(--lightfill-grey-color);
+  cursor: pointer;
 }
 .chat-add {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
-.chat-add:hover span{
-    color: black;
+.chat-add:hover span {
+  color: black;
 }
-.chat-add span{
-    display: flex;
-    color: var(--text-label-color);
-    justify-content: flex-end;
-    font-family: Arial,Inter;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 12px;
+.chat-add span {
+  display: flex;
+  color: var(--text-label-color);
+  justify-content: flex-end;
+  font-family: Arial, Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 12px;
 }
-.chat-add span::before{
-    content: " + ";
-    font-family: Arial;
-    font-size: 18px;
-    font-weight: 900;
-    width: 16px;
+.chat-add span::before {
+  content: " + ";
+  font-family: Arial;
+  font-size: 18px;
+  font-weight: 900;
+  width: 16px;
 }
 .chat-search {
-    display: flex;
-    width: 100%;
-    border-radius: 5px;
-    overflow: hidden;
-    box-sizing: border-box;
-    padding: 10px 10px;
-    background-color: var(--lightfill-grey-color);
+  display: flex;
+  width: 100%;
+  border-radius: 5px;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 10px 10px;
+  background-color: var(--lightfill-grey-color);
 }
-.chat-search input{
-    width: 100%;
-    box-sizing: border-box;
-    border: none;
-    border-radius: 5px;
-    outline: none;
-    padding: 8px 12px;
-    display: flex;
-    color: var(--text-label-color);
-    background: var(--light-grey-line);
-    background-image: url(/static/search.svg);
-    background-repeat: no-repeat;
-    background-position: 2px center;
-    text-align: center;
-    transition: background .3s ease;
+.chat-search input {
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  padding: 8px 12px;
+  display: flex;
+  color: var(--text-label-color);
+  background: var(--light-grey-line);
+  background-image: url(/static/img/search.svg);
+  background-repeat: no-repeat;
+  background-position: 2px center;
+  text-align: center;
+  transition: background 0.3s ease;
 }
-.chat-search input:focus{
-    outline: 1px solid var(--text-label-color);
+.chat-search input:focus {
+  outline: 1px solid var(--text-label-color);
 }
 input:placeholder-shown {
-    background-position: calc(50% - 28px) center;
+  background-position: calc(50% - 28px) center;
 }
-.chat-search input:active, .chat-search input:focus{
-    background-position: 2px center;
+.chat-search input:active,
+.chat-search input:focus {
+  background-position: 2px center;
 }
 .chat-list {
-    display: block;
-    position: absolute;
-    overflow-y: scroll;
-    width: 310px;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    border-right: 1px solid var(--light-grey-line);
-    background: var(--light-bg-text);
-    z-index: 9;
-    overflow: auto;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+  display: block;
+  position: absolute;
+  overflow-y: scroll;
+  width: 310px;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  border-right: 1px solid var(--light-grey-line);
+  background: var(--light-bg-text);
+  z-index: 9;
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
 .chat-list::-webkit-scrollbar {
-        width: 0;
-        height: 0;
+  width: 0;
+  height: 0;
 }

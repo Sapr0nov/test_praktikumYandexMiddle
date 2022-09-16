@@ -39,7 +39,7 @@ export class EventBus implements IEventBus {
       return;
     }
 
-    Object.keys(subscriber).forEach(key => subscriber[key](arg));
+    Object.keys(subscriber).forEach((key) => subscriber[key](arg));
   }
 
   public register(event: string, callback: Function): Registry {
@@ -53,7 +53,7 @@ export class EventBus implements IEventBus {
         delete this.subscribers[event][id];
         if (Object.keys(this.subscribers[event]).length === 0)
           delete this.subscribers[event];
-      }
+      },
     };
   }
 

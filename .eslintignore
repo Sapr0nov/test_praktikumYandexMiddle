@@ -1,0 +1,11 @@
+/build
+**/*.min.js
+/node_modules
+/dist
+*.spec.ts
+*.d.ts
+./node_modules/*
+./static/*
+./src/handlebars.d.ts,
+./test/*
+**/vendor/*.js
