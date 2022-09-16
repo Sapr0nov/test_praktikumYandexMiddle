@@ -5,8 +5,9 @@ import {
   ErrorPage404,
   ErrorPage500,
   ChatPage,
-} from "./pages";
-import Router from "./modules/Router";
+} from "./pages"
+import '/static/color.css'
+import Router from "./modules/Router"
 
 const router = new Router(window);
 
