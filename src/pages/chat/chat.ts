@@ -213,7 +213,7 @@ export default class Chat extends Block {
           return;
         }
         if (Array.isArray(data)) {
-          User.messages = data;
+          User.messages = [...data].reverse();
           router.refresh();
         }
       } catch (e) {

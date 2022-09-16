@@ -11,7 +11,7 @@ export default function renderChatPreview() {
   if (User.messages === void 0) {
     placeholder = "Выберите чат";
   } else {
-    messages = JSON.parse(JSON.stringify(User.messages!.reverse()));
+    messages = JSON.parse(JSON.stringify(User.messages!));
     messages?.forEach((message) => {
       if (message.user_id === User.id) {
         message.class = "self";
