@@ -1,5 +1,15 @@
 import { User } from "./User";
 
+export type Messages = {
+  id: number;
+  user_id: number;
+  chat_id: number;
+  time: Date;
+  content: string;
+  is_read: boolean;
+  file: string | null;
+};
+
 export type ChatFields = {
   id: number;
   title: string;
@@ -21,4 +31,5 @@ export class Chat {
     content: string | null;
     time: string | null;
   } = { user: null, id: "", content: null, time: null };
+  public messages:Messages;
 }

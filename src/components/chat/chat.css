@@ -46,11 +46,12 @@
 .message-history {
   display: flex;
   position: absolute;
-  width: calc(100% - 48px);
+  width: calc(100% - 480px);
   height: calc(100vh - 108px);
   right: 0px;
   top: 54px;
-  flex-direction: column;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
   overflow-y: scroll;
 }
 .message-input {

@@ -1,4 +1,4 @@
-import { Chat } from "./Chat";
+import { Chat, Messages } from "./Chat";
 import Cookies from "./Cookie";
 
 export type UserFields = {
@@ -42,6 +42,7 @@ export class User {
     token: string | null;
     pingId: any | null;
   } = { id: null, status: null, socket: null, token: null, pingId: null };
+  public messages: Array<Messages> | null;
 
   setCookie() {
     const cookie = new Cookies();

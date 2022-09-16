@@ -100,7 +100,14 @@ export default class Chat extends Block {
 
               
               User.currentChat.socket?.addEventListener("message", (event) => {
-                console.log("Получены данные", event.data);
+                const data = JSON.parse(event.data);
+                if (data.type && data.type == "pong") {
+                  return
+                }
+                if (data) {
+                  User.messages =  data;
+                }
+                router._onRoute(document.location.pathname);
               });
               
             }
@@ -189,7 +196,6 @@ export default class Chat extends Block {
         })
       );
     }else{
-      console.log('waiter');
       setTimeout(function () {
         this.sendMessage(message);
     }, 500);
