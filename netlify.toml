@@ -18,3 +18,7 @@
   from = "/500/"
   to = "/"
   status = 200
+[[redirects]]
+  from = "/static/*"
+  to = "../static/*"
+  status = 200
