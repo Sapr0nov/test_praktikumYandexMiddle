@@ -58,17 +58,17 @@ export default class Chat extends Block {
         router.go("/settings");
       });
 
-    addChatBtn && 
-    addChatBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      const chatName = prompt("Название добавляемого чата:");
-      const req = api.createChat(chatName!);
-      req.then((data) => {
-        if (data.status == 200) {
-          router._onRoute(window.location.pathname);
-        }
+    addChatBtn &&
+      addChatBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const chatName = prompt("Название добавляемого чата:");
+        const req = api.createChat(chatName!);
+        req.then((data) => {
+          if (data.status == 200) {
+            router._onRoute(window.location.pathname);
+          }
+        });
       });
-    });
 
     chatPreview &&
       chatPreview.length &&
@@ -76,7 +76,7 @@ export default class Chat extends Block {
         element.addEventListener("click", () => {
           User.currentChat.id = parseInt(element.dataset.id!);
           const req = api.getTokenChat(parseInt(element.dataset.id!));
-          req.then( data => {
+          req.then((data) => {
             if (data.status == 200) {
               User.currentChat.token = JSON.parse(data.response).token;
 
@@ -84,7 +84,11 @@ export default class Chat extends Block {
                 clearInterval(User.currentChat.pingId);
               }
 
-              api.socketConnect(User.id!, User.currentChat.id!, User.currentChat.token!);
+              api.socketConnect(
+                User.id!,
+                User.currentChat.id!,
+                User.currentChat.token!
+              );
               User.currentChat.pingId = setInterval(() => {
                 this.sendPing();
               }, 10000);
@@ -98,20 +102,18 @@ export default class Chat extends Block {
                 );
               }, 500);
 
-              
               User.currentChat.socket?.addEventListener("message", (event) => {
                 const data = JSON.parse(event.data);
                 if (data.type && data.type == "pong") {
-                  return
+                  return;
                 }
                 if (data) {
-                  User.messages =  data;
+                  User.messages = data;
                 }
                 router._onRoute(document.location.pathname);
               });
-              
             }
-          })
+          });
         });
         element.addEventListener("contextmenu", (e) => {
           e.preventDefault();
@@ -178,7 +180,6 @@ export default class Chat extends Block {
       });
   }
 
-
   sendPing() {
     User.currentChat.socket?.send(
       JSON.stringify({
@@ -195,11 +196,10 @@ export default class Chat extends Block {
           type: "message",
         })
       );
-    }else{
+    } else {
       setTimeout(function () {
         this.sendMessage(message);
-    }, 500);
+      }, 500);
     }
   }
-  
 }

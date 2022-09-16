@@ -90,8 +90,8 @@ const config: webpack.Configuration = {
         test: /\.(png|jpg|gif)$/,
         loader: "file-loader",
         options: {
-          outputPath: './',
-          name: '[path][name].[ext]',
+          outputPath: "./",
+          name: "[path][name].[ext]",
         },
       },
     ],

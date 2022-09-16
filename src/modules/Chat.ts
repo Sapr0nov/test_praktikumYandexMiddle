@@ -31,5 +31,5 @@ export class Chat {
     content: string | null;
     time: string | null;
   } = { user: null, id: "", content: null, time: null };
-  public messages:Messages;
+  public messages: Messages;
 }
