@@ -34,7 +34,7 @@ export default class Block {
     this.eventBus.dispatch(Block.EVENTS.INIT);
   }
 
-  _registerEvents(eventBus: EventBus) {
+  private _registerEvents(eventBus: EventBus) {
     eventBus.register(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.register(
       Block.EVENTS.FLOW_CDM,
@@ -47,7 +47,7 @@ export default class Block {
     eventBus.register(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
   }
 
-  _createResources() {
+  private _createResources() {
     const tagName = this._meta?.tagName;
     this._element = this._createDocumentElement(tagName ? tagName : "div");
   }
@@ -56,7 +56,7 @@ export default class Block {
     this._createResources();
   }
 
-  _componentDidMount() {
+  private _componentDidMount() {
     this.componentDidMount(this);
   }
 
@@ -68,7 +68,7 @@ export default class Block {
     this.eventBus.dispatch(Block.EVENTS.FLOW_CDM);
   }
 
-  _componentDidUpdate(oldProps: Object, newProps: Object) {
+  private _componentDidUpdate(oldProps: Object, newProps: Object) {
     const response = this.componentDidUpdate(oldProps, newProps);
     if (!response) {
       return;
@@ -92,7 +92,7 @@ export default class Block {
     return this._element;
   }
 
-  _render() {
+  private _render() {
     const block = this.render();
     // Этот небезопасный метод для упрощения логики
     // Используйте шаблонизатор из npm или напишите свой безопасный
@@ -114,7 +114,7 @@ export default class Block {
     return this.element;
   }
 
-  _makePropsProxy(props: any) {
+  private _makePropsProxy(props: any) {
     return new Proxy(props, {
       get(target, prop) {
         const value = target[prop];
@@ -131,7 +131,7 @@ export default class Block {
     });
   }
 
-  _createDocumentElement(tagName: string) {
+  private _createDocumentElement(tagName: string) {
     // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
     return document.createElement(tagName);
   }

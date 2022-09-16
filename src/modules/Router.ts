@@ -48,6 +48,11 @@ export default class Router {
     route.render(route, path);
   }
 
+  refresh() {
+    console.log("refresh");
+    this._currentRoute?.render(this._currentRoute, document.location.pathname);
+  }
+
   go(path: string) {
     this.history!.pushState({}, "", path);
     this._onRoute(path);

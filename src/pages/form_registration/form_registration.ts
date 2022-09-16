@@ -1,10 +1,10 @@
 import hbs_reg from "./form_registration.hbs";
-import { ValidateForm } from "../../modules/Validate";
-import Block from "../../modules/Block";
-import "../../../static/form.css";
-import { UserFields } from "../../modules/User";
-import Router from "../../modules/Router";
-import { ApiAction } from "../../modules/ApiAction";
+import { ValidateForm } from "Modules/Validate";
+import Block from "Modules/Block";
+import "Static/form.css";
+import { UserFields } from "Modules/User";
+import Router from "Modules/Router";
+import { ApiAction } from "Modules/ApiAction";
 
 export default class RegForm extends Block {
   constructor() {
@@ -36,17 +36,19 @@ export default class RegForm extends Block {
   addEvents() {
     const validator = new ValidateForm();
     const api = new ApiAction();
+    const form = document.forms[0];
+    const login = form.elements.namedItem("login") as HTMLFormElement;
+    const password = form.elements.namedItem("password") as HTMLFormElement;
+    const first_name = form.elements.namedItem("first_name") as HTMLFormElement;
+    const second_name = form.elements.namedItem(
+      "second_name"
+    ) as HTMLFormElement;
+    const email = form.elements.namedItem("email") as HTMLFormElement;
+    const phone = form.elements.namedItem("phone") as HTMLFormElement;
 
-    const form = document.querySelector("#reg");
-    const login = form!.querySelector("input[name=login]");
-    const password = form!.querySelector("input[name=password]");
-    const first_name = form!.querySelector("input[name=first_name]");
-    const second_name = form!.querySelector("input[name=second_name]");
-    const email = form!.querySelector("input[name=email]");
-    const phone = form!.querySelector("input[name=phone]");
     const form_error = form?.querySelector(".form-error");
 
-    this.addMultipleEventListener(login!, ["focus", "blur"], () => {
+    this.addMultipleEventListener(login, ["focus", "blur"], () => {
       let error = validator.validator(
         login,
         [validator.isLogin, validator.isValidLenght],
@@ -57,7 +59,7 @@ export default class RegForm extends Block {
       form_error!.textContent = error;
     });
 
-    this.addMultipleEventListener(password!, ["focus", "blur"], () => {
+    this.addMultipleEventListener(password, ["focus", "blur"], () => {
       let error = validator.validator(
         password,
         [validator.isPassword, validator.isValidLenght],
@@ -68,7 +70,7 @@ export default class RegForm extends Block {
       form_error!.textContent = error;
     });
 
-    this.addMultipleEventListener(first_name!, ["focus", "blur"], () => {
+    this.addMultipleEventListener(first_name, ["focus", "blur"], () => {
       let error = validator.validator(
         first_name,
         [validator.isName],
@@ -79,7 +81,7 @@ export default class RegForm extends Block {
       form_error!.textContent = error;
     });
 
-    this.addMultipleEventListener(second_name!, ["focus", "blur"], () => {
+    this.addMultipleEventListener(second_name, ["focus", "blur"], () => {
       let error = validator.validator(
         second_name,
         [validator.isName],
@@ -90,7 +92,7 @@ export default class RegForm extends Block {
       form_error!.textContent = error;
     });
 
-    this.addMultipleEventListener(email!, ["focus", "blur"], () => {
+    this.addMultipleEventListener(email, ["focus", "blur"], () => {
       let error = validator.validator(
         email,
         [validator.isEmail],
@@ -101,7 +103,7 @@ export default class RegForm extends Block {
       form_error!.textContent = error;
     });
 
-    this.addMultipleEventListener(phone!, ["focus", "blur"], () => {
+    this.addMultipleEventListener(phone, ["focus", "blur"], () => {
       let error = validator.validator(
         phone,
         [validator.isPhone, validator.isValidLenght],
@@ -112,9 +114,9 @@ export default class RegForm extends Block {
       form_error!.textContent = error;
     });
 
-    form!.addEventListener("submit", (e) => {
+    form.addEventListener("submit", (e) => {
       e.preventDefault();
-      const formData = new FormData(form as HTMLFormElement);
+      const formData = new FormData(form);
       const request = api.signUp(
         formData.get("first_name") as string,
         formData.get("second_name") as string,
@@ -124,12 +126,15 @@ export default class RegForm extends Block {
         formData.get("password") as string
       );
       request.then((data: XMLHttpRequest) => {
-        const JSONreqest: UserFields = JSON.parse(data.response);
-        if (JSONreqest.id) {
-          const router = new Router(window);
-          router.go("/messenger");
-        } else {
-          console.log("api err:", data.response);
+        let JSONreqest: UserFields;
+        try {
+          JSONreqest = JSON.parse(data.response);
+          if (JSONreqest.id) {
+            const router = new Router(window);
+            router.go("/messenger");
+          }
+        } catch (e) {
+          console.warn(e);
         }
       });
     });

@@ -2,7 +2,7 @@ import hbs_404 from "./404.hbs";
 import glitch from "../../components/glitch_effect/glitch_effect.hbs";
 import "./404.css";
 import "../../components/glitch_effect/glitch_effect.css";
-import Block from "../../modules/Block";
+import Block from "Modules/Block";
 
 export default class Error404 extends Block {
   constructor() {

@@ -1,11 +1,11 @@
 import hbs_index from "./chat.hbs";
 import "./chat.css";
-import Block from "../../modules/Block";
-import renderSideBarPreview from "../../components/side_bar/side_bar";
-import renderChatPreview from "../../components/chat/chat";
-import { user as User } from "../../modules/User";
-import Router from "../../modules/Router";
-import { ApiAction } from "../../modules/ApiAction";
+import Block from "Modules/Block";
+import renderSideBarPreview from "Components/side_bar/side_bar";
+import renderChatPreview from "Components/chat/chat";
+import { user as User } from "Modules/User";
+import Router from "Modules/Router";
+import { ApiAction } from "Modules/ApiAction";
 
 export default class Chat extends Block {
   constructor() {
@@ -20,7 +20,11 @@ export default class Chat extends Block {
     const req = api.chatList();
 
     req.then((data) => {
-      User.chats = JSON.parse(data.response);
+      try {
+        User.chats = JSON.parse(data.response);
+      } catch (e) {
+        console.warn(e);
+      }
       router._onRoute(window.location.pathname);
     });
   }
@@ -64,7 +68,7 @@ export default class Chat extends Block {
         const chatName = prompt("Название добавляемого чата:");
         const req = api.createChat(chatName!);
         req.then((data) => {
-          if (data.status == 200) {
+          if (data.status === 200) {
             router._onRoute(window.location.pathname);
           }
         });
@@ -77,95 +81,18 @@ export default class Chat extends Block {
           User.currentChat.id = parseInt(element.dataset.id!);
           const req = api.getTokenChat(parseInt(element.dataset.id!));
           req.then((data) => {
-            if (data.status == 200) {
-              User.currentChat.token = JSON.parse(data.response).token;
-
-              if (User.currentChat.pingId) {
-                clearInterval(User.currentChat.pingId);
+            if (data.status === 200) {
+              try {
+                User.currentChat.token = JSON.parse(data.response).token;
+              } catch (e) {
+                console.warn(e);
               }
 
-              api.socketConnect(
-                User.id!,
-                User.currentChat.id!,
-                User.currentChat.token!
-              );
-              User.currentChat.pingId = setInterval(() => {
-                this.sendPing();
-              }, 10000);
-
-              setTimeout(function () {
-                User.currentChat.socket?.send(
-                  JSON.stringify({
-                    content: "0",
-                    type: "get old",
-                  })
-                );
-              }, 500);
-
-              User.currentChat.socket?.addEventListener("message", (event) => {
-                const data = JSON.parse(event.data);
-                if (data.type && data.type == "pong") {
-                  return;
-                }
-                if (data) {
-                  User.messages = data;
-                }
-                router._onRoute(document.location.pathname);
-              });
+              this.connectToNewChat();
             }
           });
         });
-        element.addEventListener("contextmenu", (e) => {
-          e.preventDefault();
-          const chatId = parseInt(element.dataset.id!);
-          let submenu: HTMLElement = document.querySelector(".submenu")!;
-          if (!submenu) {
-            submenu = document.createElement("div");
-            submenu.classList.add("submenu");
-            const [subBtn1, subBtn2, subBtn3] = [
-              document.createElement("div"),
-              document.createElement("div"),
-              document.createElement("div"),
-            ];
-            subBtn1.textContent = "добавить пользователя";
-            subBtn2.textContent = "удалить пользователя";
-            subBtn3.textContent = "удалить чат";
-            [subBtn1, subBtn2, subBtn3].forEach((btn) => {
-              btn.classList.add("submenu__btn");
-              submenu.appendChild(btn);
-            });
-            document.body.appendChild(submenu);
-            subBtn1.addEventListener("click", (e) => {
-              e.preventDefault();
-              submenu.classList.add("hide");
-              const id = parseInt(
-                prompt("Введите id ДОБАВЛЯЕМОГО пользователя:")!
-              );
-              api.addUsersToChat([id], chatId);
-            });
-            subBtn2.addEventListener("click", (e) => {
-              e.preventDefault();
-              submenu.classList.add("hide");
-              const id = parseInt(
-                prompt("Введите id УДАЛЯЕМОГО пользователя:")!
-              );
-              api.deleteUsersFromChat([id], chatId);
-            });
-            subBtn3.addEventListener("click", (e) => {
-              e.preventDefault();
-              submenu.classList.add("hide");
-              const isDelete = confirm("Точно УДАЛИТЬ этот чат?");
-              if (isDelete) {
-                api.deleteChat(chatId);
-              }
-            });
-          }
-          [submenu.style.left, submenu.style.top] = [
-            e.pageX.toString() + "px",
-            e.pageY.toString() + "px",
-          ];
-          submenu.classList.remove("hide");
-        });
+        this.addSubMenu(element);
       });
 
     sendMsgBtn &&
@@ -201,5 +128,97 @@ export default class Chat extends Block {
         this.sendMessage(message);
       }, 500);
     }
+  }
+
+  addSubMenu(element: HTMLElement) {
+    const api = new ApiAction();
+    element.addEventListener("contextmenu", (event: MouseEvent) => {
+      event.preventDefault();
+      const chatId = parseInt(element.dataset.id!);
+      let submenu: HTMLElement = document.querySelector(".submenu")!;
+      if (!submenu) {
+        submenu = document.createElement("div");
+        submenu.classList.add("submenu");
+        const [subBtn1, subBtn2, subBtn3] = [
+          document.createElement("div"),
+          document.createElement("div"),
+          document.createElement("div"),
+        ];
+        subBtn1.textContent = "добавить пользователя";
+        subBtn2.textContent = "удалить пользователя";
+        subBtn3.textContent = "удалить чат";
+        [subBtn1, subBtn2, subBtn3].forEach((btn) => {
+          btn.classList.add("submenu__btn");
+          submenu.appendChild(btn);
+        });
+        document.body.appendChild(submenu);
+        subBtn1.addEventListener("click", (e) => {
+          e.preventDefault();
+          submenu.classList.add("hide");
+          const id = parseInt(prompt("Введите id ДОБАВЛЯЕМОГО пользователя:")!);
+          api.addUsersToChat([id], chatId);
+        });
+        subBtn2.addEventListener("click", (e) => {
+          e.preventDefault();
+          submenu.classList.add("hide");
+          const id = parseInt(prompt("Введите id УДАЛЯЕМОГО пользователя:")!);
+          api.deleteUsersFromChat([id], chatId);
+        });
+        subBtn3.addEventListener("click", (e) => {
+          e.preventDefault();
+          submenu.classList.add("hide");
+          const isDelete = confirm("Точно УДАЛИТЬ этот чат?");
+          if (isDelete) {
+            api.deleteChat(chatId);
+          }
+        });
+      }
+      [submenu.style.left, submenu.style.top] = [
+        event.pageX.toString() + "px",
+        event.pageY.toString() + "px",
+      ];
+      submenu.classList.remove("hide");
+    });
+  }
+
+  connectToNewChat() {
+    const api = new ApiAction();
+    if (User.currentChat.pingId) {
+      clearInterval(User.currentChat.pingId);
+    }
+    api.socketConnect(User.id!, User.currentChat.id!, User.currentChat.token!);
+    User.currentChat.pingId = setInterval(() => {
+      this.sendPing();
+    }, 10000);
+
+    setTimeout(function () {
+      User.currentChat.socket?.send(
+        JSON.stringify({
+          content: "0",
+          type: "get old",
+        })
+      );
+    }, 500);
+
+    User.currentChat.socket?.addEventListener("message", (event) => {
+      const router = new Router(window);
+      try {
+        const data = JSON.parse(event.data);
+        if (data.type && data.type === "pong") {
+          return;
+        }
+        if (data.type && data.type === "message") {
+          User.messages?.push(data);
+          router.refresh();
+          return;
+        }
+        if (Array.isArray(data)) {
+          User.messages = data;
+          router.refresh();
+        }
+      } catch (e) {
+        console.warn(e);
+      }
+    });
   }
 }

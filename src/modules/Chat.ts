@@ -1,6 +1,6 @@
 import { User } from "./User";
 
-export type Messages = {
+export type Message = {
   id: number;
   user_id: number;
   chat_id: number;
@@ -31,5 +31,5 @@ export class Chat {
     content: string | null;
     time: string | null;
   } = { user: null, id: "", content: null, time: null };
-  public messages: Messages;
+  public messages: Array<Message>;
 }

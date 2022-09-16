@@ -1,11 +1,11 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import fs from "fs";
 import path from "path";
-
 import * as webpack from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
+import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
 
 const getRoot = (dir: string): string => {
   if (fs.existsSync(path.resolve(dir, "package.json"))) {
@@ -17,18 +17,12 @@ const getRoot = (dir: string): string => {
 const isDevelopment = process.env.NODE_ENV === "development";
 const projectRoot = getRoot(__dirname);
 
-const PATHS = {
-  src: path.resolve(projectRoot, "src"),
-  dist: path.resolve(projectRoot, "dist"),
-  build: path.resolve(projectRoot, "build"),
-};
-
 const config: webpack.Configuration = {
   mode: "development",
   target: "web",
-  entry: path.resolve(PATHS.src, "index.ts"),
+  entry: path.resolve(projectRoot, "src", "index.ts"),
   output: {
-    path: PATHS.dist,
+    path: projectRoot + "/dist",
     filename: "[name]-[fullhash].js",
     chunkFilename: "[name].bundle-[fullhash].js",
     publicPath: "/",
@@ -47,11 +41,11 @@ const config: webpack.Configuration = {
     },
   },
   resolve: {
-    alias: {
-      "handlebars/runtime":
-        "/node_modules/handlebars/dist/handlebars.runtime.min.js",
-      handlebars: "/node_modules/handlebars/dist/handlebars.min.js",
-    },
+    plugins: [
+      new TsconfigPathsPlugin({
+        configFile: path.resolve("tsconfig.json"),
+      }),
+    ],
     extensions: [".ts", ".js", ".css"],
   },
   module: {
@@ -62,7 +56,8 @@ const config: webpack.Configuration = {
           {
             loader: "ts-loader",
             options: {
-              configFile: path.resolve(projectRoot, "tsconfig.json"),
+              context: __dirname,
+              configFile: path.resolve("tsconfig.json"),
             },
           },
         ],
@@ -74,17 +69,15 @@ const config: webpack.Configuration = {
         exclude: /(node_modules|bower_components)/,
       },
       {
-        test: /\.css$/,
+        test: /\.(css)$/,
+        resolve: { extensions: [".css"] },
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: "/",
-            },
-          },
+          MiniCssExtractPlugin.loader,
           "css-loader",
+          {
+            loader: `postcss-loader`,
+          },
         ],
-        exclude: /.svg/,
       },
       {
         test: /\.(png|jpg|gif)$/,
@@ -97,9 +90,10 @@ const config: webpack.Configuration = {
     ],
   },
   plugins: [
+    require("autoprefixer"),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: path.resolve(PATHS.src, "index.html"),
+      template: path.resolve(projectRoot, "src", "index.html"),
       filename: "index.html",
       minify: {
         collapseWhitespace: true,

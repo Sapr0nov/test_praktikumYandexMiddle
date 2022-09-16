@@ -8,7 +8,14 @@
     "noUnusedParameters": true,
     "sourceMap": true,
     "strictNullChecks": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": ["*", "src/modules/*"],
+      "Components/*": ["./src/components/*"],
+      "Modules/*": ["./src/modules/*"],
+      "Static/*": ["static/*"]
+    }
   },
   "exclude": ["node_modules", ".parcel-cache"]
 }

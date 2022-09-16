@@ -6,6 +6,7 @@
   </div>
 
   <div class="message-history">
+    <div class="placeholder">{{placeholder}}</div>
     {{#each messages}}
       {{#with this}}
         <div class="message {{class}}">{{content}}<span>{{time}}</span></div>
