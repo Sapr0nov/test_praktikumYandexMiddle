@@ -11,7 +11,6 @@ export default class Error500 extends Block {
       document.body.classList.add("e500");
     });
   }
-
   render() {
     let outLine: string = "";
     outLine = hbs_500({

@@ -20,6 +20,10 @@
   "lint-staged": {
     "*.ts": "npm run lint && npm run lint:format"
   },
+  "directories": {
+    "test": "test"
+  },
+  "browser": "dist/handlebars.js",
   "keywords": [],
   "author": "SSA",
   "license": "ISC",

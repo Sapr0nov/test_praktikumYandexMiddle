@@ -37,7 +37,7 @@ npm run build
 npm start
 ```
 
-#### linter
+#### linter 
 
 ```sh
 npm run lint

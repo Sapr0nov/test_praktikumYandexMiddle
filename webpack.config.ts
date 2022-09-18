@@ -103,10 +103,10 @@ const config: webpack.Configuration = {
       },
     }),
     new MiniCssExtractPlugin({
-      filename: isDevelopment ? "[name].css" : "[name].[fullhash].css",
-      chunkFilename: isDevelopment ? "[id].css" : "[id].[fullhash].css",
+      filename: isDevelopment ? '[name].css' : '[name].[fullhash].css',
+      chunkFilename: isDevelopment ? '[id].css' : '[id].[fullhash].css',
     }),
   ],
-};
+}
 
-export default config;
+export default config
