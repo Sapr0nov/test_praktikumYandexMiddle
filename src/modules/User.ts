@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { Chat, Message } from "./Chat";
+=======
+import { Chat } from "./Chat";
+>>>>>>> main
 import Cookies from "./Cookie";
 
 export type UserFields = {
@@ -41,8 +45,12 @@ export class User {
     socket: WebSocket | null;
     token: string | null;
     pingId: any | null;
+<<<<<<< HEAD
   } = { id: null, status: null, socket: null, token: null, pingId: null };
   public messages: Array<Message> | null;
+=======
+  } = {"id": null, "status": null,"socket": null,"token": null, "pingId": null}; 
+>>>>>>> main
 
   setCookie() {
     const cookie = new Cookies();

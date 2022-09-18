@@ -1,4 +1,5 @@
 import hbs_reg from "./form_registration.hbs";
+<<<<<<< HEAD
 import { ValidateForm } from "Modules/Validate";
 import Block from "Modules/Block";
 import "Static/form.css";
@@ -15,6 +16,12 @@ export default class RegForm extends Block {
     });
   }
 
+=======
+import Block from "../../modules/Block";
+import "../../../static/form.css"
+
+export default class RegForm extends Block {
+>>>>>>> main
   render() {
     let outLine: string = "";
     outLine = hbs_reg({
@@ -32,6 +39,7 @@ export default class RegForm extends Block {
 
     return outLine;
   }
+<<<<<<< HEAD
 
   addEvents() {
     const validator = new ValidateForm();
@@ -143,4 +151,6 @@ export default class RegForm extends Block {
   addMultipleEventListener(element: Element, events: Array<any>, handler: any) {
     events.forEach((el) => element.addEventListener(el, handler));
   }
+=======
+>>>>>>> main
 }
