@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-export { default as ChatPage } from "./chat";
-=======
-export {default as ChatPage } from './chat'
->>>>>>> main
+export { default as ChatPage } from "./chat"

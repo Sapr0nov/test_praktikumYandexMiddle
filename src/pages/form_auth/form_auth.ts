@@ -1,5 +1,4 @@
 import hbs_auth from "./form_auth.hbs";
-<<<<<<< HEAD
 import { ValidateForm } from "Modules/Validate";
 import Block from "Modules/Block";
 import "Static/form.css";
@@ -14,12 +13,6 @@ export default class AuthForm extends Block {
       this.addEvents();
     });
   }
-=======
-import Block from "../../modules/Block";
-import "../../../static/form.css"
-
-export default class AuthForm extends Block {
->>>>>>> main
 
   render() {
     let outLine: string = "";
@@ -33,7 +26,6 @@ export default class AuthForm extends Block {
 
     return outLine;
   }
-<<<<<<< HEAD
 
   addMultipleEventListener(element: Element, events: Array<any>, handler: any) {
     events.forEach((el) => element.addEventListener(el, handler));
@@ -96,6 +88,4 @@ export default class AuthForm extends Block {
       });
     });
   }
-=======
->>>>>>> main
 }

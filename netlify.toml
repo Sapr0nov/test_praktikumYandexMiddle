@@ -18,14 +18,11 @@
   from = "/500/"
   to = "/"
   status = 200
-<<<<<<< HEAD
 [[redirects]]
   from = "/static/form.css"
   to = "../static/form.css"
   status = 200
-  [[redirects]]
+[[redirects]]
   from = "/static/color.css"
   to = "../static/color.css"
   status = 200
-=======
->>>>>>> main

@@ -23,10 +23,6 @@ export default class Router {
   use(path: string, block: Block) {
     const route = new Route(path, block);
     this.routes.push(route);
-<<<<<<< HEAD
-=======
-    return;
->>>>>>> main
   }
 
   start() {
@@ -52,7 +48,6 @@ export default class Router {
     route.render(route, path);
   }
 
-<<<<<<< HEAD
   refresh() {
     console.log("refresh");
     this._currentRoute?.render(this._currentRoute, document.location.pathname);
@@ -61,12 +56,6 @@ export default class Router {
   go(path: string) {
     this.history!.pushState({}, "", path);
     this._onRoute(path);
-=======
-  go(path: string) {
-    this.history!.pushState({}, "", path);
-    this._onRoute(path);
-    return;
->>>>>>> main
   }
 
   back() {

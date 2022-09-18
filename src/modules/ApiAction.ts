@@ -1,11 +1,6 @@
 import { Fetch } from "./Fetch";
 import type { Options } from "./Fetch";
-<<<<<<< HEAD
 import { UserFields, user as User } from "./User";
-=======
-import { UserFields } from "./User";
-import { user as User } from "./User";
->>>>>>> main
 import { bus as eventsBus } from "./EventBus";
 
 export class ApiAction {
@@ -35,7 +30,6 @@ export class ApiAction {
       this.BASE_URL + this.GET_USER,
       options
     )) as XMLHttpRequest;
-<<<<<<< HEAD
     const response = await req.response;
     let data: UserFields;
     try {
@@ -46,11 +40,6 @@ export class ApiAction {
       console.warn(e);
       return response;
     }
-=======
-    const data: UserFields = await JSON.parse(req.response);
-    eventsBus.dispatch("getUser", data);
-    return data;
->>>>>>> main
   }
 
   async signUp(
@@ -99,10 +88,6 @@ export class ApiAction {
       this.BASE_URL + this.SIGNIN,
       options
     )) as XMLHttpRequest;
-<<<<<<< HEAD
-=======
-    eventsBus.dispatch("signIn", data);
->>>>>>> main
     return data;
   }
 
@@ -139,13 +124,8 @@ export class ApiAction {
       additionalString += "limit" + limit;
     }
     if (
-<<<<<<< HEAD
       additionalString === "?" ||
       additionalString[additionalString.length] === "&"
-=======
-      additionalString == "?" ||
-      additionalString[additionalString.length] == "&"
->>>>>>> main
     ) {
       additionalString = additionalString.substring(
         0,

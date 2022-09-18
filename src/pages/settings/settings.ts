@@ -1,6 +1,5 @@
 import hbs_settings from "./settings.hbs";
 import "./settings.css";
-<<<<<<< HEAD
 import image from "Static/img/placeholder.png";
 import Block from "Modules/Block";
 import { UserFields, user as User } from "Modules/User";
@@ -42,13 +41,6 @@ export default class Settings extends Block {
     });
   }
 
-=======
-import image from "../../../static/img/placeholder.png";
-import Block from "../../modules/Block";
-import { user as User } from "../../modules/User";
-
-export default class  Settings extends Block {
->>>>>>> main
   render() {
     let image_link: string = image;
     if (User.avatar) {
@@ -66,7 +58,6 @@ export default class  Settings extends Block {
     });
     return outLine;
   }
-<<<<<<< HEAD
 
   addEvents() {
     const api = new ApiAction();
@@ -142,6 +133,4 @@ export default class  Settings extends Block {
         });
       });
   }
-=======
->>>>>>> main
 }

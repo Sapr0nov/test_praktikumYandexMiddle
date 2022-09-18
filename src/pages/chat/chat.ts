@@ -1,6 +1,5 @@
 import hbs_index from "./chat.hbs";
 import "./chat.css";
-<<<<<<< HEAD
 import Block from "Modules/Block";
 import renderSideBarPreview from "Components/side_bar/side_bar";
 import renderChatPreview from "Components/chat/chat";
@@ -30,13 +29,6 @@ export default class Chat extends Block {
     });
   }
 
-=======
-import Block from "../../modules/Block";
-import renderSideBarPreview from "../../components/side_bar/side_bar";
-import renderChatPreview from "../../components/chat/chat";
-
-export default class Chat extends Block {
->>>>>>> main
   render() {
     let outLine: string = "";
     outLine = hbs_index({
@@ -46,7 +38,6 @@ export default class Chat extends Block {
 
     return outLine;
   }
-<<<<<<< HEAD
 
   addEvents() {
     const router = new Router(window);
@@ -230,6 +221,4 @@ export default class Chat extends Block {
       }
     });
   }
-=======
->>>>>>> main
 }
