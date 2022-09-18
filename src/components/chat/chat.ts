@@ -1,5 +1,6 @@
 import hbs_chat from "./chat.hbs";
 import "./chat.css";
+<<<<<<< HEAD
 import { user as User } from "Modules/User";
 import { Message } from "Modules/Chat";
 
@@ -36,5 +37,21 @@ export default function renderChatPreview() {
       messages: messages,
       placeholder: placeholder,
     });
+=======
+
+export default function renderChatPreview() {
+  let outLine: string = "";
+  //    messages.forEach(message => {
+  outLine =
+    outLine +
+    hbs_chat({
+      class: "self",
+      text: "a very long message Lorum... Test wrap message into box",
+      date: "10.10.2022",
+      photo: "IMAGE",
+      name: "Ivan Ivanovich",
+    });
+  //    });
+>>>>>>> main
   return outLine;
 }

@@ -2,6 +2,7 @@ import hbs_404 from "./404.hbs";
 import glitch from "../../components/glitch_effect/glitch_effect.hbs";
 import "./404.css";
 import "../../components/glitch_effect/glitch_effect.css";
+<<<<<<< HEAD
 import Block from "Modules/Block";
 
 export default class Error404 extends Block {
@@ -12,6 +13,11 @@ export default class Error404 extends Block {
       document.body.classList.add("e404");
     });
   }
+=======
+import Block from "../../modules/Block";
+
+export default class Error404 extends Block {
+>>>>>>> main
   render() {
     let outLine: string = "";
 

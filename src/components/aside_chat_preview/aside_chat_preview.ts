@@ -1,6 +1,10 @@
 import hbs_aside_chat_preview from "./aside_chat_preview.hbs";
 import "./aside_chat_preview.css";
+<<<<<<< HEAD
 import { user as User } from "Modules/User";
+=======
+import { user as User } from "../../modules/User";
+>>>>>>> main
 
 export default function renderAsideChatPreview() {
   let outLine: string = "";
