@@ -6,15 +6,12 @@
   </div>
 
   <div class="message-history">
-    <div class="message {{class}}">{{text}}<span>{{date}}</span></div>
-    <div class="message {{class}}">{{text}}<span>{{date}}</span></div>
-    <div class="message {{class}}">{{text}}<span>{{date}}</span></div>
-    <div class="message {{class}}">{{text}}<span>{{date}}</span></div>
-    <div class="message {{class}}">{{text}}<span>{{date}}</span></div>
-    <div class="message {{class}}">{{text}}<span>{{date}}</span></div>
-    <div class="message {{class}}">{{text}}<span>{{date}}</span></div>
-    <div class="message {{class}}">{{text}}<span>{{date}}</span></div>
-
+    <div class="placeholder">{{placeholder}}</div>
+    {{#each messages}}
+      {{#with this}}
+        <div class="message {{class}}">{{content}}<span>{{time}}</span></div>
+      {{/with}}
+    {{/each}}
   </div>
   <div class="message-input">
     <div class="message-input__attach"></div>

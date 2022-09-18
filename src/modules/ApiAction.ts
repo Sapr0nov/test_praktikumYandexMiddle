@@ -1,7 +1,6 @@
 import { Fetch } from "./Fetch";
 import type { Options } from "./Fetch";
-import { UserFields } from "./User";
-import { user as User } from "./User";
+import { UserFields, user as User } from "./User";
 import { bus as eventsBus } from "./EventBus";
 
 export class ApiAction {
@@ -31,9 +30,16 @@ export class ApiAction {
       this.BASE_URL + this.GET_USER,
       options
     )) as XMLHttpRequest;
-    const data: UserFields = await JSON.parse(req.response);
-    eventsBus.dispatch("getUser", data);
-    return data;
+    const response = await req.response;
+    let data: UserFields;
+    try {
+      data = JSON.parse(response);
+      eventsBus.dispatch("getUser", data);
+      return data;
+    } catch (e) {
+      console.warn(e);
+      return response;
+    }
   }
 
   async signUp(
@@ -82,7 +88,6 @@ export class ApiAction {
       this.BASE_URL + this.SIGNIN,
       options
     )) as XMLHttpRequest;
-    eventsBus.dispatch("signIn", data);
     return data;
   }
 
@@ -119,8 +124,8 @@ export class ApiAction {
       additionalString += "limit" + limit;
     }
     if (
-      additionalString == "?" ||
-      additionalString[additionalString.length] == "&"
+      additionalString === "?" ||
+      additionalString[additionalString.length] === "&"
     ) {
       additionalString = additionalString.substring(
         0,
